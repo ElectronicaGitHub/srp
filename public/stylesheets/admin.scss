@@ -1,13 +1,27 @@
 @import "main";
 
+$green_color : #10D94D;
+
 .admin-container {
-	max-width: 1000px;
-	margin: 50px auto 0 auto;
+	max-width: 1200px;
+	margin: 20px auto 0 auto;
+	.block {
+		border-radius: 5px;
+		border: 1px solid lighten($serp_main_color2, 20%);
+		.title {
+			background-color: lighten($serp_main_color2, 20%);
+			padding: 2px 5px;
+			color: $serp_main_color;
+		}
+		.wrapper {
+			padding: 10px;
+		}
+	}
 	input, textarea {
 		transition: background-color .1s;
 	}
 	.fill {
-		background-color: lighten(green, 30%);
+		background-color: lighten($green_color, 30%);
 	}
 
 	.left, .right {
@@ -20,22 +34,36 @@
 	}
 	.right {
 		width: 40%;
-		.images-list {
-			.each-img {
-				width: 100px;
-				height: 80px;
-				margin: 0 20px 10px 0;
-				float: left;
-				background-position: center;
-			    background-size: cover;
-			    box-shadow: 0 1px 2px rgba(0,0,0,.4);
+		.images-load-container {
+			position: relative;
+			input {
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 0;
+				height: 0;
 			}
-			
+			margin-bottom: 20px;
+			.images-list {
+				clear: both;
+				overflow: hidden;
+				.each-img {
+					width: 100px;
+					height: 80px;
+					margin: 0 20px 10px 0;
+					float: left;
+					background-position: center;
+				    background-size: cover;
+				    box-shadow: 0 1px 2px rgba(0,0,0,.4);
+				}	
+			}
 		}
 	}
 	.bottom {
 		width: 100%;
 		clear: both;
+		padding: 0 20px;
+		margin-bottom: 50px;
 	}
 }
 

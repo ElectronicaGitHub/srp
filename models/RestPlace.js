@@ -37,6 +37,7 @@ var RestPlace = new Schema({
 	benefits : {
 		type : [String]
 	},
+	characteristics : String,
 	places : {
 		type : [ObjectId],
 		ref : 'Place'

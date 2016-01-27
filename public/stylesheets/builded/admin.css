@@ -42,6 +42,7 @@ html, body {
   margin: 0; }
 
 html * {
+  font-family: "Effra";
   color: #333333;
   box-sizing: border-box; }
 
@@ -53,12 +54,21 @@ html a {
   margin: 0 auto; }
 
 .admin-container {
-  max-width: 1000px;
-  margin: 50px auto 0 auto; }
+  max-width: 1200px;
+  margin: 20px auto 0 auto; }
+  .admin-container .block {
+    border-radius: 5px;
+    border: 1px solid #ffdba5; }
+    .admin-container .block .title {
+      background-color: #ffdba5;
+      padding: 2px 5px;
+      color: #E82C0C; }
+    .admin-container .block .wrapper {
+      padding: 10px; }
   .admin-container input, .admin-container textarea {
     transition: background-color .1s; }
   .admin-container .fill {
-    background-color: #1aff1a; }
+    background-color: #8cf6ac; }
   .admin-container .left, .admin-container .right {
     float: left;
     display: inline-block;
@@ -67,16 +77,30 @@ html a {
     width: 60%; }
   .admin-container .right {
     width: 40%; }
-    .admin-container .right .images-list .each-img {
-      width: 100px;
-      height: 80px;
-      margin: 0 20px 10px 0;
-      float: left;
-      background-position: center;
-      background-size: cover;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+    .admin-container .right .images-load-container {
+      position: relative;
+      margin-bottom: 20px; }
+      .admin-container .right .images-load-container input {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 0;
+        height: 0; }
+      .admin-container .right .images-load-container .images-list {
+        clear: both;
+        overflow: hidden; }
+        .admin-container .right .images-load-container .images-list .each-img {
+          width: 100px;
+          height: 80px;
+          margin: 0 20px 10px 0;
+          float: left;
+          background-position: center;
+          background-size: cover;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
   .admin-container .bottom {
     width: 100%;
-    clear: both; }
+    clear: both;
+    padding: 0 20px;
+    margin-bottom: 50px; }
 
 /*# sourceMappingURL=admin.css.map */

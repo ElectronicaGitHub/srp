@@ -42,6 +42,7 @@ html, body {
   margin: 0; }
 
 html * {
+  font-family: "Effra";
   color: #333333;
   box-sizing: border-box; }
 

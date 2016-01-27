@@ -3,47 +3,103 @@
 
 <script src="/libs/angular/angular.min.js"></script>
 <script src="/javascripts/admin.js"></script>
+<script>
+	window.benefitsData = <%- JSON.stringify(data) %>;
+</script>
 <link rel="stylesheet" href="/stylesheets/builded/admin.css">
 
 <div ng-app="serpAdmin" ng-controller="MainCtrl" class="admin-container">
+	
 	<div class="left">
+
+		<div class="block">
+			<div class="title">Основная информация</div>
+			
+			<div class="wrapper">
+				<div class="form-group">
+					<label for="title">Заголовок</label>
+					<input class="form-control" id="title" ng-class="{ fill : restplace.title }" type="text" ng-model="restplace.title">
+				</div>
+
+				<div class="form-group">
+					<label for="description_full">Полное описание</label>
+					<textarea class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full" placeholder="Описание полное"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="description_mini">Краткое описание</label>
+					<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini" placeholder="Описание мини"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label>Координаты</label>
+					<input class="form-control" ng-class="{ fill : restplace.coordinates }" type="text" ng-model="restplace.coordinates" placeholder="Координаты">
+				</div>
+
+				<div class="form-group">
+					<label>Адрес</label>
+					<input class="form-control" ng-class="{ fill : restplace.adress }" type="text" ng-model="restplace.adress" placeholder="Адрес">
+				</div>
+
+				<div id="map" style="width: 100%; height: 500px"></div>
+
+			</div>
 		
-		<div class="form-group">
-			<label for="title">Заголовок</label>
-			<input class="form-control" id="title" ng-class="{ fill : restplace.title }" type="text" ng-model="restplace.title">
-		</div>
-
-		<div class="form-group">
-			<label for="description_full">Полное описание</label>
-			<textarea class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full" placeholder="Описание полное"></textarea>
-		</div>
-
-		<div class="form-group">
-			<label for="description_mini">Краткое описание</label>
-			<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini" placeholder="Описание мини"></textarea>
-		</div>
-
-		<h1>Карта</h1>
-		<div class="form-group">
-			<label>Координаты</label>
-			<input class="form-control" ng-class="{ fill : restplace.coordinates }" type="text" ng-model="restplace.coordinates" placeholder="Координаты">
-			<input class="form-control" ng-class="{ fill : restplace.adress }" type="text" ng-model="restplace.adress" placeholder="Адрес">
 		</div>
 
 	</div>
 	<div class="right">
-		<h1>Файлы</h1>
-		<p>
-			<input id="image" type="file" multiple="true" style="visibility:hidden">
-			<button class="btn btn-success" ng-click="imageLoad()">Загрузить фотки</button>
-		</p>
-		<div class="images-list">
-			<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in imageList">
+		
+		<div class="images-load-container block">
+			<div class="title">Большие фото</div>
+			<div class="wrapper">
+				<input id="image" type="file" data-key="images" multiple="true" style="visibility:hidden">
+				<p><button class="btn btn-success" ng-click="imageLoad(true)">Загрузить фотки</button></p>
+				<div class="images-list">
+					<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in images">
+					</div>
+				</div>
 			</div>
 		</div>
+		<div class="images-load-container block">
+			<div class="title">Мелкие фото</div>
+			<div class="wrapper">
+				<input id="mini-image" type="file" data-key="mini_images" multiple="true" style="visibility:hidden">
+				<p><button class="btn btn-success" ng-click="imageLoad()">Загрузить фотки</button></p>
+				<div class="images-list">
+					<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in mini_images">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Прочая информация</div>
+			<div class="wrapper">
+				<div class="form-group">
+					<label>Характеристики (каждая с новой строки)</label>
+					<textarea rows="6" class="form-control" ng-class="{ fill : restplace.characteristics }" type="text" ng-model="restplace.characteristics" placeholder="Характеристики"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label>Плюсы</label>
+					<div class="checkbox" ng-repeat="benefit in restplace.benefits">
+					  <label><input type="checkbox" ng-model="benefit.value">{{ benefit.name }}</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Теги</label>
+					<div class="checkbox" ng-repeat="tag in restplace.tags">
+					  <label><input type="checkbox" ng-model="tag.value">{{ tag.name }}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
+	
 	<div class="bottom">
-		<div id="map" style="width: 100%; height: 500px"></div>
 		<button class="btn btn-success" ng-click="saveRestPlace(restplace)">Сохранить</button>
 	</div>
 

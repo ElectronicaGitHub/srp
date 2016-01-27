@@ -3,21 +3,16 @@
 $header_color: #FDFDFD;
 
 $text_color : #333333;
-// $text_color : #3C545F;
-
-// $dark_color : linear-gradient(#598192 30%, #3B5058 78%);
-// $dark_color : #A4BFCA;
 $dark_color : #CDE6F1;
 
 $call_color : #34c520;
-// $call_color : #219211;
 
 $text_color_light : #3c505a;
 $text_color_lighter : #727272;
 
-$main_focus_color : #FFB23F;
-// $main_focus_color : #ffcd34;
 
+$serp_main_color : #E82C0C;
+$serp_main_color2 : #FFB23F;
 $super_focus_color : #ffcd34;
 
 $main_font : 'Effra';
@@ -30,7 +25,7 @@ html ,body {
 }
 
 html * {
-	// font-family: 'Milio';
+	font-family: $main_font;
 	color: $text_color;
 	box-sizing: border-box;
 }

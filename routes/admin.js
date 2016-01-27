@@ -4,12 +4,15 @@ var fs = require('fs');
 var async = require('async');
 var RestPlace = require('../models/RestPlace.js');
 var Image_ = require('../models/Image.js');
+var benefitsData = require('../data/data.js');
 
 module.exports = function (express) {
 	var router = express.Router();
 
 	router.get('/', function (req, res, next) {
-		res.render('admin');
+		res.render('admin', {
+			data : benefitsData.hotel
+		});
 	});
 
 	router.post('/loadImages', function (req, res, next) {

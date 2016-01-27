@@ -1,6 +1,9 @@
 angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', function ($scope, $http) {
 
-	$scope.restplace = {};
+	$scope.restplace = {
+		benefits : window.benefitsData.benefits,
+		tags : window.benefitsData.tags
+	};
 	var map;
 	
 	ymaps.ready(mapInit);
@@ -39,12 +42,16 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		});
 	}
 
-	$scope.imageLoad = function () {
-		$('#image').click();
+	$scope.imageLoad = function (bool) {
+		if (bool) {
+			$('#image').click();
+		} else {
+			$('#mini-image').click();
+		}
 	}
 
-	$('#image').on('change', function (e) {
-
+	$('#image, #mini-image').on('change', function (e) {
+		var key = $(this).attr('data-key');
 		var data = new FormData();
 
 		for (var i in e.target.files) {
@@ -56,8 +63,7 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 			headers: {'Content-Type': undefined }
 		})
 			.success(function (data) {
-				console.log(data);
-				$scope.imageList = data.filesArray;
+				$scope[key] = data.filesArray;
 			})
 			.error(function (data) {
 				console.log(data);
@@ -65,7 +71,7 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 	})
 
 	$scope.saveRestPlace = function (place) {
-		place.images = $scope.imageList.map(function (el) { return el._id; });
+		place.images = $scope.images.map(function (el) { return el._id; });
 
 		$http.post('/admin/place', place)
 			.success(function (data) {
