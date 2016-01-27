@@ -52,25 +52,31 @@ html a {
   max-width: 960px;
   margin: 0 auto; }
 
-input, textarea {
-  transition: background-color .1s; }
-
-.fill {
-  background-color: #1aff1a; }
-
-.left, .right {
-  float: left;
-  display: inline-block; }
-
-.left {
-  width: 60%; }
-
-.right {
-  width: 40%; }
-  .right .images-list .each-img {
-    width: 100px;
-    height: 80px;
-    margin: 0 20px 10px 0;
-    float: left; }
+.admin-container {
+  max-width: 1000px;
+  margin: 50px auto 0 auto; }
+  .admin-container input, .admin-container textarea {
+    transition: background-color .1s; }
+  .admin-container .fill {
+    background-color: #1aff1a; }
+  .admin-container .left, .admin-container .right {
+    float: left;
+    display: inline-block;
+    padding: 20px; }
+  .admin-container .left {
+    width: 60%; }
+  .admin-container .right {
+    width: 40%; }
+    .admin-container .right .images-list .each-img {
+      width: 100px;
+      height: 80px;
+      margin: 0 20px 10px 0;
+      float: left;
+      background-position: center;
+      background-size: cover;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+  .admin-container .bottom {
+    width: 100%;
+    clear: both; }
 
 /*# sourceMappingURL=admin.css.map */
