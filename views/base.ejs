@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%- blocks.title %></title>
+	<script src="/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/javascripts/config.js"></script>
+	<!-- // <script src="/libs/angular/angular.min.js"></script> -->
+	<script src="/libs/vegas/dist/vegas.js"></script>
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+	<link rel="stylesheet" href="/libs/vegas/dist/vegas.css">
+
+	<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css"/>
+</head>
+
+<body>
+<!-- <body class="container"> -->
+	<%- partial('particials/header') %>	
+	<%- body %>
+	<%- partial('particials/footer') %>	
+
+	<message></message>
+
+	<style>
+	button:focus {
+		outline : none !important;
+	}
+	html, body {
+		height: 100%;
+		width: 100%;
+		background: white;
+		-webkit-font-smoothing: antialiased;
+	}
+	*[ng-click] {
+		cursor: pointer;
+	}
+	*:focus {
+		outline: none;
+	}
+	</style>
+</body>
+</html>

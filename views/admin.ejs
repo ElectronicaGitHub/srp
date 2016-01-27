@@ -1,0 +1,34 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Админка') -%>
+
+<script src="/libs/angular/angular.min.js"></script>
+<script src="/javascripts/admin.js"></script>
+<link rel="stylesheet" href="/stylesheets/builded/admin.css">
+
+<div ng-app="serpAdmin" ng-controller="MainCtrl">
+	<div class="left">
+		<p><input ng-class="{ fill : restplace.title }" type="text" ng-model="restplace.title"></p>
+		<p><textarea ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full" placeholder="Описание полное"></textarea></p>
+		<p><textarea ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini" placeholder="Описание мини"></textarea></p>
+		<h1>Карта</h1>
+		<p><input ng-class="{ fill : restplace.coordinates }" type="text" ng-model="restplace.coordinates" placeholder="Координаты"></p>
+		<p><input ng-class="{ fill : restplace.adress }" type="text" ng-model="restplace.adress" placeholder="Адрес"></p>
+		<div id="map" style="width: 600px; height: 400px"></div>
+	</div>
+	<div class="right">
+		<h1>Файлы</h1>
+		<p>
+			<input id="image" type="file" multiple="true" style="visibility:hidden">
+			<button ng-click="imageLoad()">Загрузить фотки</button>
+		</p>
+		<div class="images-list">
+			<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in imageList">
+			</div>
+		</div>
+	</div>
+	<div class="bottom">
+		<button ng-click="saveRestPlace(restplace)">Сохранить</button>
+	</div>
+
+
+</div>

@@ -1,0 +1,86 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Каталог товаров, мебель на заказ') -%>
+
+<link rel="stylesheet" href="/stylesheets/builded/tovary.css"/>
+
+
+<div class="container">
+	<div class="good-image">
+		<div class="good-title"></div>
+	</div>
+	
+	<div class="left-panel">
+		<ul>
+			<%for (var i in all_goods) { %>
+				<% var g = all_goods[i]; %>
+
+				<li class="<%= g.selected ? 'current' : '' %>">
+					<a href="/tovary/<%= i %>">
+						<p class="goods-label"><%= g.name %></p>
+					</a>
+					
+					<% if (g.selected) { %>
+						<ul class="types-list">
+							<% for (var j in g.types) { %>
+							<% var t = g.types[j]; %>
+								<li class="<%= t.selected ? 'current' : '' %>">
+									<a href="/tovary/<%= i %>/<%= j %>">
+										<p class="goods-type-label"><%= t.name %></p>
+									</a>
+								</li>
+							<% } %>
+						</ul>
+					<% } %>
+
+				</li>
+
+			<% } %>
+		</ul>
+	</div>
+	<div class="right-panel">
+		<% if (current_goods_type) { %>
+			<div class="images-container" data-type="<%= g.name%>">
+				<% for (var j in current_goods_type.images) { %>
+					<div class="cell">
+						<div class="goods-image-wrapper">
+							<div class="image" style="background-image:url('<%= current_goods_type.images[j].src %>')"></div>
+							<div class="image-label"><%= current_goods_type.images[j].name %></div>
+						</div>
+					</div>
+				<% } %>
+			</div>
+
+		<% } else { %>
+
+			<% for (var i in current_goods.types) { %>
+				<% var g = current_goods.types[i]; %>
+				<div class="images-container" data-type="<%= g.name%>">
+					<% for (var j in g.images) { %>
+						<div class="cell">
+							<div class="goods-image-wrapper">
+								<div class="image" style="background-image:url('<%= g.images[j].src %>')"></div>
+								<div class="image-label"><%= g.images[j].name %></div>
+							</div>
+						</div>
+					<% } %>
+				</div>
+			<% } %>
+
+		<% } %>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+{
+	"port" : 8080,
+	"db": {
+		"name" : "serpantin",
+		"test_name" : "school_test"
+	},
+	"mongoose" :  {
+		"uri" : "mongodb://localhost/serpantin",
+		"test_uri" : "mongodb://localhost/school_test",
+		"options" : {
+			"server" : {
+				"socketOptions" : {
+					"keepAive" : 1
+				}
+			}
+		}
+	},
+	"autentification" : {
+		"username" : "admin",
+		"password" : "serpserpserp"
+	},
+	"session" : {
+		"secret" : "serpantin..serpantin",
+		"key" : "sid",
+		"cookie" : {
+			"path" : "/",
+			"httpOnly" : true,
+			"maxAge" : null
+		}
+	}
+}

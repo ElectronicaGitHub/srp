@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Raleway';
+  src: url("../../fonts/Raleway/Raleway-Thin.ttf") format("truetype");
+  font-weight: 100; }
+@font-face {
+  font-family: 'Milio';
+  src: url("../../fonts/Milio.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Effra';
+  src: url("../../fonts/Effra/Dalton Maag - Effra Heavy.ttf") format("truetype");
+  font-weight: 700; }
+@font-face {
+  font-family: 'Effra';
+  src: url("../../fonts/Effra/Dalton Maag - Effra Bold.ttf") format("truetype");
+  font-weight: 500; }
+@font-face {
+  font-family: 'Effra';
+  src: url("../../fonts/Effra/Dalton Maag - Effra Medium.ttf") format("truetype");
+  font-weight: 300; }
+@font-face {
+  font-family: 'Effra';
+  src: url("../../fonts/Effra/Dalton Maag - Effra Light.ttf") format("truetype");
+  font-weight: 100; }
+@font-face {
+  font-family: 'ProximaNova';
+  src: url("../../fonts/ProximaNova/regular.ttf") format("truetype");
+  font-weight: 100; }
+@font-face {
+  font-family: 'ProximaNova';
+  src: url("../../fonts/ProximaNova/bold.ttf") format("truetype");
+  font-weight: 300; }
+@font-face {
+  font-family: 'ProximaNova';
+  src: url("../../fonts/ProximaNova/extrabold.ttf") format("truetype");
+  font-weight: 500; }
+@font-face {
+  font-family: 'ProximaNova';
+  src: url("../../fonts/ProximaNova/black.ttf") format("truetype");
+  font-weight: 700; }
+
+/*# sourceMappingURL=fonts.css.map */

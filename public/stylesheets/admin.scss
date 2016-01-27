@@ -1,0 +1,28 @@
+@import "main";
+
+input, textarea {
+	transition: background-color .1s;
+}
+.fill {
+	background-color: lighten(green, 30%);
+}
+
+.left, .right {
+	float: left;
+	display: inline-block;
+}
+.left {
+	width: 60%;
+}
+.right {
+	width: 40%;
+	.images-list {
+		.each-img {
+			width: 100px;
+			height: 80px;
+			margin: 0 20px 10px 0;
+			float: left;
+		}
+		
+	}
+}

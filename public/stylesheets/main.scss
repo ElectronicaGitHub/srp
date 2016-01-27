@@ -1,0 +1,58 @@
+@import "fonts";
+
+$header_color: #FDFDFD;
+
+$text_color : #333333;
+// $text_color : #3C545F;
+
+// $dark_color : linear-gradient(#598192 30%, #3B5058 78%);
+// $dark_color : #A4BFCA;
+$dark_color : #CDE6F1;
+
+$call_color : #34c520;
+// $call_color : #219211;
+
+$text_color_light : #3c505a;
+$text_color_lighter : #727272;
+
+$main_focus_color : #FFB23F;
+// $main_focus_color : #ffcd34;
+
+$super_focus_color : #ffcd34;
+
+$main_font : 'Effra';
+$secondary_font : 'ProximaNova';
+
+
+html ,body {
+	padding: 0;
+	margin: 0;
+}
+
+html * {
+	// font-family: 'Milio';
+	color: $text_color;
+	box-sizing: border-box;
+}
+
+html a {
+	text-decoration: none;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+@mixin default-button($color:#fff) {
+	background-color: $color;
+	font-family: $main_font;
+	font-weight: 500;
+	padding: 10px 15px;
+	border-radius: 5px;
+	margin-right: 30px;
+	transition: background-color 0.2s;
+	&:hover {
+		background-color: darken($color, 10%);
+	}
+}

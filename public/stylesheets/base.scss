@@ -1,0 +1,9 @@
+head {
+	margin: 20px;
+	a {
+		padding: 100px;
+		&:hover {
+			color: #222;
+		}
+	}
+}
