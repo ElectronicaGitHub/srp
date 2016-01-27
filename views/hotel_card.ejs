@@ -1,0 +1,6 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Карточка отеля') -%>
+
+<script>
+	window.hotel = <%- JSON.stringify(hotel) %>;
+</script>

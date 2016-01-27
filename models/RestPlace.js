@@ -7,6 +7,10 @@ var RestPlace = new Schema({
 		type: String,
 		required: true
 	},
+	title_url : {
+		type: String,
+		required: true
+	},
 	description_full : {
 		type: String,
 		required: true
@@ -15,14 +19,14 @@ var RestPlace = new Schema({
 		type: String,
 		required: true
 	},
-	mini_images : {
-		type : [ObjectId],
-		ref : 'Image'
-	},
-	images : {
-		type : [ObjectId],
-		ref : 'Image'
-	},
+	mini_images : [{
+		type : ObjectId,
+		ref : 'Img'
+	}],
+	images : [{
+		type : ObjectId,
+		ref : 'Img'
+	}],
 	coordinates : {
 		type: [Number],
 		required: true

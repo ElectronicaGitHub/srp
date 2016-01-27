@@ -1,8 +1,8 @@
 angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', function ($scope, $http) {
 
 	$scope.restplace = {
-		benefits : window.benefitsData.benefits,
-		tags : window.benefitsData.tags
+		_benefits : window.benefitsData.benefits,
+		_tags : window.benefitsData.tags
 	};
 	var map;
 	
@@ -64,6 +64,7 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		})
 			.success(function (data) {
 				$scope[key] = data.filesArray;
+				console.log(data);
 			})
 			.error(function (data) {
 				console.log(data);
@@ -72,6 +73,17 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 
 	$scope.saveRestPlace = function (place) {
 		place.images = $scope.images.map(function (el) { return el._id; });
+		place.mini_images = $scope.mini_images.map(function (el) { return el._id; });
+
+		place.benefits = [];
+		place.tags = [];
+
+		for (var i in place._benefits) {
+			if (place._benefits[i].value) place.benefits.push(i);
+		}
+		for (var i in place._tags) {
+			if (place._tags[i].value) place.tags.push(i);
+		}
 
 		$http.post('/admin/place', place)
 			.success(function (data) {

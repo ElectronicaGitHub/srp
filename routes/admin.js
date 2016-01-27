@@ -3,7 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var async = require('async');
 var RestPlace = require('../models/RestPlace.js');
-var Image_ = require('../models/Image.js');
+var Img = require('../models/Img.js');
 var benefitsData = require('../data/data.js');
 
 module.exports = function (express) {
@@ -14,6 +14,7 @@ module.exports = function (express) {
 			data : benefitsData.hotel
 		});
 	});
+
 
 	router.post('/loadImages', function (req, res, next) {
 
@@ -45,7 +46,7 @@ module.exports = function (express) {
 
 	router.post('/place', function (req, res, next) {
 		var body = req.body;
-
+		
 		var rp = new RestPlace(body);
 
 		rp.save(function (err, model) {
@@ -84,7 +85,7 @@ var fileSave = function (file, cb, cbFail) {
       		},
       		function (path, callback) {
 		      	// добавить модель файла
-		      	var img = new Image_({
+		      	var img = new Img({
 		      		name : file.originalFilename,
 		      		path : path
 		      	})

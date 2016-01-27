@@ -22,13 +22,18 @@
 				</div>
 
 				<div class="form-group">
+					<label for="title">URL Заголовок( транслит)</label>
+					<input class="form-control" id="title" ng-class="{ fill : restplace.title_url }" type="text" ng-model="restplace.title_url" placeholder="Пример: hotel_spa_resort_super_dream_comes_true">
+				</div>
+
+				<div class="form-group">
 					<label for="description_full">Полное описание</label>
-					<textarea class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full" placeholder="Описание полное"></textarea>
+					<textarea class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="description_mini">Краткое описание</label>
-					<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini" placeholder="Описание мини"></textarea>
+					<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini"></textarea>
 				</div>
 
 				<div class="form-group">
@@ -78,19 +83,19 @@
 			<div class="wrapper">
 				<div class="form-group">
 					<label>Характеристики (каждая с новой строки)</label>
-					<textarea rows="6" class="form-control" ng-class="{ fill : restplace.characteristics }" type="text" ng-model="restplace.characteristics" placeholder="Характеристики"></textarea>
+					<textarea rows="6" class="form-control" ng-class="{ fill : restplace.characteristics }" type="text" ng-model="restplace.characteristics"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label>Плюсы</label>
-					<div class="checkbox" ng-repeat="benefit in restplace.benefits">
+					<div class="checkbox" ng-repeat="benefit in restplace._benefits">
 					  <label><input type="checkbox" ng-model="benefit.value">{{ benefit.name }}</label>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label>Теги</label>
-					<div class="checkbox" ng-repeat="tag in restplace.tags">
+					<div class="checkbox" ng-repeat="tag in restplace._tags">
 					  <label><input type="checkbox" ng-model="tag.value">{{ tag.name }}</label>
 					</div>
 				</div>
@@ -98,7 +103,7 @@
 		</div>
 
 	</div>
-	
+
 	<div class="bottom">
 		<button class="btn btn-success" ng-click="saveRestPlace(restplace)">Сохранить</button>
 	</div>
