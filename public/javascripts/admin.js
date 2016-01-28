@@ -33,7 +33,11 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
                 res.geoObjects.each(function (obj) {
                     names.push(obj.properties.get('name'));
 
-		            $scope.restplace.adress = names.reverse().join(', ');
+                    namesr = names.reverse();
+
+		            $scope.restplace.adress = namesr.join(', ');
+		            $scope.restplace.country = namesr[0];
+		            $scope.restplace.city = namesr[1];
 				    $scope.$apply();
                 });
             });

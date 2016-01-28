@@ -35,10 +35,13 @@ var RestPlace = new Schema({
 		type: String,
 		required: true
 	},
-	tags : [{
-		type : ObjectId,
-		ref : 'Tag'
-	}],
+	country : String,
+	city : String,
+	stars : Number,
+
+	price : Number,
+	best_offer : Boolean,
+
 	benefits : [{
 		type : ObjectId,
 		ref : 'Benefit'
@@ -48,6 +51,10 @@ var RestPlace = new Schema({
 		type : [ObjectId],
 		ref : 'Place'
 	},
+	tags : [{
+		type : ObjectId,
+		ref : 'Tag'
+	}],
 	created: {
 	    type: Date,
 	    default: Date.now

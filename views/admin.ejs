@@ -38,6 +38,24 @@
 				</div>
 
 				<div class="form-group">
+					<label for="stars">Звезды</label>
+					<input type="number" class="form-control" id="stars" ng-class="{ fill : restplace.stars }" ng-model="restplace.stars"/>
+				</div>
+
+				<div class="form-group">
+					<label for="price">Цена за сутки в рублях</label>
+					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price }" ng-model="restplace.price"/>
+				</div>
+
+
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Расположение</div>
+			
+			<div class="wrapper">
+				<div class="form-group">
 					<label>Координаты</label>
 					<input class="form-control" ng-class="{ fill : restplace.coordinates }" type="text" ng-model="restplace.coordinates" placeholder="Координаты">
 				</div>
@@ -45,6 +63,16 @@
 				<div class="form-group">
 					<label>Адрес</label>
 					<input class="form-control" ng-class="{ fill : restplace.adress }" type="text" ng-model="restplace.adress" placeholder="Адрес">
+				</div>
+
+				<div class="form-group">
+					<label>Страна</label>
+					<input class="form-control" ng-class="{ fill : restplace.country }" type="text" ng-model="restplace.country" placeholder="Страна">
+				</div>
+
+				<div class="form-group">
+					<label>Город</label>
+					<input class="form-control" ng-class="{ fill : restplace.city }" type="text" ng-model="restplace.city" placeholder="Город">
 				</div>
 
 				<div id="map" style="width: 100%; height: 500px"></div>
@@ -75,6 +103,15 @@
 				<div class="images-list">
 					<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in mini_images">
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Прочее</div>
+			<div class="wrapper">
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="restplace.best_offer"> Лучшее предложение</label>
 				</div>
 			</div>
 		</div>
