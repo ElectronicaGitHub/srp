@@ -4,15 +4,69 @@ var fs = require('fs');
 var async = require('async');
 var RestPlace = require('../models/RestPlace.js');
 var Img = require('../models/Img.js');
+var Tag = require('../models/Tag.js');
+var Benefit = require('../models/Benefit.js');
 var benefitsData = require('../data/data.js');
 
 module.exports = function (express) {
 	var router = express.Router();
 
 	router.get('/', function (req, res, next) {
-		res.render('admin', {
-			data : benefitsData.hotel
-		});
+		async.series([
+			function (cb) {
+				Tag.find({}, function (err, tags) {
+					cb(null, tags);
+				});
+			}, function (cb) {
+				Benefit.find({}).populate('image').exec(function (err, benefits) {
+					cb(null, benefits);
+				})
+			}], 
+			function (err, results) {
+				res.render('admin', {
+					tags : results[0],
+					benefits : results[1]
+				});
+			});
+	});
+
+	router.get('/misc', function (req, res, next) {
+		async.series([
+			function (cb) {
+				Tag.find({}, function (err, tags) {
+					cb(null, tags);
+				});
+			}, function (cb) {
+				Benefit.find({}).populate('image').exec(function (err, benefits) {
+					cb(null, benefits);
+				})
+			}], 
+			function (err, results) {
+				res.render('admin_misc', {
+					tags : results[0],
+					benefits : results[1]
+				});
+			})
+	});
+
+	router.post('/tag', function (req, res, next) {
+		var body = req.body;
+
+		var t = new Tag(body);
+		t.save(function (err, readyTag) {
+			if (err) return next(err);
+			res.json({ message : 'ok' });
+		})
+	});
+
+	router.post('/benefit', function (req, res, next) {
+		var body = req.body;
+
+		var ben = new Benefit(body);
+		ben.save(function (err, readyBenefit) {
+			if (err) return next(err);
+			res.json({ message : 'ok' });
+		})
 	});
 
 
@@ -31,17 +85,8 @@ module.exports = function (express) {
 			}, function (err) {
 				if (err) return next(err);
 				res.json({ message : 'ok' , filesArray : filesArray });
-			})
-
+			});
 		});
-
-		// removeFile = function(file, cb) {
-		//     fs.unlink(file, function(err) {
-	    //         if (err) throw err;
-	    //         console.log('file in path', file, 'successfully deleted');
-	    //  	   cb();
-		// 	   });
-		// }
 	});
 
 	router.post('/place', function (req, res, next) {
@@ -50,6 +95,7 @@ module.exports = function (express) {
 		var rp = new RestPlace(body);
 
 		rp.save(function (err, model) {
+			if (err) return next(err);
 			console.log(arguments);
 			res.json({
 				message : 'ok'

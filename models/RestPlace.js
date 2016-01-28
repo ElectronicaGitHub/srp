@@ -35,12 +35,14 @@ var RestPlace = new Schema({
 		type: String,
 		required: true
 	},
-	tags : {
-		type : [String]
-	},
-	benefits : {
-		type : [String]
-	},
+	tags : [{
+		type : ObjectId,
+		ref : 'Tag'
+	}],
+	benefits : [{
+		type : ObjectId,
+		ref : 'Benefit'
+	}],
 	characteristics : String,
 	places : {
 		type : [ObjectId],

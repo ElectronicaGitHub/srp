@@ -11,11 +11,21 @@ module.exports = function (express) {
 	router.get('/hotel/:title_url', function (req, res, next) {
 		RestPlace.findOne({
 			title_url : req.params.title_url
-		}).populate('images mini_images').exec(function (err, hotel) {
+		}).populate('images mini_images tags benefits')
+		.exec(function (err, hotel) {
 			if(err) return next(err);
-			res.render('hotel_card', {
-				hotel : hotel
-			});
+
+			var options = {
+		    	path: 'benefits.image',
+		    	model: 'Img'
+		    };
+
+		    RestPlace.populate(hotel, options, function (err, readyHotel) {
+				res.render('hotel_card', {
+					hotel : readyHotel
+				});
+		    })
+
 		})
 	})
 

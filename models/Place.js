@@ -23,6 +23,14 @@ var Place = new Schema({
 		type: String,
 		required: true
 	},
+	mini_images : [{
+		type : ObjectId,
+		ref : 'Img'
+	}],
+	images : [{
+		type : ObjectId,
+		ref : 'Img'
+	}],
 	tags : {
 		type : [String]
 	},

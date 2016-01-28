@@ -58,12 +58,14 @@ html a {
   margin: 20px auto 0 auto; }
   .admin-container .block {
     border-radius: 5px;
-    border: 1px solid #ffdba5; }
+    border: 1px solid #ffdba5;
+    margin-bottom: 20px; }
     .admin-container .block .title {
       background-color: #ffdba5;
-      padding: 2px 5px;
+      padding: 5px 10px;
       color: #E82C0C; }
     .admin-container .block .wrapper {
+      overflow: hidden;
       padding: 10px; }
   .admin-container input, .admin-container textarea {
     transition: background-color .1s; }
@@ -78,8 +80,7 @@ html a {
   .admin-container .right {
     width: 40%; }
     .admin-container .right .images-load-container {
-      position: relative;
-      margin-bottom: 20px; }
+      position: relative; }
       .admin-container .right .images-load-container input {
         position: absolute;
         right: 0;
@@ -102,5 +103,22 @@ html a {
     clear: both;
     padding: 0 20px;
     margin-bottom: 50px; }
+
+.listed-objects {
+  clear: both; }
+  .listed-objects .img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    display: inline-block; }
+  .listed-objects .name {
+    float: left;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 15px;
+    font-weight: 700; }
 
 /*# sourceMappingURL=admin.css.map */

@@ -8,12 +8,14 @@ $green_color : #10D94D;
 	.block {
 		border-radius: 5px;
 		border: 1px solid lighten($serp_main_color2, 20%);
+		margin-bottom: 20px;
 		.title {
 			background-color: lighten($serp_main_color2, 20%);
-			padding: 2px 5px;
+			padding: 5px 10px;
 			color: $serp_main_color;
 		}
 		.wrapper {
+			overflow: hidden;
 			padding: 10px;
 		}
 	}
@@ -43,7 +45,6 @@ $green_color : #10D94D;
 				width: 0;
 				height: 0;
 			}
-			margin-bottom: 20px;
 			.images-list {
 				clear: both;
 				overflow: hidden;
@@ -67,3 +68,22 @@ $green_color : #10D94D;
 	}
 }
 
+.listed-objects {
+	clear: both;
+	.img {
+		float: left;
+		width: 50px;
+		height: 50px;
+		background-size: cover;
+		background-position: center;
+		display: inline-block;
+	}
+	.name {
+		float: left;
+		display: inline-block;
+		height: 50px;
+		line-height: 50px;
+		padding-left: 15px;
+		font-weight: 700;
+	}
+}
