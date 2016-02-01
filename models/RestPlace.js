@@ -1,4 +1,5 @@
 var mongoose = require('../configs/mongoose.js');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 Schema = mongoose.Schema;
 ObjectId = Schema.Types.ObjectId;
 
@@ -37,9 +38,8 @@ var RestPlace = new Schema({
 	},
 	country : String,
 	city : String,
-	stars : Number,
 
-	price : Number,
+	price : [Number],
 	best_offer : Boolean,
 
 	benefits : [{
@@ -47,10 +47,10 @@ var RestPlace = new Schema({
 		ref : 'Benefit'
 	}],
 	characteristics : String,
-	places : {
-		type : [ObjectId],
+	places : [{
+		type : ObjectId,
 		ref : 'Place'
-	},
+	}],
 	tags : [{
 		type : ObjectId,
 		ref : 'Tag'
@@ -60,5 +60,7 @@ var RestPlace = new Schema({
 	    default: Date.now
 	}
 });
+RestPlace.plugin(deepPopulate);
+
 
 module.exports = mongoose.model('RestPlace', RestPlace);

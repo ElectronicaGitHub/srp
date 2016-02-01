@@ -13,15 +13,15 @@ $text_color_lighter : #727272;
 
 $serp_main_color : #E82C0C;
 $serp_main_color2 : #FFB23F;
-$super_focus_color : #ffcd34;
 
 $main_font : 'Effra';
 $secondary_font : 'ProximaNova';
 
 
-html ,body {
+html, body {
 	padding: 0;
 	margin: 0;
+	// background-color: lighten($serp_main_color2, 30%);
 }
 
 html * {

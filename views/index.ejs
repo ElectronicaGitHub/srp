@@ -1,6 +1,41 @@
 <%- layout('base.ejs')%>
-<% block('title', 'Кондор Мебель мебель на заказ хуе мое') -%>
+<% block('title', 'Серпантин') -%>
 
 <script src="/javascripts/main.js"></script>
+<link rel="stylesheet" href="/stylesheets/builded/index.css">
 
-<div class="image-panel"></div>
+<div class="filters-content">
+	<div class="container">
+		<div class="filters">
+			<div class="input-wrapper">
+				<div></div>
+			</div>
+			<div class="input-wrapper">
+				<div></div>
+			</div>
+			<div class="input-wrapper">
+				<div></div>
+			</div>
+			<div class="input-wrapper">
+				<div></div>
+			</div>
+		</div>
+		<div class="content">
+			<% for (var i in hotels) { var hotel = hotels[i]; %>
+				<div class="cell-wrapper">
+					<a href="/hotel/<%= hotel.title_url %>">
+						<div class="cell">
+							<div class="card-images-wrapper">
+								<div class="card-image" style="background-image: url(<%= hotel.mini_images[0].path %>)"></div>
+							</div>
+							<div class="card-info">
+								<p class="title"><%= hotel.title %></p>
+								<p class="description"><%= hotel.description_mini %></p>
+							</div>
+						</div>
+					</a>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</div>

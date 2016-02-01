@@ -7,6 +7,10 @@ var Place = new Schema({
 		type: String,
 		required: true
 	},
+	title_url : {
+		type: String,
+		required: true
+	},
 	description_full : {
 		type: String,
 		required: true
@@ -23,6 +27,8 @@ var Place = new Schema({
 		type: String,
 		required: true
 	},
+	country : String,
+	city : String,
 	mini_images : [{
 		type : ObjectId,
 		ref : 'Img'
@@ -31,12 +37,6 @@ var Place = new Schema({
 		type : ObjectId,
 		ref : 'Img'
 	}],
-	tags : {
-		type : [String]
-	},
-	benefits : {
-		type : [String]
-	},
 	created: {
 	    type: Date,
 	    default: Date.now

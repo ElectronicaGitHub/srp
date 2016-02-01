@@ -3,6 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var async = require('async');
 var RestPlace = require('../models/RestPlace.js');
+var Place = require('../models/Place.js');
 var Img = require('../models/Img.js');
 var Tag = require('../models/Tag.js');
 var Benefit = require('../models/Benefit.js');
@@ -21,11 +22,17 @@ module.exports = function (express) {
 				Benefit.find({}).populate('image').exec(function (err, benefits) {
 					cb(null, benefits);
 				})
-			}], 
+			}, 
+			function (cb) {
+				Place.find().populate('images mini_images').exec(function (err, places) {
+					cb(null, places);
+				})
+			}],
 			function (err, results) {
 				res.render('admin', {
 					tags : results[0],
-					benefits : results[1]
+					benefits : results[1],
+					places : results[2]
 				});
 			});
 	});
@@ -47,6 +54,10 @@ module.exports = function (express) {
 					benefits : results[1]
 				});
 			})
+	});
+
+	router.get('/places', function (req, res, next) {
+		res.render('admin_places');
 	});
 
 	router.post('/tag', function (req, res, next) {
@@ -89,7 +100,7 @@ module.exports = function (express) {
 		});
 	});
 
-	router.post('/place', function (req, res, next) {
+	router.post('/restplace', function (req, res, next) {
 		var body = req.body;
 		
 		var rp = new RestPlace(body);
@@ -103,7 +114,19 @@ module.exports = function (express) {
 		});
 	});
 
+	router.post('/place', function (req, res, next) {
+		var body = req.body;
+		
+		var p = new Place(body);
 
+		p.save(function (err, model) {
+			if (err) return next(err);
+			console.log(arguments);
+			res.json({
+				message : 'ok'
+			});
+		});
+	});
 
 	return router;
 }

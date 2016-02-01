@@ -53,4 +53,8 @@ html a {
   max-width: 960px;
   margin: 0 auto; }
 
+header {
+  height: 100px;
+  background-color: white; }
+
 /*# sourceMappingURL=header.css.map */
