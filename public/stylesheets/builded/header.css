@@ -39,7 +39,8 @@
   font-weight: 700; }
 html, body {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  background-color: #f7f7f7; }
 
 html * {
   font-family: "Effra";
@@ -52,6 +53,58 @@ html a {
 .container {
   max-width: 960px;
   margin: 0 auto; }
+
+.container-max {
+  max-width: 1200px;
+  margin: 0 auto; }
+
+/* Variables */
+/* Colors */
+/* Dropdown style */
+.dropdown {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  background: white;
+  position: relative;
+  z-index: 10; }
+  .dropdown dt a {
+    display: block;
+    height: 40px;
+    width: 100%;
+    text-decoration: none; }
+    .dropdown dt a:hover, .dropdown dt a:active {
+      border-color: #bdc3c7; }
+  .dropdown dt span {
+    display: block;
+    padding: 0 1em;
+    line-height: 40px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHo+AACAQQAA+MoAAIC0AAB48QAA9RwAADw3AAAbzhlfIT4AAACJSURBVHjajNAxCsJAEEbhb5cU4i0sbHIaL6IQTxFPo4VeROwXQs4gKW1cWJZEM90wj5l5f0jDeMXBunqENIw7vLD9A09oIxL6FdsvSCENI2zwxH4BTmgxxeJc92P76cuIpRBuc6K45yZWwzPeleixBOLMr30tWgJZuqwcQJNFy2GzkHeHUMPwGQChFSPmzlJ1WgAAAABJRU5ErkJggg==) no-repeat scroll right center;
+    border-right: 1em solid transparent;
+    cursor: pointer; }
+  .dropdown dd {
+    position: relative; }
+    .dropdown dd ul {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: -40px;
+      width: 100%;
+      list-style: none;
+      background: #fff none repeat scroll 0 0;
+      padding-left: 0; }
+    .dropdown dd li a {
+      display: block;
+      padding: 0 1em;
+      line-height: 40px;
+      text-decoration: none; }
+      .dropdown dd li a:hover {
+        background-color: #FBB958;
+        color: #fff;
+        cursor: pointer; }
+
+.selected {
+  font-weight: 700; }
 
 header {
   height: 100px;

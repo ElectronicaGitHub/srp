@@ -1,0 +1,215 @@
+@import "main";
+
+$offer_width : 550px;
+$image_height: 400px;
+$picker_width: 510px;
+.hotel-card {
+	.main-panel {
+		width: 100%;
+		.image-panel {
+			width: 100%;
+			height: $image_height;
+			position: relative;
+			.images-wrapper {
+				height: 100%;
+				width: 100%;
+				.image {
+					width: 100%;
+					height: 100%;
+					background-size: cover;
+					position: absolute;
+					background-position: center;
+					z-index: 100;
+					opacity: 0;
+					&.pre_current {
+						z-index: 250;
+					}
+					&.current {
+						z-index: 200;
+						opacity: 1
+					}
+				}	
+			}
+			.radio-wrapper {
+				position: absolute;
+				display: inline-block;
+				// right: 0;
+				bottom: 0;
+				width: 100%;
+				text-align: center;
+				height: 30px;
+				z-index: 300;
+				margin: 0 15px 0px 0;
+				.image-radio {
+					cursor: pointer;
+					margin: 0px 1px;
+					width: 15px;
+					border: 2px solid white;
+					display: inline-block;
+					height: 15px;
+					border-radius: 50%;
+					// background-color: transparentize($serp_main_color, 0.5);
+					background-color: rgba(255, 255, 255, .1);
+					transition: background-color .4s;
+					&.current {
+						cursor: default;
+						// background-color: $serp_main_color;
+						background-color: rgba(255, 255, 255, 1);
+					}
+				}
+			}
+		}
+		.title-content {
+			overflow: hidden;
+			background-color: #222;
+			> div {
+				.wrappers-container {
+					width: calc(100% - #{$offer_width});
+					padding: 15px;
+					overflow: hidden;
+					.left-wrapper {
+						// padding: 15px 15px 0;
+						float: left;
+						.title {
+							padding: 0;
+							margin: 0;
+							font-size: 28px;
+							font-weight: 700;
+							color: white;
+						}
+						.target-name {
+							font-size: 18px;
+							padding: 0;
+							color: white;
+							margin: 0;
+							span {
+								color: white;
+								margin-right: 8px;
+							}
+						}
+					}
+					.right-wrapper {
+						// padding: 15px 15px 0 15px;
+						float: right;
+						text-align: right;
+						.price {
+							font-size: 25px;
+							font-weight: 700;
+							color: $serp_main_color;
+							font-family: $secondary_font;
+							margin: 0;
+							span {
+								color: $serp_main_color;
+								font-size: 18px;
+								margin-left: 5px;
+							}
+						}
+						.price-text {
+							font-size: 12px;
+							font-weight: 500;
+							color: white;
+						}
+					}
+				}
+			}
+		}
+		.hotel-info {
+			background-color: white;
+			box-shadow: 0 1px 2px rgba(0,0,0,.2);
+			.info-wrapper {
+				float: left;
+				width: calc(100% - #{$offer_width});
+				min-height: 400px;
+				overflow: hidden;
+				background: white;
+
+				.info-node {
+					font-size: 16px;
+					padding: 40px 20px;
+				}
+
+
+				.tabs {
+					padding: 0px 50px;
+					.nav-tabs {
+						// margin-top: 20px;
+						text-align: center;
+						border-bottom: 3px solid #f5f5f5;
+						li {
+							position: relative;
+							top: 13px;
+							display: inline-block;
+							margin: 10px 10px;
+							padding: 8px 2px;
+							font-weight: 700;
+							font-size: 16px;
+							float: initial;
+							border-bottom: 3px solid transparent;
+							transition: border-bottom .3s;
+							&.active {
+								border-bottom: 3px solid $serp_main_color;
+							}
+							a {
+								border: none;
+								padding: 0;
+								&:hover {
+									background: initial;
+								}
+							}
+						}
+					}
+				}
+				.tab-content {
+					padding: 50px 50px;
+					.tab-pane {
+						overflow: hidden;
+						clear: both;
+						font-size: 16px;
+						color: #555555;
+						.each-characterictic {
+							width: 50%;
+							float: left;
+						}
+					}
+				}
+				.map-wrapper {
+					width: 100%;
+					height: 400px;
+				}
+			}
+			.offer-panel {
+				position: relative;
+				z-index: 500;
+				float: left;
+				top: -140px;
+				width: $offer_width;
+				overflow: hidden;
+				.picker-wrapper {
+					border-radius: 5px;
+					width: $picker_width;
+					background-color: white;
+					margin: 0 auto;
+					box-shadow: 0 1px 2px rgba(0,0,0,.1);
+					height: 100%;
+					.price-container {
+						margin: 10px 15px 15px 15px;
+						border-radius: 5px;
+						border: 2px solid $serp_main_color;
+						background-color: $serp_main_color;
+						padding: 20px;
+						text-align: center;
+						span {
+							color: white;
+							font-size: 18px;
+							font-weight: 300;
+						}
+						.price {
+							color: white;
+							font-weight: 700;
+						} 
+					}
+				}
+			}
+		}
+	}
+}

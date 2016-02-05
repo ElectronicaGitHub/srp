@@ -5,6 +5,9 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		_tags : window.tags,
 		_places : window.places
 	};
+	
+	$scope._cities = window.cities;
+
 	var map;
 	
 	ymaps.ready(mapInit);
@@ -38,7 +41,7 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 
 		            $scope.restplace.adress = namesr.join(', ');
 		            $scope.restplace.country = namesr[0];
-		            $scope.restplace.city = namesr[1];
+		            // $scope.restplace.city = namesr[1];
 				    $scope.$apply();
                 });
             });

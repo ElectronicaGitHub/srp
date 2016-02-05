@@ -5,6 +5,7 @@ var async = require('async');
 var RestPlace = require('../models/RestPlace.js');
 var Place = require('../models/Place.js');
 var Img = require('../models/Img.js');
+var City = require('../models/City.js');
 var Tag = require('../models/Tag.js');
 var Benefit = require('../models/Benefit.js');
 var benefitsData = require('../data/data.js');
@@ -27,12 +28,18 @@ module.exports = function (express) {
 				Place.find().populate('images mini_images').exec(function (err, places) {
 					cb(null, places);
 				})
+			},
+			function (cb) {
+				City.find(function (err, places) {
+					cb(null, places);
+				})
 			}],
 			function (err, results) {
 				res.render('admin', {
 					tags : results[0],
 					benefits : results[1],
-					places : results[2]
+					places : results[2],
+					cities : results[3]
 				});
 			});
 	});
@@ -44,6 +51,10 @@ module.exports = function (express) {
 					cb(null, tags);
 				});
 			}, function (cb) {
+				City.find({}, function (err, cities) {
+					cb(null, cities);
+				});
+			}, function (cb) {
 				Benefit.find({}).populate('image').exec(function (err, benefits) {
 					cb(null, benefits);
 				})
@@ -51,13 +62,18 @@ module.exports = function (express) {
 			function (err, results) {
 				res.render('admin_misc', {
 					tags : results[0],
-					benefits : results[1]
+					cities : results[1],
+					benefits : results[2]
 				});
 			})
 	});
 
 	router.get('/places', function (req, res, next) {
-		res.render('admin_places');
+		City.find({}, function (err, cities) {
+			res.render('admin_places', {
+				cities : cities
+			});
+		});
 	});
 
 	router.post('/tag', function (req, res, next) {
@@ -65,6 +81,16 @@ module.exports = function (express) {
 
 		var t = new Tag(body);
 		t.save(function (err, readyTag) {
+			if (err) return next(err);
+			res.json({ message : 'ok' });
+		})
+	});
+
+	router.post('/city', function (req, res, next) {
+		var body = req.body;
+
+		var city = new City(body);
+		city.save(function (err, readyCity) {
 			if (err) return next(err);
 			res.json({ message : 'ok' });
 		})

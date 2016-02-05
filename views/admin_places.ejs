@@ -4,6 +4,10 @@
 <script src="/libs/angular/angular.min.js"></script>
 <script src="/javascripts/admin_places.js"></script>
 
+<script>
+	window.cities = <%- JSON.stringify(cities) %>;
+</script>
+
 <link rel="stylesheet" href="/stylesheets/builded/admin.css">
 
 <div ng-app="serpAdmin" ng-controller="MainCtrl" class="admin-container">
@@ -58,7 +62,7 @@
 
 				<div class="form-group">
 					<label>Город</label>
-					<input class="form-control" ng-class="{ fill : restplace.city }" type="text" ng-model="restplace.city" placeholder="Город">
+					<select ng-options="city._id as city.name for city in _cities" ng-model="restplace.city"></select>
 				</div>
 
 				<div id="map" style="width: 100%; height: 500px"></div>

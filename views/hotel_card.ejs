@@ -1,6 +1,100 @@
 <%- layout('base.ejs')%>
 <% block('title', 'Карточка отеля') -%>
 
+<script src="/javascripts/hotel.js"></script>
+<script src="/libs/moment/min/moment-with-locales.min.js"></script>
+<script src="/libs/date-picker/jquery.daterangepicker.js"></script>
+<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
 	window.hotel = <%- JSON.stringify(hotel) %>;
 </script>
+
+<link rel="stylesheet" href="/stylesheets/builded/hotel.css">
+<link rel="stylesheet" href="/stylesheets/builded/date-picker.css">
+
+<div class="hotel-card">
+	<div class="main-panel">
+		<div class="image-panel">
+			<div class="images-wrapper">
+				<% for (var i = 0; i < hotel.images.length; i++) { var img = hotel.images[i]; %>
+						<div data-n="<%= i %>" class="image <%= i == 0 ? 'current' : '' %>" style="background-image : url(<%= img.path %>)"></div>
+				<% } %>
+			</div>
+			<div class="radio-wrapper">
+				<% for (var j = 0; j < hotel.images.length; j++) { var img = hotel.images[j]; %>
+					<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
+				<% } %>
+			</div>
+		</div>
+		<div class="title-content">
+			<div class="container-max">
+				<div class="wrappers-container">
+					<div class="left-wrapper">
+						<h1 class="title"><%= hotel.title %></h1>
+						<p class="target-name"><span class="fa fa-map-marker"></span><%= hotel.city.name %></p>
+					</div>
+					<!-- <div class="middle-wrapper col-xs-12 col-sm-6 col-md-4 col-lg-4">
+						<p>Получите мгновенную консультацию</p>
+						<p>+7 (495) 638 - 14 - 83</p>
+					</div> -->
+					<div class="right-wrapper">
+						<p class="price"><%= hotel.price[hotel.price.length - 1] %> - <%= hotel.price[0] %><span class="fa fa-rub"></span></p>
+						<p class="price-text">В зависимости от периода пребывания</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hotel-info">
+			<div class="container-max">
+				<div class="info-wrapper">
+						
+					<div class="tabs">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a data-toggle="tab" role="tab" aria-controls="description" href="#description">Описание</a></li>
+							<li role="presentation"><a data-toggle="tab" role="tab" aria-controls="information" href="#information">Информация</a></li>
+							<li role="presentation"><a data-toggle="tab" role="tab" aria-controls="places" href="#places">Места рядом (<%= hotel.places.length %>)</a></li>
+						</ul>
+					</div>
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane fade in active" id="description"><%= hotel.description_full %></div>
+						<div role="tabpanel" class="tab-pane fade" id="information">
+							<% for (var i = 0, characts = hotel.characteristics.split('\n'); i < characts.length; i++ ) { %>
+								<div class="each-characterictic">- <%= characts[i] %></div>
+							<% } %>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="places"></div>
+					</div>
+
+					<!-- // или -->
+					<!-- // или -->
+					<!-- // или -->
+
+					<!-- <div class="info-node"><%= hotel.description_full %></div>
+					<div class="info-node">
+						<% for (var i = 0, characts = hotel.characteristics.split('\n'); i < characts.length; i++ ) { %>
+							<div class="each-characterictic">- <%= characts[i] %></div>
+						<% } %>
+					</div>
+					<div class="info-node"></div> -->
+
+					<div class="map-wrapper">
+						<div id="map" style="width: 100%; height: 100%"></div>
+					</div>
+				</div>	
+
+				<div class="offer-panel">
+					<div class="picker-wrapper">
+						<div class="picker" id="picker"></div>
+						<div class="price-container">
+							<span>Итоговая стоимость: </span>
+							<span class="price"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+
+</div>

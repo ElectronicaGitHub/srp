@@ -7,6 +7,7 @@
 	window.tags = <%- JSON.stringify(tags) %>;
 	window.benefits = <%- JSON.stringify(benefits) %>;
 	window.places = <%- JSON.stringify(places) %>;
+	window.cities = <%- JSON.stringify(cities) %>;
 </script>
 <link rel="stylesheet" href="/stylesheets/builded/admin.css">
 
@@ -86,7 +87,7 @@
 
 				<div class="form-group">
 					<label>Город</label>
-					<input class="form-control" ng-class="{ fill : restplace.city }" type="text" ng-model="restplace.city" placeholder="Город">
+					<select ng-options="city._id as city.name for city in _cities" ng-model="restplace.city"></select>
 				</div>
 
 				<div id="map" style="width: 100%; height: 500px"></div>

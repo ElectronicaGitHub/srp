@@ -2,9 +2,23 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 
 	$scope.tags = window.tags;
 	$scope.benefits = window.benefits;
+	$scope.cities = window.cities;
 
 	$scope.newBenefit = {};
 	$scope.newTag = {};
+	$scope.newCity = {};
+
+	$scope.createCity = function () {
+		$http.post('/admin/city', $scope.newCity)
+			.success(function (data) {
+				console.log(data);
+				$scope.cities.push($scope.newCity);
+				$scope.newCity = {};
+			})
+			.error(function (data) {
+				console.log(data);
+			})
+	}
 
 	$scope.createTag = function () {
 		$http.post('/admin/tag', $scope.newTag)

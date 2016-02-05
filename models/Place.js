@@ -28,7 +28,10 @@ var Place = new Schema({
 		required: true
 	},
 	country : String,
-	city : String,
+	city : {
+		type: ObjectId,
+		ref : 'City'
+	},
 	mini_images : [{
 		type : ObjectId,
 		ref : 'Img'

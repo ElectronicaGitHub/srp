@@ -6,6 +6,7 @@
 <script>
 	window.tags = <%- JSON.stringify(tags) %>;
 	window.benefits = <%- JSON.stringify(benefits) %>;
+	window.cities = <%- JSON.stringify(cities) %>;
 </script>
 
 <link rel="stylesheet" href="/stylesheets/builded/admin.css">
@@ -28,6 +29,24 @@
 		<div class="title">Готовые теги</div>
 		<div class="wrapper">
 			<p ng-repeat="t in tags" ng-model="benefit.name">{{ t.name }}</p>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="title">Города</div>
+		<div class="wrapper">
+			<div class="form-group">
+				<label for="title">Название города</label>
+				<input class="form-control" id="title" ng-class="{ fill : newCity.name }" type="text" ng-model="newCity.name">
+				<button ng-click="createCity(newCity)" class="btn btn-apply">Добавить тег</button>
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="title">Имеющиеся города</div>
+		<div class="wrapper">
+			<p ng-repeat="city in cities">{{ city.name }}</p>
 		</div>
 	</div>
 </div>

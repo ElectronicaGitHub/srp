@@ -37,8 +37,10 @@ var RestPlace = new Schema({
 		required: true
 	},
 	country : String,
-	city : String,
-
+	city : {
+		type: ObjectId,
+		ref : 'City'
+	},
 	price : [Number],
 	best_offer : Boolean,
 
