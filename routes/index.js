@@ -49,6 +49,20 @@ module.exports = function (express) {
 	 //    });
 	});
 
+	router.post('/api/getHotels', function (req, res, next) {
+		console.log(req.body);
+
+		RestPlace.find(req.body)
+		.deepPopulate('images mini_images city tags benefits benefits.image places places.city places.images places.mini_images')
+		.exec(function (err, hotels) {
+			if(err) return next(err);
+			res.json({
+				hotels: hotels
+			});
+	    });
+
+	})
+
 	router.get('/hotel/:title_url', function (req, res, next) {
 		RestPlace.findOne({
 			title_url : req.params.title_url

@@ -6,6 +6,11 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		_places : window.places
 	};
 	
+	$scope._price_categories = [
+		{ _id : 0, name : 'до 3000'},
+		{ _id : 1, name : 'от 3000 до 6000'},
+		{ _id : 2, name : 'от 6000'}
+	]
 	$scope._cities = window.cities;
 
 	var map;

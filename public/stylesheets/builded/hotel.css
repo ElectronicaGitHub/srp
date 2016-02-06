@@ -92,6 +92,7 @@ html a {
       width: 100%;
       list-style: none;
       background: #fff none repeat scroll 0 0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       padding-left: 0; }
     .dropdown dd li a {
       display: block;
@@ -179,11 +180,11 @@ html a {
         .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price {
           font-size: 25px;
           font-weight: 700;
-          color: #DE4330;
+          color: #FBB958;
           font-family: "ProximaNova";
           margin: 0; }
           .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span {
-            color: #DE4330;
+            color: #FBB958;
             font-size: 18px;
             margin-left: 5px; }
         .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price-text {
@@ -219,7 +220,7 @@ html a {
             border-bottom: 3px solid transparent;
             transition: border-bottom .3s; }
             .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs li.active {
-              border-bottom: 3px solid #DE4330; }
+              border-bottom: 3px solid #F34352; }
             .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs li a {
               border: none;
               padding: 0; }
@@ -243,8 +244,7 @@ html a {
       z-index: 500;
       float: left;
       top: -140px;
-      width: 550px;
-      overflow: hidden; }
+      width: 550px; }
       .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper {
         border-radius: 5px;
         width: 510px;
@@ -252,19 +252,40 @@ html a {
         margin: 0 auto;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         height: 100%; }
-        .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .price-container {
-          margin: 10px 15px 15px 15px;
-          border-radius: 5px;
-          border: 2px solid #DE4330;
-          background-color: #DE4330;
-          padding: 20px;
-          text-align: center; }
-          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .price-container span {
+        .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .offer-continue {
+          display: none;
+          margin: 0px 20px 20px 20px; }
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .offer-continue .price-container {
+            position: relative;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color .3s;
+            margin: 0 0 20px 0;
+            top: 5px; }
+            .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .offer-continue .price-container .placeholder-fw {
+              position: absolute;
+              top: -12px;
+              width: 100%;
+              left: 0;
+              text-align: center; }
+              .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .offer-continue .price-container .placeholder-fw .placeholder {
+                background-color: white;
+                font-size: 12px;
+                padding: 0 10px; }
+            .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .offer-continue .price-container .price {
+              font-size: 25px;
+              font-weight: 700;
+              display: inline-block;
+              padding: 10px 0; }
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .offer-continue .offer-button {
+            background-color: #F34352;
+            border: 2px solid #F34352;
+            padding: 15px;
+            border-radius: 5px;
+            width: 100%;
             color: white;
-            font-size: 18px;
-            font-weight: 300; }
-          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .price-container .price {
-            color: white;
+            font-size: 20px;
             font-weight: 700; }
 
 /*# sourceMappingURL=hotel.css.map */

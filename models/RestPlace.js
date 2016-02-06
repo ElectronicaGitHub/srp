@@ -42,6 +42,7 @@ var RestPlace = new Schema({
 		ref : 'City'
 	},
 	price : [Number],
+	price_category : Number,
 	best_offer : Boolean,
 
 	benefits : [{

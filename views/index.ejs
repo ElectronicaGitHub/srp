@@ -3,9 +3,42 @@
 
 <script src="/javascripts/main.js"></script>
 <script src="/javascripts/dropdown.js"></script>
+<script src="/libs/jq-render.min.js"></script>
 
 <script>
 	window.hotels = <%- JSON.stringify(hotels) %>;
+</script>
+
+<script id="cells" type="text/x-jsrender">
+	<div class="cell-wrapper col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<a href="/hotel/{{:title_url}}">
+			<div class="cell">
+				<div class="images-with-radio-wrapper">
+					<div class="images-wrapper">
+						{{for mini_images}}
+							<div data-n="{{:#index}}" class="card-image {{:i==0?'current':''}}" style="background-image: url('{{:path}}')"></div>
+						{{/for}}
+						<div class="radio-wrapper">
+							{{for mini_images}}
+								<span data-n="{{:#index}}" class="image-radio {{:j==0?'current':''}}"></span>
+							{{/for}}
+						</div>
+					</div>
+				</div>
+				<div class="card-info">
+					<p class="title">{{:title}}</p>
+					<p class="city"><span class="fa fa-map-marker icon"></span>{{:city.name}}</p>
+					<div class="price-wrapper">
+						<div class="price-with-icon">
+							<span class="fa fa-rub icon"></span>
+							<span class="price">{{:price[0]}}</span>	
+						</div>
+						<div class="per-x">за сутки</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
 </script>
 <link rel="stylesheet" href="/stylesheets/builded/index.css">
 
@@ -20,39 +53,39 @@
 	<div class="filters-wrapper container">
 			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
 				<h4>Город</h4>
-				<div class="dropdown">
+				<div class="dropdown" data-type="city">
 					<dt><a><span>Выберите город</span></a></dt>
 					<dd><ul>
 						<% for (var i in cities) { var city = cities[i]; %>
-							<li><a data-id="<%= city._id %>" class="<%= i == 0 ? 'default' : '' %>"><%= city.name %></a></li>
+							<li><a data-id="<%= city._id %>"><%= city.name %></a></li>
 						<% } %>
 					</ul></dd>
 				</div>
 			</div>
 			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
 				<h4>Цена за день в руб.</h4>
-				<div class="dropdown">
+				<div class="dropdown" data-type="price_category">
 					<dt><a><span>Выберите цену</span></a></dt>
 					<dd><ul>
 						<% for (var i in costs) { var cost = costs[i]; %>
-							<li><a data-id="<%= cost._id %>" class="<%= i == 0 ? 'default' : '' %>"><%= cost.name %></a></li>
+							<li><a data-id="<%= cost._id %>"><%= cost.name %></a></li>
 						<% } %>
 					</ul></dd>
 				</div>
 			</div>
 			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
 				<h4>Тип отдыха</h4>
-				<div class="dropdown">
+				<div class="dropdown" data-type="tags">
 					<dt><a><span>Выберите тип отдыха</span></a></dt>
 					<dd><ul>
 						<% for (var i in tags) { var tag = tags[i]; %>
-							<li><a data-id="<%= tag._id %>" class="<%= i == 0 ? 'default' : '' %>"><%= tag.name %></a></li>
+							<li><a data-id="<%= tag._id %>"><%= tag.name %></a></li>
 						<% } %>
 					</ul></dd>
 				</div>
 			</div>
 			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
-				<div class="search-button">Искать</div>
+				<div class="search-button" id="search-button">Искать</div>
 			</div>
 		</div>
 </div>
@@ -68,16 +101,14 @@
 								<% for (var i = 0; i < hotel.mini_images.length; i++) { %>
 									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url(<%= hotel.mini_images[i].path %>)"></div>
 								<% } %>
+								<% if (hotel.mini_images.length > 1) { %>
 								<div class="radio-wrapper">
 									<% for (var j = 0; j < hotel.mini_images.length; j++) { %>
 										<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
 									<% } %>
 								</div>
+								<% } %>
 							</div>
-						</div>
-						<div class="card-info">
-							<p class="title"><%= hotel.title %></p>
-							<p class="city"><span class="fa fa-map-marker icon"></span><%= hotel.city.name %></p>
 							<div class="price-wrapper">
 								<div class="price-with-icon">
 									<span class="fa fa-rub icon"></span>
@@ -85,6 +116,15 @@
 								</div>
 								<div class="per-x">за сутки</div>
 							</div>
+						</div>
+						<div class="card-info">
+							<span class="left">
+								<p class="title"><%= hotel.title %></p>
+								<p class="city"><span class="fa fa-map-marker icon"></span><%= hotel.city.name %></p>
+							</span>
+							<span class="right">
+								<button class="more-info">Подробнее</button>
+							</span>
 						</div>
 					</div>
 				</a>

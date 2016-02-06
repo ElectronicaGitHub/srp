@@ -92,6 +92,7 @@ html a {
       width: 100%;
       list-style: none;
       background: #fff none repeat scroll 0 0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       padding-left: 0; }
     .dropdown dd li a {
       display: block;
@@ -116,7 +117,7 @@ html a {
     .admin-container .block .title {
       background-color: #fde3bc;
       padding: 5px 10px;
-      color: #DE4330; }
+      color: #F34352; }
     .admin-container .block .wrapper {
       overflow: hidden;
       padding: 10px; }

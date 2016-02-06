@@ -92,6 +92,7 @@ html a {
       width: 100%;
       list-style: none;
       background: #fff none repeat scroll 0 0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       padding-left: 0; }
     .dropdown dd li a {
       display: block;
@@ -136,8 +137,7 @@ html a {
 .date-picker-wrapper {
   position: absolute;
   z-index: 1;
-  border: 2px solid #DE4330;
-  margin: 15px;
+  margin: 15px 15px 5px 15px;
   padding: 6px;
   font-size: 12px;
   line-height: 20px;
@@ -169,9 +169,11 @@ html a {
     text-transform: uppercase;
     font-size: 16px; }
   .date-picker-wrapper .month-wrapper {
-    border-radius: 3px;
+    border-radius: 5px;
+    border: 2px solid #F34352;
     background-color: #fff;
     padding: 5px;
+    margin: 20px 0 0 0;
     cursor: default;
     position: relative;
     _overflow: hidden; }
@@ -289,8 +291,11 @@ html a {
   .date-picker-wrapper .selected-days {
     display: none; }
   .date-picker-wrapper .drp_top-bar {
+    text-align: center;
     line-height: 1.4;
     font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #F34352;
     position: relative;
     padding: 10px 40px 10px 10px; }
     .date-picker-wrapper .drp_top-bar .error-top {
@@ -338,10 +343,10 @@ html a {
   .date-picker-wrapper .hide {
     display: none; }
   .date-picker-wrapper .first-date-selected {
-    background-color: #DE4330 !important;
+    background-color: #F34352 !important;
     color: #fff !important; }
   .date-picker-wrapper .last-date-selected {
-    background-color: #DE4330 !important;
+    background-color: #F34352 !important;
     color: #fff !important; }
   .date-picker-wrapper .date-range-length-tip {
     position: absolute;
@@ -372,7 +377,7 @@ html a {
     color: #999;
     cursor: pointer; }
     .date-picker-wrapper .week-number.week-number-selected {
-      color: #DE4330;
+      color: #F34352;
       font-weight: bold; }
   .date-picker-wrapper table .caption {
     height: 40px; }

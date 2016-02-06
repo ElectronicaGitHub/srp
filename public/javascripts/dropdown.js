@@ -5,7 +5,7 @@ $(function () {
 	// Onclick on a dropdown, toggle visibility
 	dropdowns.find("dt").click(function(){
 		dropdowns.find("dd ul").hide();
-		$(this).next().children().toggle();
+		$(this).next().children().toggle().closest('.input-wrapper').css('z-index', '999');
 	});
 
 	// Clic handler for dropdown
@@ -30,11 +30,11 @@ $(function () {
 		}
 	  
 		// Close dropdown
-		$(this).parents("ul").hide();
+		$(this).parents("ul").hide().closest('.input-wrapper').css('z-index', '');
 	});
 
 	// Close all dropdown onclick on another element
 	$(document).bind('click', function(e){
-		if (! $(e.target).parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+		if (! $(e.target).parents().hasClass("dropdown")) $(".dropdown dd ul").hide().closest('.input-wrapper').css('z-index', '');
 	});
 })

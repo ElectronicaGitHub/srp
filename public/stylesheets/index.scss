@@ -48,17 +48,19 @@ $search_container_color : #DBDCE4;
 	}
 	.filters-wrapper {
 		position: relative;
-		z-index: 4;
+		z-index: 20;
 		text-align: initial;
-		background-color: rgba(255,255,255,.4);
+		// background-color: rgba(255,255,255,.5);
+		background-color: rgba(0,0,0,.5);
 		padding-top: 20px;
 		padding-bottom: 20px;
 		margin-bottom: 20px;
 		display: inline-block;
 		.input-wrapper {
 			h4 {
-				font-weight: 300;
+				font-weight: 700;
 				margin-top: 0;
+				color: $serp_main_color2;
 			}
 			div {
 				width: 100%;
@@ -76,7 +78,8 @@ $search_container_color : #DBDCE4;
 }
 
 .filters-content {
-	background-color: lighten($search_container_color, 10%);
+	// background-color: white;
+	// background-color: lighten($search_container_color, 10%);
 	.content {
 		margin: 10px -10px;
 		.cell-wrapper {
@@ -91,6 +94,42 @@ $search_container_color : #DBDCE4;
 					box-shadow: 0 1px 2px rgba(0,0,0,.3);
 					position: relative;
 					z-index: 5;
+					.price-wrapper {
+						position: absolute;
+						// top: 10px;
+						bottom: 5px;
+						right: 5px;
+						z-index: 999;
+						padding: 5px;
+						// background-color: $serp_main_color;
+						background-color: rgba(0,0,0,.8);
+						right: 10px;
+						border-radius: 2px;
+						* {
+							// color: white;
+							color: $serp_main_color2;
+						}
+						.price-with-icon {
+							float: right;
+							height: 25px;
+							.price {
+								font-family: $secondary_font;
+								font-size: 25px;
+								font-weight: 700;
+							}
+							.icon {
+								font-size: 13px;
+								margin: 8px 2px 0 0;
+								vertical-align: top;
+							}
+						}
+						.per-x {
+							clear: both;
+							font-size: 13px;
+							font-weight: 500;
+							text-align: right;
+						}
+					}
 					.images-wrapper {
 						position: relative;
 						width: 100%;
@@ -144,52 +183,47 @@ $search_container_color : #DBDCE4;
 					}
 				}
 				.card-info {
+					overflow: hidden;
 					position: relative;
-					height: 70px;
+					// height: 70px;
 					padding: 10px;
-					background-color: $serp_main_color2;
-					.price-wrapper {
-						position: absolute;
-						top: 0;
-						right: 0;
-						padding: 10px;
-						.price-with-icon {
-							float: right;
-							height: 25px;
-							.price {
-								font-family: $secondary_font;
-								font-size: 25px;
-								font-weight: 700;
-							}
-							.icon {
-								font-size: 13px;
-								margin: 8px 2px 0 0;
-								vertical-align: top;
-							}
-						}
-						.per-x {
-							clear: both;
-							font-size: 13px;
-							font-weight: 500;
-							text-align: right;
-						}
-					}
-					p.title {
-						// color: $serp_main_color;
-						padding: 0;
-						margin: 0;
-						font-weight: 700;
-						font-size: 22px;
-					}
-					p.city {
-						font-size: 14px;
-						line-height: 18px;
-						font-weight: 500;
-						color: #333;
-						.icon {
-							color: #333;
-							margin-right: 5px;
+					// background-color: $serp_main_color2;
+					.left {
+						float: left;
+						display: inline-block;
+						p.title {
 							// color: $serp_main_color;
+							padding: 0;
+							margin: 0;
+							font-weight: 700;
+						    // padding-right: 100px;
+						    font-size: 18px;
+						}
+						p.city {
+							font-size: 14px;
+							margin: 0;
+							line-height: 18px;
+							font-weight: 500;
+							color: #333;
+							.icon {
+								color: #333;
+								margin-right: 5px;
+								// color: $serp_main_color;
+							}
+						}
+					}
+					.right {
+						float: right;
+						display: inline-block;
+						.more-info {
+							background-color: $serp_main_color;
+							border-radius: 5px;
+							border: none;
+							padding: 8px 12px;
+							color: white;
+							font-size: 16px;
+							font-weight: 500;
+							height: 43px;
 						}
 					}
 				}

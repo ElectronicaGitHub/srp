@@ -82,8 +82,7 @@ $font_0: Arial;
 .date-picker-wrapper {
 	position: absolute;
 	z-index: 1;
-	border: 2px solid $serp_main_color;
-	margin: 15px;
+	margin: 15px 15px 5px 15px;
 	padding: 6px;
 	font-size: 12px;
 	line-height: 20px;
@@ -127,9 +126,11 @@ $font_0: Arial;
 	}
 	.month-wrapper {
 		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-		border-radius: 3px;
+		border-radius: 5px;
+		border: 2px solid $serp_main_color;
 		background-color: $white;
 		padding: 5px;
+		margin: 20px 0 0 0;
 		cursor: default;
 		position: relative;
 		_overflow: hidden;
@@ -285,8 +286,11 @@ $font_0: Arial;
 		display: none;
 	}
 	.drp_top-bar {
+		text-align: center;
 		line-height: 1.4;
 		font-size: 16px;
+		border-radius: 5px;
+		border: 2px solid $serp_main_color;
 		position: relative;
 		padding: 10px 40px 10px 10px;
 		.error-top {

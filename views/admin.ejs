@@ -47,6 +47,11 @@
 
 			<div class="wrapper">
 				<div class="form-group">
+					<label for="price">Категория цены</label>
+					<select ng-options="cat._id as cat.name for cat in _price_categories" ng-model="restplace.price_category"></select>
+				</div>
+
+				<div class="form-group">
 					<label for="price">Цена за 1-3 суток в рублях</label>
 					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price1 }" ng-model="restplace.price1"/>
 				</div>
