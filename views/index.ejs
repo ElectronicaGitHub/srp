@@ -23,18 +23,23 @@
 								<span data-n="{{:#index}}" class="image-radio {{:j==0?'current':''}}"></span>
 							{{/for}}
 						</div>
+						<div class="price-wrapper">
+							<div class="price-with-icon">
+								<span class="fa fa-rub icon"></span>
+								<span class="price">{{:price[0]}}</span>	
+							</div>
+							<div class="per-x">за сутки</div>
+						</div>
 					</div>
 				</div>
 				<div class="card-info">
-					<p class="title">{{:title}}</p>
-					<p class="city"><span class="fa fa-map-marker icon"></span>{{:city.name}}</p>
-					<div class="price-wrapper">
-						<div class="price-with-icon">
-							<span class="fa fa-rub icon"></span>
-							<span class="price">{{:price[0]}}</span>	
-						</div>
-						<div class="per-x">за сутки</div>
-					</div>
+					<span class="left">
+						<p class="title">{{:title}}</p>
+						<p class="city"><span class="fa fa-map-marker icon"></span>{{:city.name}}</p>
+					</span>
+					<span class="right">
+						<button class="more-info">Подробнее</button>
+					</span>
 				</div>
 			</div>
 		</a>

@@ -50,14 +50,6 @@ html * {
 html a {
   text-decoration: none; }
 
-.container {
-  max-width: 960px;
-  margin: 0 auto; }
-
-.container-max {
-  max-width: 1200px;
-  margin: 0 auto; }
-
 /* Variables */
 /* Colors */
 /* Dropdown style */
@@ -113,6 +105,22 @@ html a {
     width: 100%;
     height: 400px;
     position: relative; }
+    @media only screen and (max-width: 320px) {
+      .hotel-card .main-panel .image-panel {
+        height: 200px; } }
+    @media only screen and (min-width: 321px) and (max-width: 450px) {
+      .hotel-card .main-panel .image-panel {
+        height: 200px; } }
+    .hotel-card .main-panel .image-panel .left-button, .hotel-card .main-panel .image-panel .right-button {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      top: 0;
+      z-index: 210; }
+    .hotel-card .main-panel .image-panel .left-button {
+      left: 0; }
+    .hotel-card .main-panel .image-panel .right-button {
+      right: 0; }
     .hotel-card .main-panel .image-panel .images-wrapper {
       height: 100%;
       width: 100%; }
@@ -148,33 +156,76 @@ html a {
         border-radius: 50%;
         background-color: rgba(255, 255, 255, 0.1);
         transition: background-color .4s; }
+        @media only screen and (max-width: 320px) {
+          .hotel-card .main-panel .image-panel .radio-wrapper .image-radio {
+            width: 5px;
+            height: 5px;
+            border-width: 1px; } }
+        @media only screen and (min-width: 321px) and (max-width: 450px) {
+          .hotel-card .main-panel .image-panel .radio-wrapper .image-radio {
+            width: 10px;
+            height: 10px; } }
         .hotel-card .main-panel .image-panel .radio-wrapper .image-radio.current {
           cursor: default;
           background-color: white; }
   .hotel-card .main-panel .title-content {
     overflow: hidden;
-    background-color: #222; }
+    background-color: #151413; }
     .hotel-card .main-panel .title-content > div .wrappers-container {
+      position: relative;
       width: calc(100% - 550px);
       padding: 15px;
       overflow: hidden; }
+      @media only screen and (max-width: 320px) {
+        .hotel-card .main-panel .title-content > div .wrappers-container {
+          width: 100%;
+          padding: 20px 0 10px 0; } }
+      @media only screen and (min-width: 321px) and (max-width: 450px) {
+        .hotel-card .main-panel .title-content > div .wrappers-container {
+          width: 100%;
+          padding: 20px 0 10px 0; } }
+      @media only screen and (min-width: 321px) and (max-width: 1023px) {
+        .hotel-card .main-panel .title-content > div .wrappers-container {
+          width: 100%; } }
+      @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+        .hotel-card .main-panel .title-content > div .wrappers-container {
+          width: calc(100% - 350px); } }
+      @media only screen and (min-width: 1200px) {
+        .hotel-card .main-panel .title-content > div .wrappers-container {
+          width: calc(100% - 550px); } }
       .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper {
-        float: left; }
+        float: left;
+        padding-right: 100px; }
         .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper .title {
           padding: 0;
           margin: 0;
-          font-size: 28px;
+          font-size: 24px;
           font-weight: 700;
           color: white; }
+          @media only screen and (max-width: 320px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper .title {
+              font-size: 14px; } }
+          @media only screen and (min-width: 321px) and (max-width: 450px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper .title {
+              font-size: 16px; } }
         .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper .target-name {
-          font-size: 18px;
+          font-size: 16px;
           padding: 0;
           color: white;
-          margin: 0; }
+          margin-top: 4px; }
+          @media only screen and (max-width: 320px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper .target-name {
+              font-size: 11px; } }
+          @media only screen and (min-width: 321px) and (max-width: 450px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper .target-name {
+              font-size: 12px; } }
           .hotel-card .main-panel .title-content > div .wrappers-container .left-wrapper .target-name span {
             color: white;
             margin-right: 8px; }
       .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper {
+        position: absolute;
+        top: 20px;
+        right: 0;
         float: right;
         text-align: right; }
         .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price {
@@ -183,14 +234,56 @@ html a {
           color: #FBB958;
           font-family: "ProximaNova";
           margin: 0; }
-          .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span {
-            color: #FBB958;
+          @media only screen and (min-width: 321px) and (max-width: 450px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price {
+              font-size: 18px; } }
+          @media only screen and (max-width: 320px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price {
+              font-size: 16px; } }
+          @media only screen and (min-width: 321px) and (max-width: 450px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span {
+              font-size: 16px; } }
+          @media only screen and (max-width: 320px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span {
+              font-size: 14px; } }
+          .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span.icon {
+            margin-left: 5px;
             font-size: 18px;
-            margin-left: 5px; }
+            color: #FBB958; }
+            @media only screen and (min-width: 321px) and (max-width: 450px) {
+              .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span.icon {
+                font-size: 14px;
+                margin-left: 3px; } }
+            @media only screen and (max-width: 320px) {
+              .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span.icon {
+                font-size: 12px;
+                margin-left: 3px; } }
+          .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span.before {
+            font-size: 12px;
+            color: white;
+            font-weight: 500;
+            margin-right: 3px; }
+            @media only screen and (min-width: 321px) and (max-width: 450px) {
+              .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span.before {
+                font-size: 10px; } }
+            @media only screen and (max-width: 320px) {
+              .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price span.before {
+                font-size: 8px; } }
         .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price-text {
           font-size: 12px;
           font-weight: 500;
-          color: white; }
+          color: white;
+          margin: 0;
+          position: relative;
+          top: -7px; }
+          @media only screen and (min-width: 321px) and (max-width: 450px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price-text {
+              font-size: 10px;
+              top: -5px; } }
+          @media only screen and (max-width: 320px) {
+            .hotel-card .main-panel .title-content > div .wrappers-container .right-wrapper .price-text {
+              font-size: 8px;
+              top: -3px; } }
   .hotel-card .main-panel .hotel-info {
     background-color: white;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
@@ -200,11 +293,23 @@ html a {
       min-height: 400px;
       overflow: hidden;
       background: white; }
+      @media only screen and (max-width: 320px) {
+        .hotel-card .main-panel .hotel-info .info-wrapper {
+          width: 100%; } }
+      @media only screen and (min-width: 321px) and (max-width: 1023px) {
+        .hotel-card .main-panel .hotel-info .info-wrapper {
+          width: 100%; } }
+      @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+        .hotel-card .main-panel .hotel-info .info-wrapper {
+          width: calc(100% - 350px); } }
+      @media only screen and (min-width: 1200px) {
+        .hotel-card .main-panel .hotel-info .info-wrapper {
+          width: calc(100% - 550px); } }
       .hotel-card .main-panel .hotel-info .info-wrapper .info-node {
         font-size: 16px;
         padding: 40px 20px; }
       .hotel-card .main-panel .hotel-info .info-wrapper .tabs {
-        padding: 0px 50px; }
+        padding: 0px; }
         .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs {
           text-align: center;
           border-bottom: 3px solid #f5f5f5; }
@@ -219,6 +324,12 @@ html a {
             float: initial;
             border-bottom: 3px solid transparent;
             transition: border-bottom .3s; }
+            @media only screen and (max-width: 320px) {
+              .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs li {
+                font-size: 14px; } }
+            @media only screen and (min-width: 321px) and (max-width: 450px) {
+              .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs li {
+                font-size: 14px; } }
             .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs li.active {
               border-bottom: 3px solid #F34352; }
             .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs li a {
@@ -227,31 +338,137 @@ html a {
               .hotel-card .main-panel .hotel-info .info-wrapper .tabs .nav-tabs li a:hover {
                 background: initial; }
       .hotel-card .main-panel .hotel-info .info-wrapper .tab-content {
-        padding: 50px 50px; }
+        padding: 50px 0px; }
+        @media only screen and (max-width: 320px) {
+          .hotel-card .main-panel .hotel-info .info-wrapper .tab-content {
+            padding: 40px 0; } }
+        @media only screen and (min-width: 321px) and (max-width: 450px) {
+          .hotel-card .main-panel .hotel-info .info-wrapper .tab-content {
+            padding: 40px 0; } }
         .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane {
           overflow: hidden;
           clear: both;
           font-size: 16px;
           color: #555555; }
+          @media only screen and (max-width: 320px) {
+            .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane {
+              font-size: 14px; } }
+          @media only screen and (min-width: 321px) and (max-width: 450px) {
+            .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane {
+              font-size: 14px; } }
+          .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place {
+            width: 33%;
+            padding: 10px;
+            float: left; }
+            .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .image {
+              width: 100%;
+              height: 16vw;
+              background-size: 100%;
+              background-position: center; }
+              @media only screen and (max-width: 320px) {
+                .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .image {
+                  height: 20vw; } }
+              @media only screen and (min-width: 321px) and (max-width: 1023px) {
+                .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .image {
+                  height: 16vw; } }
+              @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+                .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .image {
+                  height: 12vw; } }
+              @media only screen and (min-width: 1200px) {
+                .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .image {
+                  height: 9vw; } }
+            .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .info {
+              padding: 10px 10px 10px 0;
+              width: 100%;
+              height: 50px; }
+              @media only screen and (max-width: 320px) {
+                .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .info {
+                  padding: 5px 5px 5px 0; } }
+              .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .info span {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: 20px;
+                font-weight: 700; }
+                @media only screen and (min-width: 321px) and (max-width: 1023px) {
+                  .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .info span {
+                    font-size: 13px;
+                    line-height: 16px; } }
+                @media only screen and (min-width: 321px) and (max-width: 450px) {
+                  .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .info span {
+                    font-size: 10px;
+                    line-height: 13px; } }
+                @media only screen and (max-width: 320px) {
+                  .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane.places-wrapper .each-place .info span {
+                    font-size: 8px;
+                    line-height: 11px; } }
           .hotel-card .main-panel .hotel-info .info-wrapper .tab-content .tab-pane .each-characterictic {
             width: 50%;
             float: left; }
       .hotel-card .main-panel .hotel-info .info-wrapper .map-wrapper {
         width: 100%;
         height: 400px; }
+        @media only screen and (max-width: 320px) {
+          .hotel-card .main-panel .hotel-info .info-wrapper .map-wrapper {
+            height: 250px; } }
+        @media only screen and (min-width: 321px) and (max-width: 450px) {
+          .hotel-card .main-panel .hotel-info .info-wrapper .map-wrapper {
+            height: 250px; } }
     .hotel-card .main-panel .hotel-info .offer-panel {
       position: relative;
       z-index: 500;
       float: left;
-      top: -140px;
+      top: -70px;
       width: 550px; }
+      @media only screen and (max-width: 320px) {
+        .hotel-card .main-panel .hotel-info .offer-panel {
+          width: 100%;
+          top: 0;
+          margin-top: 20px; } }
+      @media only screen and (min-width: 321px) and (max-width: 1023px) {
+        .hotel-card .main-panel .hotel-info .offer-panel {
+          width: 100%;
+          top: 0;
+          margin-top: 40px; } }
+      @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+        .hotel-card .main-panel .hotel-info .offer-panel {
+          width: 350px; } }
+      @media only screen and (min-width: 1200px) {
+        .hotel-card .main-panel .hotel-info .offer-panel {
+          width: 550px; } }
       .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper {
         border-radius: 5px;
         width: 510px;
         background-color: white;
-        margin: 0 auto;
+        float: right;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         height: 100%; }
+        @media only screen and (max-width: 320px) {
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper {
+            width: 100%; } }
+        @media only screen and (min-width: 321px) and (max-width: 1023px) {
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper {
+            width: 100%; } }
+        @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper {
+            width: 320px;
+            float: right; } }
+        .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .single-month .month-wrapper {
+          width: 100% !important; }
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .single-month .month-wrapper > table {
+            float: initial;
+            margin: 0 auto; }
+        .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .single-month .drp_top-bar {
+          width: 100%;
+          font-size: 15px; }
+        @media only screen and (max-width: 320px) {
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .picker {
+            text-align: center; } }
+        @media only screen and (min-width: 321px) and (max-width: 1023px) {
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .picker {
+            text-align: center; } }
+        @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+          .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .picker {
+            text-align: center; } }
         .hotel-card .main-panel .hotel-info .offer-panel .picker-wrapper .offer-continue {
           display: none;
           margin: 0px 20px 20px 20px; }

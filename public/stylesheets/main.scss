@@ -42,14 +42,14 @@ html a {
 	text-decoration: none;
 }
 
-.container {
-	max-width: 960px;
-	margin: 0 auto;
-}
-.container-max {
-	max-width: 1200px;
-	margin: 0 auto;
-}
+// .container {
+// 	max-width: 960px;
+// 	margin: 0 auto;
+// }
+// .container-max {
+// 	max-width: 1200px;
+// 	margin: 0 auto;
+// }
 
 @mixin default-button($color:#fff) {
 	background-color: $color;
@@ -65,17 +65,25 @@ html a {
 }
 
 $small: 320px;
+$middle : 450px;
 $large: 1024px;
+$big: 1200px;
 
 @mixin respond-to($media) {
   @if $media == handhelds {
     @media only screen and (max-width: $small) { @content; }
   }
+  @else if $media == mobile-screens {
+    @media only screen and (min-width: $small + 1) and (max-width: $middle) { @content; }
+  }
   @else if $media == medium-screens {
     @media only screen and (min-width: $small + 1) and (max-width: $large - 1) { @content; }
   }
   @else if $media == wide-screens {
-    @media only screen and (min-width: $large) { @content; }
+    @media only screen and (min-width: $large) and (max-width: $big - 1) { @content; }
+  }
+  @else if $media == extra-screens {
+  	@media only screen and (min-width: $big) { @content; }	
   }
 }
 
