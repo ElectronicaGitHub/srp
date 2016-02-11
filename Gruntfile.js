@@ -1,16 +1,24 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    // jshint: {
-    //   files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
-    //   options: {
-    //     globals: {
-    //       jQuery: true
-    //     }
-    //   }
-    // },
+    postcss: {
+        options: {
+            map: true,
+            processors: [
+                require('autoprefixer')({
+                    browsers: ['last 2 versions']
+                })
+            ]
+        },
+        dist: {
+            src: './public/stylesheets/builded/*.css'
+        }
+    },
     sass: {
       dist: {
+        options : {
+          style : 'compressed'
+        },
         files: [{
           expand: true,
           cwd: './public/stylesheets',
@@ -23,11 +31,8 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: ['**/*.scss'],
-        // tasks: ['jshint'],
-        tasks: ['sass'],
+        tasks: ['sass', 'postcss'],
         options: {
-          // spawn: false
-          // livereload: true
         },
       },
     }
@@ -36,6 +41,7 @@ module.exports = function(grunt) {
   // grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-postcss');
 
   grunt.registerTask('default', ['watch']);
 

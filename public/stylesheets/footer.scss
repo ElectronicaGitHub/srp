@@ -1,4 +1,35 @@
+@import "main";
+
 footer {
-	height: 200px;
+	// height: 200px;
 	background-color: white;
+	padding: 40px 0;
+	.container {
+		.cols-wrapper {
+			overflow: hidden;
+			> div {
+				@include respond-to(under-768) { text-align: center; margin: 15px 0; padding-top: 30px; border-top: 2px solid #f0f0f0; }
+				p {
+					font-size: 14px;
+					font-weight: 500;
+					&.title {
+						font-weight: 700;
+						font-size: 18px;
+					}
+				}
+			}
+		}
+		.bottom-wrapper {
+			clear: both;
+		    margin-top: 15px;
+		    border-top: 2px solid #f0f0f0;
+		    padding-top: 25px;
+			p {
+				text-align: center;
+				.fa-copyright {
+					margin-right: 8px;
+				}
+			}
+		}
+	}
 }

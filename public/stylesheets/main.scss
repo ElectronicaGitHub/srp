@@ -66,6 +66,8 @@ html a {
 
 $small: 320px;
 $middle : 450px;
+$picker_2col_min : 550px;
+$medium : 768px;
 $large: 1024px;
 $big: 1200px;
 
@@ -76,8 +78,14 @@ $big: 1200px;
   @else if $media == mobile-screens {
     @media only screen and (min-width: $small + 1) and (max-width: $middle) { @content; }
   }
+  @else if $media == picker-ok {
+    @media only screen and (min-width: $picker_2col_min) and (max-width: $large - 1) { @content; }
+  }
   @else if $media == medium-screens {
     @media only screen and (min-width: $small + 1) and (max-width: $large - 1) { @content; }
+  }
+  @else if $media == under-768 {
+    @media only screen and (min-width: $small) and (max-width: $medium - 1) { @content; }
   }
   @else if $media == wide-screens {
     @media only screen and (min-width: $large) and (max-width: $big - 1) { @content; }
@@ -91,7 +99,8 @@ $big: 1200px;
 
 
 /* Variables */
-$height: 40px; // dropdown height
+$filter_height: 40px; // dropdown height
+$mini_filter_height: 32px; // dropdown mini height
 $ajust: 1em; // left & right padding in dropdown menu
 $radius: 3px;
 
@@ -112,8 +121,10 @@ $dark-grey: #bdc3c7;
 	dt {
 		a {
 			display: block;
-			height: $height;
+			height: $filter_height;
 			width: 100%;
+			@include respond-to(handhelds) { height: $mini_filter_height; }
+			@include respond-to(mobile-screens) { height: $mini_filter_height; }
 			// text-align: center;
 			// border: 1px solid $grey;
 			// border-radius: $radius;
@@ -125,7 +136,9 @@ $dark-grey: #bdc3c7;
 		span{
 			display: block;
 			padding: 0 $ajust;
-			line-height: $height;
+			line-height: $filter_height;
+			@include respond-to(handhelds) { line-height: $mini_filter_height; }
+			@include respond-to(mobile-screens) { line-height: $mini_filter_height; }
 			background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHo+AACAQQAA+MoAAIC0AAB48QAA9RwAADw3AAAbzhlfIT4AAACJSURBVHjajNAxCsJAEEbhb5cU4i0sbHIaL6IQTxFPo4VeROwXQs4gKW1cWJZEM90wj5l5f0jDeMXBunqENIw7vLD9A09oIxL6FdsvSCENI2zwxH4BTmgxxeJc92P76cuIpRBuc6K45yZWwzPeleixBOLMr30tWgJZuqwcQJNFy2GzkHeHUMPwGQChFSPmzlJ1WgAAAABJRU5ErkJggg==) no-repeat scroll right center;
 			border-right: $ajust solid transparent;
 			cursor: pointer;
@@ -138,7 +151,9 @@ $dark-grey: #bdc3c7;
 			display: none;
 			position: absolute;
 			left: 0;
-			top: -$height;
+			top: -$filter_height;
+			@include respond-to(handhelds) { top: -$mini_filter_height; }
+			@include respond-to(mobile-screens) { top: -$mini_filter_height; }
 			width: 100%;
 			list-style: none;
 			background: #fff none repeat scroll 0 0;
@@ -159,7 +174,9 @@ $dark-grey: #bdc3c7;
 		li a {
 			display: block;
 			padding: 0 $ajust;
-			line-height: $height;
+			line-height: $filter_height;
+			@include respond-to(handhelds) { line-height: $mini_filter_height; }
+			@include respond-to(mobile-screens) { line-height: $mini_filter_height; }
 			text-decoration: none;
 			&:hover {
 				background-color: $serp_main_color2;

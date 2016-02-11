@@ -20,13 +20,14 @@ module.exports = function (express) {
 			function (cb) {
 				City.find(function (err, places) {
 					cb(null, places);
-				})
+				});
 			},
 			function (cb) {
 				RestPlace.find({}).deepPopulate('city images mini_images tags benefits benefits.image places.city places.images places.mini_images')
+				.limit(10)
 				.exec(function (err, hotels) {
 					cb(null, hotels);
-			    });
+				});
 			}],
 			function (err, results) {
 				res.render('index', {
@@ -40,28 +41,22 @@ module.exports = function (express) {
 					]
 				});
 			});
-		// RestPlace.find().deepPopulate('images mini_images tags benefits benefits.image places places.images places.mini_images')
-		// .exec(function (err, hotels) {
-		// 	if(err) return next(err);
-		// 	res.render('index', {
-		// 		hotels : hotels
-		// 	});
-	 //    });
 	});
 
 	router.post('/api/getHotels', function (req, res, next) {
-		console.log(req.body);
+		var p = req.query.p;
 
 		RestPlace.find(req.body)
 		.deepPopulate('images mini_images city tags benefits benefits.image places places.city places.images places.mini_images')
+		.skip(p * 10)
+		.limit(10)
 		.exec(function (err, hotels) {
 			if(err) return next(err);
 			res.json({
 				hotels: hotels
 			});
-	    });
-
-	})
+		});
+	});
 
 	router.get('/hotel/:title_url', function (req, res, next) {
 		RestPlace.findOne({
@@ -72,8 +67,22 @@ module.exports = function (express) {
 			res.render('hotel_card', {
 				hotel : hotel
 			});
-	    });
+		});
+	});
+
+	router.get('/place/:title_url', function (req, res, next) {
+		Place.findOne({
+			title_url : req.params.title_url
+		// }).populate('images mini_images city')
+		}).populate('images mini_images')
+		.exec(function (err, place) {
+			console.log('place', place);
+			if(err) return next(err);
+			res.render('place_card', {
+				hotel : place
+			});
+		});
 	});
 
 	return router;
-}
+};

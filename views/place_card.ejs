@@ -1,0 +1,61 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Карточка места') -%>
+
+<script>
+	window.hotel = <%- JSON.stringify(hotel) %>;
+</script>
+
+<script src="/javascripts/page-slider.js"></script>
+<script src="/javascripts/place.js"></script>
+<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/stylesheets/builded/place.css">
+
+<div class="hotel-card">
+	<div class="main-panel">
+		<div class="image-panel <%= hotel.images.length < 2 ? 'single-image' : '' %>">
+			<div class="left-button"></div>
+			<div class="right-button"></div>
+			<div class="images-wrapper">
+				<% for (var i = 0; i < hotel.images.length; i++) { var img = hotel.images[i]; %>
+						<div data-n="<%= i %>" class="image <%= i == 0 ? 'current' : '' %>" style="background-image : url(<%= img.path %>)"></div>
+				<% } %>
+			</div>
+			<div class="radio-wrapper">
+				<% if (hotel.images.length > 1) { %>
+					<% for (var j = 0; j < hotel.images.length; j++) { var img = hotel.images[j]; %>
+						<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
+					<% } %>
+				<% } %>
+			</div>
+		</div>
+		<div class="title-content">
+			<div class="container">
+				<div class="wrappers-container">
+					<div class="left-wrapper">
+						<h1 class="title"><%= hotel.title %></h1>
+						<p class="target-name"><span class="fa fa-map-marker"></span><%= hotel.city %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hotel-info">
+			<div class="container">
+				<div class="info-wrapper">
+						
+					<div class="tab-content">
+						<div class="tab-pane"><%= hotel.description_full %></div>
+					</div>
+					<div class="map-wrapper">
+						<div id="map" style="width: 100%; height: 100%"></div>
+					</div>
+				</div>	
+
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+
+</div>

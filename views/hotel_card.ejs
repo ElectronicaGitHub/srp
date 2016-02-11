@@ -1,20 +1,21 @@
 <%- layout('base.ejs')%>
 <% block('title', 'Карточка отеля') -%>
 
+<script>
+	window.hotel = <%- JSON.stringify(hotel) %>;
+</script>
+<script src="/javascripts/page-slider.js"></script>
 <script src="/javascripts/hotel.js"></script>
 <script src="/libs/moment/min/moment-with-locales.min.js"></script>
 <script src="/libs/date-picker/jquery.daterangepicker.js"></script>
 <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script>
-	window.hotel = <%- JSON.stringify(hotel) %>;
-</script>
 
 <link rel="stylesheet" href="/stylesheets/builded/hotel.css">
 <link rel="stylesheet" href="/stylesheets/builded/date-picker.css">
 
 <div class="hotel-card">
 	<div class="main-panel">
-		<div class="image-panel">
+		<div class="image-panel <%= hotel.images.length < 2 ? 'single-image' : '' %>">
 			<div class="left-button"></div>
 			<div class="right-button"></div>
 			<div class="images-wrapper">
@@ -23,8 +24,10 @@
 				<% } %>
 			</div>
 			<div class="radio-wrapper">
-				<% for (var j = 0; j < hotel.images.length; j++) { var img = hotel.images[j]; %>
-					<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
+				<% if (hotel.images.length > 1) { %>
+					<% for (var j = 0; j < hotel.images.length; j++) { var img = hotel.images[j]; %>
+						<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
+					<% } %>
 				<% } %>
 			</div>
 		</div>
@@ -66,7 +69,8 @@
 						</div>
 						<div role="tabpanel" class="tab-pane fade places-wrapper" id="places">
 							<% for (var i = 0, characts = hotel.places.length; i < characts ; i++ ) { %>
-								<div class="each-place">
+								<a href="/place/<%= hotel.places[i].title_url %>" target="_blank">
+									<div class="each-place">
 									<div class="image" style="background-image:url('<%= hotel.places[i].mini_images[0].path%>')"></div>
 									<div class="info">
 										<span>
@@ -74,6 +78,7 @@
 										</span>
 									</div>
 								</div>	
+								</a>
 							<% } %>
 						</div>
 					</div>
@@ -92,7 +97,25 @@
 								</div>
 								<span class="price"></span>
 							</div>
-							<button class="offer-button">Оформить заказ</button>
+							<div class="input-container">
+								<div class="placeholder-fw">
+									<span class="placeholder">Количество мест</span>
+								</div>
+								<input type="text" id="name">
+							</div>
+							<div class="input-container">
+								<div class="placeholder-fw">
+									<span class="placeholder">Ваше имя</span>
+								</div>
+								<input type="text" id="name">
+							</div>
+							<div class="input-container">
+								<div class="placeholder-fw">
+									<span class="placeholder" id="phone">Ваш телефон</span>
+								</div>
+								<input type="text">
+							</div>
+							<button class="offer-button" if="offer-button">Оформить заказ</button>
 						</div>
 					</div>
 				</div>

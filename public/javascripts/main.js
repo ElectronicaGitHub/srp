@@ -22,23 +22,40 @@ $(function () {
 		$(this).addClass('current');
 	});
 
-
+	var SEARCH_OBJ = {}, PAGE = 0, LOADING = false, NO_MORE_DATA = false;
 
 	$('#search-button').on('click', function () {
-		var obj = {};
-		$('.filters-wrapper .dropdown').each(function (n, el) {
-			var el = $(el);
-			obj[$(el).attr('data-type')] = el.find('.selected[data-id]').attr('data-id');
-
+		SEARCH_OBJ = {};
+		$('.filters-wrapper .dropdown').each(function (n, _el) {
+			var el = $(_el);
+			var val = el.find('.selected[data-id]').attr('data-id');
+			if (val) {
+				SEARCH_OBJ[$(el).attr('data-type')] = val;
+			}
 		});
 
+		PAGE = 0;
+		NO_MORE_DATA = false;
+		getData();
+	});
+
+	function getData(append) {
+		if (LOADING || NO_MORE_DATA) return;
+		LOADING = true;
 		$.ajax({
 			method : 'POST',
-			url : '/api/getHotels',
-			data : obj,
+			url : '/api/getHotels?p=' + PAGE,
+			data : SEARCH_OBJ,
 			success : function (data) {
-				$('.filters-content .content').html('');
-				$('.filters-content .content').html($('#cells').render(data.hotels));
+				if (data.hotels.length < 10) {
+					NO_MORE_DATA = true;
+				}
+				if (!append) {
+					$('.filters-content .content').html('');
+					$('.filters-content .content').html($('#cells').render(data.hotels));
+				} else {
+					$('.filters-content .content').append($('#cells').render(data.hotels));
+				}
 				setTimeout(function () {
 					$('.images-with-radio-wrapper').each(function (n, el) {
 						el = $(el);
@@ -49,13 +66,21 @@ $(function () {
 							el.find('.radio-wrapper').remove();
 						}
 					});
-				})
+					LOADING = false;
+					PAGE++;
+				});
 
 			},
 			error : function (data) {
 				console.log('err', data);
 			}
 		});
-	})
+	}
+
+	$(window).scroll(function() {
+		if($(window).scrollTop() + $(window).height() > $(document).height() - 800) {
+			getData(true);
+		}
+	});
 
 });

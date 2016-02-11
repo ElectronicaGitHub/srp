@@ -1,0 +1,171 @@
+@import "main";
+
+$offer_width : 550px;
+$offer_width_mini : 350px;
+$picker_width: $offer_width - 40px;
+$picker_width_mini: $offer_width_mini - 30px;
+
+$image_height: 450px;
+.hotel-card {
+	.main-panel {
+		width: 100%;
+		.image-panel {
+			width: 100%;
+			height: $image_height;
+			position: relative;
+
+			-webkit-user-select: none;  /* Chrome all / Safari all */
+			-moz-user-select: none;     /* Firefox all */
+			-ms-user-select: none;      /* IE 10+ */
+			user-select: none; 
+
+			@include respond-to(handhelds) { height: $image_height - 50px; }
+			@include respond-to(mobile-screens) { height: $image_height - 50px; }
+
+			// @include respond-to(medium-screens) { height:  }
+			// @include respond-to(wide-screens) { height:  }
+			// @include respond-to(extra-screens) { height:  }
+			.left-button, .right-button {
+				position: absolute;
+				width: 50%;
+				height: 100%;
+				top: 0;
+				z-index: 210;
+			}
+			.left-button {
+				left: 0;
+			}
+			.right-button {
+				right: 0;
+			}
+			.images-wrapper {
+				height: 100%;
+				width: 100%;
+				.image {
+					width: 100%;
+					height: 100%;
+					background-size: cover;
+					position: absolute;
+					background-position: center;
+					z-index: 100;
+					opacity: 0;
+					&.pre_current {
+						z-index: 250;
+					}
+					&.current {
+						z-index: 200;
+						opacity: 1
+					}
+				}	
+			}
+			.radio-wrapper {
+				position: absolute;
+				display: inline-block;
+				// right: 0;
+				bottom: 0;
+				width: 100%;
+				text-align: center;
+				height: 30px;
+				z-index: 300;
+				margin: 0 15px 0px 0;
+				.image-radio {
+					cursor: pointer;
+					margin: 0px 1px;
+					width: 15px;
+					border: 2px solid white;
+					display: inline-block;
+					height: 15px;
+					border-radius: 50%;
+
+					// background-color: transparentize($serp_main_color, 0.5);
+					background-color: rgba(255, 255, 255, .1);
+					transition: background-color .4s;
+					@include respond-to(handhelds) { width: 5px; height: 5px; border-width: 1px; }
+					@include respond-to(mobile-screens) { width: 10px; height: 10px; }
+					&.current {
+						cursor: default;
+						// background-color: $serp_main_color;
+						background-color: rgba(255, 255, 255, 1);
+					}
+				}
+			}
+		}
+		.title-content {
+			overflow: hidden;
+			background-color: #151413;
+			> div {
+				.wrappers-container {
+					position: relative;
+					width: calc(100% - #{$offer_width});
+					padding: 15px;
+					overflow: hidden;
+					@include respond-to(handhelds) { width: 100%; padding: 20px 0 10px 0; }
+					@include respond-to(mobile-screens) { width: 100%; padding: 20px 0 10px 0; }
+					@include respond-to(medium-screens) { width: 100%; }
+					@include respond-to(wide-screens) { width: calc(100% - #{$offer_width_mini}); }
+					@include respond-to(extra-screens) { width: calc(100% - #{$offer_width}); }
+
+					.left-wrapper {
+						float: left;
+						padding-right: 100px;
+						.title {
+							padding: 0;
+							margin: 0;
+							font-size: 24px;
+							font-weight: 700;
+							color: white;
+							@include respond-to(handhelds) { font-size: 14px; }
+							@include respond-to(mobile-screens) { font-size: 16px; }
+						}
+						.target-name {
+							font-size: 16px;
+							padding: 0;
+							color: white;
+							margin-top: 4px;
+							@include respond-to(handhelds) { font-size: 11px; }
+							@include respond-to(mobile-screens) { font-size: 12px; }
+							span {
+								color: white;
+								margin-right: 8px;
+							}
+						}
+					}
+				}
+			}
+		}
+		.hotel-info {
+			margin-bottom: 100px;
+			.info-wrapper {
+				float: left;
+				width: calc(100% - #{$offer_width});
+				min-height: 400px;
+				overflow: hidden;
+				background: white;
+				@include respond-to(handhelds) { width: 100%; }
+				@include respond-to(medium-screens) { width: 100%; }
+				@include respond-to(wide-screens) { width: calc(100% - #{$offer_width_mini}); }
+				@include respond-to(extra-screens) { width: calc(100% - #{$offer_width}); }
+
+				.tab-content {
+					padding: 50px 25px;
+					@include respond-to(handhelds) { padding: 40px 0; }
+					@include respond-to(mobile-screens) { padding: 40px 0; }
+					.tab-pane {
+						overflow: hidden;
+						clear: both;
+						font-size: 16px;
+						color: #555555;
+						@include respond-to(handhelds) { font-size: 14px; }
+						@include respond-to(mobile-screens) { font-size: 14px; }
+					}
+				}
+				.map-wrapper {
+					width: 100%;
+					height: 400px;
+					@include respond-to(handhelds) { height: 250px; }
+					@include respond-to(mobile-screens) { height: 250px; }
+				}
+			}
+		}
+	}
+}

@@ -56,40 +56,43 @@
 		</span>
 	</div>
 	<div class="filters-wrapper container">
-			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
+			<div class="input-wrapper col-md-3 col-sm-6 col-xs-12">
 				<h4>Город</h4>
 				<div class="dropdown" data-type="city">
 					<dt><a><span>Выберите город</span></a></dt>
 					<dd><ul>
+						<li><a>Любой</a></li>
 						<% for (var i in cities) { var city = cities[i]; %>
 							<li><a data-id="<%= city._id %>"><%= city.name %></a></li>
 						<% } %>
 					</ul></dd>
 				</div>
 			</div>
-			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
+			<div class="input-wrapper col-md-3 col-sm-6 col-xs-12">
 				<h4>Цена за день в руб.</h4>
 				<div class="dropdown" data-type="price_category">
 					<dt><a><span>Выберите цену</span></a></dt>
 					<dd><ul>
+						<li><a>Любая</a></li>
 						<% for (var i in costs) { var cost = costs[i]; %>
 							<li><a data-id="<%= cost._id %>"><%= cost.name %></a></li>
 						<% } %>
 					</ul></dd>
 				</div>
 			</div>
-			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
+			<div class="input-wrapper col-md-3 col-sm-6 col-xs-12">
 				<h4>Тип отдыха</h4>
 				<div class="dropdown" data-type="tags">
 					<dt><a><span>Выберите тип отдыха</span></a></dt>
 					<dd><ul>
+						<li><a>Любой</a></li>
 						<% for (var i in tags) { var tag = tags[i]; %>
 							<li><a data-id="<%= tag._id %>"><%= tag.name %></a></li>
 						<% } %>
 					</ul></dd>
 				</div>
 			</div>
-			<div class="input-wrapper col-md-3 col-sm-6 col-xs-6">
+			<div class="input-wrapper col-md-3 col-sm-6 col-xs-12">
 				<div class="search-button" id="search-button">Искать</div>
 			</div>
 		</div>
