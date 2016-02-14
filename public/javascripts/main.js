@@ -22,7 +22,7 @@ $(function () {
 		$(this).addClass('current');
 	});
 
-	var SEARCH_OBJ = {}, PAGE = 0, LOADING = false, NO_MORE_DATA = false;
+	var SEARCH_OBJ = {}, PAGE = 1, LOADING = false, NO_MORE_DATA = false;
 
 	$('#search-button').on('click', function () {
 		SEARCH_OBJ = {};

@@ -62,6 +62,7 @@ module.exports = function (express) {
 		RestPlace.findOne({
 			title_url : req.params.title_url
 		}).deepPopulate('images mini_images city tags benefits benefits.image places places.city places.images places.mini_images')
+		.select('-_id')
 		.exec(function (err, hotel) {
 			if(err) return next(err);
 			res.render('hotel_card', {
