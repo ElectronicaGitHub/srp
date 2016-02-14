@@ -52,9 +52,12 @@ header {
 					color: $serp_main_color2;
 					font-weight: 700;
 					font-size: 32px;
-					@include respond-to(handhelds) { font-size: 16px; line-height: 16px ;}
-					@include respond-to(medium-screens) { font-size: 24px; line-height: 24px ;}
-					@include respond-to(mobile-screens) { font-size: 18px; line-height: 18px ;}
+					@include respond-to(handhelds) { font-size: 16px; line-height: 16px;}
+					@include respond-to(medium-screens) { font-size: 24px; line-height: 24px;}
+					@include respond-to(mobile-screens) { font-size: 18px; line-height: 18px;}
+					a {
+						color: $serp_main_color2;						
+					}
 				}
 			}
 

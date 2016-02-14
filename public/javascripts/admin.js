@@ -1,70 +1,57 @@
-angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', function ($scope, $http) {
+angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope', '$http', '$uibModal', function ($scope, $http, $uibModal) {
 
-	$scope.restplace = {
-		_benefits : window.benefits,
-		_tags : window.tags,
-		_places : window.places
+	$scope.tags = window.tags;
+	$scope.benefits = window.benefits;
+	$scope.cities = window.cities;
+	$scope.places = window.places;
+	$scope.restplaces = window.restplaces;
+
+	$scope.newBenefit = {};
+	$scope.newTag = {};
+	$scope.newCity = {};
+
+	$scope.createCity = function () {
+		$http.post('/admin/city', $scope.newCity)
+			.success(function (data) {
+				console.log(data);
+				$scope.cities.push($scope.newCity);
+				$scope.newCity = {};
+			})
+			.error(function (data) {
+				console.log(data);
+			})
+	}
+
+	$scope.createTag = function () {
+		$http.post('/admin/tag', $scope.newTag)
+			.success(function (data) {
+				console.log(data);
+				$scope.tags.push($scope.newTag);
+				$scope.newTag = {};
+			})
+			.error(function (data) {
+				console.log(data);
+			})
+	}
+
+	$scope.createBenefit = function () {
+		$scope.newBenefit.image = $scope.newBenefit.image._id;
+		$http.post('/admin/benefit', $scope.newBenefit)
+			.success(function (data) {
+				console.log(data);
+				$scope.benefits.push($scope.newBenefit);
+				$scope.newBenefit = {};
+			})
+			.error(function (data) {
+				console.log(data);
+			});
 	};
-	
-	$scope._price_categories = [
-		{ _id : 0, name : 'до 3000'},
-		{ _id : 1, name : 'от 3000 до 6000'},
-		{ _id : 2, name : 'от 6000'}
-	]
-	$scope._cities = window.cities;
 
-	var map;
-	
-	ymaps.ready(mapInit);
+	$scope.loadImageForBenefit = function () {
+		$('#image').click();
+	};
 
-	function mapInit() {
-	 	map = new ymaps.Map("map", {
-	        center: [55.76, 37.64], 
-	        zoom: 7
-	    });
-	    map.events.add('click', function (e) {
-
-	    	map.geoObjects.removeAll();
-
-		    var coords = e.get('coords');
-
-		    myPlacemark = new ymaps.Placemark(coords, {}, {
-		    	preset: 'islands#icon',
-	            iconColor: '#E82C0C'
-		    });	
-		    map.geoObjects.add(myPlacemark);
-
-		    // Отправим запрос на геокодирование.
-            var names = [];
-            ymaps.geocode(coords).then(function (res) {
-                // Переберём все найденные результаты и
-                // запишем имена найденный объектов в массив names.
-                res.geoObjects.each(function (obj) {
-                    names.push(obj.properties.get('name'));
-
-                    namesr = names.reverse();
-
-		            $scope.restplace.adress = namesr.join(', ');
-		            $scope.restplace.country = namesr[0];
-		            // $scope.restplace.city = namesr[1];
-				    $scope.$apply();
-                });
-            });
- 
-		    $scope.restplace.coordinates = coords;
-		});
-	}
-
-	$scope.imageLoad = function (bool) {
-		if (bool) {
-			$('#image').click();
-		} else {
-			$('#mini-image').click();
-		}
-	}
-
-	$('#image, #mini-image').on('change', function (e) {
-		var key = $(this).attr('data-key');
+	$('#image').on('change', function (e) {
 		var data = new FormData();
 
 		for (var i in e.target.files) {
@@ -76,44 +63,58 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 			headers: {'Content-Type': undefined }
 		})
 			.success(function (data) {
-				$scope[key] = data.filesArray;
+				$scope.newBenefit.image = data.filesArray[0];
 				console.log(data);
 			})
 			.error(function (data) {
 				console.log(data);
-			})
-	})
+			});
+	});
 
-	$scope.saveRestPlace = function (place) {
-		place.images = $scope.images.map(function (el) { return el._id; });
-		place.mini_images = $scope.mini_images.map(function (el) { return el._id; });
+	$scope.removeIndex = null;
+	$scope.iterateModel = null;
 
-		place.benefits = place._benefits.filter(function (el) { return el.value; }).map(function (el) {
-			return el._id;
+	$scope.delete = function (name, model) {
+		$http.delete('/admin/' + name + '/' + model._id)
+		.success(function (data) {
+			console.log(data);
+			$scope[$scope.iterateModel].splice($scope.removeIndex, 1);
+		})
+		.error(function (data) {
+			console.log(data);
 		});
-		place.tags = place._tags.filter(function (el) { return el.value; }).map(function (el) {
-			return el._id;
+	};
+
+	$scope.deleteModal = function (name, model, removeIndex, iterateModel) {
+		$scope.removeIndex = removeIndex;
+		$scope.iterateModel = iterateModel;
+		var modalInstance = $uibModal.open({
+			templateUrl: 'deleteModel.html',
+			controller: 'deleteModalCtrl',
+			resolve: {
+				items: function () {
+					return {name : name, model : model};
+				}
+			}
 		});
-
-		place.places = place._places.filter(function (el) { return el.selected; }).map(function (el) {
-			return el._id;
+		modalInstance.result.then(function (obj) {
+			$scope.delete(name, model);
+			// console.log(obj.name, obj.model);
+		}, function () {
 		});
-
-		place.price = [];
-		for (var i = 1; i < 5; i++) {
-			place.price.push(place['price' + i]);
-		}
-
-		console.log(place);
-
-		$http.post('/admin/restplace', place)
-			.success(function (data) {
-				console.log(data);
-			})
-			.error(function (data) {
-				console.log(data);
-			})
-	}
+	};
 
 
-} ])
+}])
+.controller('deleteModalCtrl', function ($scope, $uibModalInstance, items) {
+
+	$scope.items = items;
+
+	$scope.ok = function () {
+		$uibModalInstance.close(items);
+	};
+
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+});

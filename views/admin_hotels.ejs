@@ -2,13 +2,14 @@
 <% block('title', 'Админка') -%>
 
 <script src="/libs/angular/angular.min.js"></script>
-<script src="/javascripts/admin_places.js"></script>
-
+<script src="/javascripts/admin_hotels.js"></script>
 <script>
+	window.tags = <%- JSON.stringify(tags) %>;
+	window.benefits = <%- JSON.stringify(benefits) %>;
+	window.places = <%- JSON.stringify(places) %>;
 	window.cities = <%- JSON.stringify(cities) %>;
-	window.place = <%- JSON.stringify(place) %>;
+	window.hotel = <%- JSON.stringify(hotel) %>;
 </script>
-
 <link rel="stylesheet" href="/stylesheets/builded/admin.css">
 
 <div ng-app="serpAdmin" ng-controller="MainCtrl" class="admin-container">
@@ -16,6 +17,7 @@
 	<div class="container"><a href="/admin">Вернуться назад</a></div>
 	
 	<div class="left">
+
 		<div class="block">
 			<div class="title">Основная информация</div>
 			
@@ -38,6 +40,35 @@
 				<div class="form-group">
 					<label for="description_mini">Краткое описание</label>
 					<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini"></textarea>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Цена</div>
+
+			<div class="wrapper">
+				<div class="form-group">
+					<label for="price">Категория цены</label>
+					<select ng-options="cat._id as cat.name for cat in _price_categories" ng-model="restplace.price_category"></select>
+				</div>
+
+				<div class="form-group">
+					<label for="price">Цена за 1-3 суток в рублях</label>
+					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price1 }" ng-model="restplace.price1"/>
+				</div>
+				<div class="form-group">
+					<label for="price">Цена за 4-6 суток в рублях</label>
+					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price2 }" ng-model="restplace.price2"/>
+				</div>
+				<div class="form-group">
+					<label for="price">Цена за 6-10 суток в рублях</label>
+					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price3 }" ng-model="restplace.price3"/>
+				</div>
+				<div class="form-group">
+					<label for="price">Цена за 10+ суток в рублях</label>
+					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price4 }" ng-model="restplace.price4"/>
 				</div>
 
 			</div>
@@ -99,10 +130,61 @@
 			</div>
 		</div>
 
+		<div class="block">
+			<div class="title">Прочее</div>
+			<div class="wrapper">
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="restplace.best_offer"> Лучшее предложение</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Места рядом</div>
+
+			<div class="wrapper">
+				<div class="form-group">
+					<label>Поиск по местам</label>
+					<input class="form-control" type="text" ng-model="places_filter">
+				</div>
+				<div ng-repeat="place in restplace._places | filter:places_filter" class="checkbox listed-objects">
+					<label>
+						<input type="checkbox" ng-model="place.selected">
+						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
+						<span class="name">{{ place.title }}</span>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Прочая информация</div>
+			<div class="wrapper">
+				<div class="form-group">
+					<label>Характеристики (каждая с новой строки)</label>
+					<textarea rows="6" class="form-control" ng-class="{ fill : restplace.characteristics }" type="text" ng-model="restplace.characteristics"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label>Плюсы</label>
+					<div class="checkbox" ng-repeat="benefit in restplace._benefits">
+					  <label><input type="checkbox" ng-model="benefit.value">{{ benefit.name }}</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Теги</label>
+					<div class="checkbox" ng-repeat="tag in restplace._tags">
+					  <label><input type="checkbox" ng-model="tag.value">{{ tag.name }}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 	<div class="bottom">
-		<% if (place) { %>
+		<% if (hotel) { %>
 			<button class="btn btn-success" ng-click="updateRestPlace(restplace)">Редактировать</button>
 		<%} else { %>
 			<button class="btn btn-success" ng-click="saveRestPlace(restplace)">Сохранить</button>

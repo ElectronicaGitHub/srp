@@ -2,6 +2,10 @@
 
 $green_color : #10D94D;
 
+header {
+	display: none;
+}
+
 .admin-container {
 	max-width: 1200px;
 	margin: 20px auto 0 auto;
@@ -69,6 +73,7 @@ $green_color : #10D94D;
 }
 
 .listed-objects {
+	position: relative;
 	clear: both;
 	.img {
 		float: left;
@@ -82,8 +87,24 @@ $green_color : #10D94D;
 		float: left;
 		display: inline-block;
 		height: 50px;
-		line-height: 50px;
 		padding-left: 15px;
 		font-weight: 700;
+		width: calc(100% - 50px);
+	}
+	span.fa-pencil,
+	span.fa-times {
+		cursor: pointer;
+		position: absolute;
+		display: none;
+		top: 5px;
+		right: 5px;
+		padding: 2px;
+	}
+	span.fa-pencil {
+		top : 5px;
+		right: 20px;
+	}
+	&:hover span {
+		display: inline-block;
 	}
 }

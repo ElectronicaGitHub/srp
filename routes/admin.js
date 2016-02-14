@@ -8,70 +8,140 @@ var Img = require('../models/Img.js');
 var City = require('../models/City.js');
 var Tag = require('../models/Tag.js');
 var Benefit = require('../models/Benefit.js');
-var benefitsData = require('../data/data.js');
 
 module.exports = function (express) {
 	var router = express.Router();
 
 	router.get('/', function (req, res, next) {
 		async.series([
-			function (cb) {
-				Tag.find({}, function (err, tags) {
-					cb(null, tags);
-				});
-			}, function (cb) {
-				Benefit.find({}).populate('image').exec(function (err, benefits) {
-					cb(null, benefits);
-				})
-			}, 
-			function (cb) {
-				Place.find().populate('images mini_images').exec(function (err, places) {
-					cb(null, places);
-				})
-			},
-			function (cb) {
-				City.find(function (err, places) {
-					cb(null, places);
-				})
-			}],
-			function (err, results) {
-				res.render('admin', {
-					tags : results[0],
-					benefits : results[1],
-					places : results[2],
-					cities : results[3]
-				});
+		function (cb) {
+			Tag.find({}, function (err, tags) {
+				cb(null, tags);
 			});
+		},
+		function (cb) {
+			Benefit.find({}).populate('image').exec(function (err, benefits) {
+				cb(null, benefits);
+			});
+		},
+		function (cb) {
+			City.find({}, function (err, cities) {
+				cb(null, cities);
+			});
+		},
+		function (cb) {
+			RestPlace.find({}).populate('images').exec(function (err, restplaces) {
+				cb(null, restplaces);
+			});
+		},
+		function (cb) {
+			Place.find({}).populate('images').exec(function (err, places) {
+				cb(null, places);
+			});
+		}], function (err, result) {
+			res.render('admin', {
+				tags : result[0],
+				benefits : result[1],
+				cities : result[2],
+				restplaces : result[3],
+				places : result[4]
+			});
+		});
 	});
 
-	router.get('/misc', function (req, res, next) {
+	router.get('/create/hotel', function (req, res, next) {
 		async.series([
-			function (cb) {
-				Tag.find({}, function (err, tags) {
-					cb(null, tags);
-				});
-			}, function (cb) {
-				City.find({}, function (err, cities) {
-					cb(null, cities);
-				});
-			}, function (cb) {
-				Benefit.find({}).populate('image').exec(function (err, benefits) {
-					cb(null, benefits);
-				})
-			}], 
-			function (err, results) {
-				res.render('admin_misc', {
-					tags : results[0],
-					cities : results[1],
-					benefits : results[2]
-				});
-			})
+		function (cb) {
+			Tag.find({}, function (err, tags) {
+				cb(null, tags);
+			});
+		}, function (cb) {
+			Benefit.find({}).populate('image').exec(function (err, benefits) {
+				cb(null, benefits);
+			});
+		},
+		function (cb) {
+			Place.find().populate('images mini_images').exec(function (err, places) {
+				cb(null, places);
+			});
+		},
+		function (cb) {
+			City.find(function (err, places) {
+				cb(null, places);
+			});
+		}],
+		function (err, results) {
+			res.render('admin_hotels', {
+				hotel : null,
+				tags : results[0],
+				benefits : results[1],
+				places : results[2],
+				cities : results[3]
+			});
+		});
 	});
 
-	router.get('/places', function (req, res, next) {
+	router.get('/update/hotel/:id', function (req, res, next) {
+		var id = req.params.id;
+		async.series([
+		function (cb) {
+			RestPlace.findById(id).deepPopulate('images mini_images').exec(function (err, place) {
+				cb(null, place);
+			});
+		},
+		function (cb) {
+			Place.find().populate('images mini_images').exec(function (err, places) {
+				cb(null, places);
+			});
+		},
+		function (cb) {
+			City.find({}, function (err, cities) {
+				cb(null, cities);
+			});
+		},
+		function (cb) {
+			Tag.find({}, function (err, tags) {
+				cb(null, tags);
+			});
+		}, function (cb) {
+			Benefit.find({}).populate('image').exec(function (err, benefits) {
+				cb(null, benefits);
+			});
+		}], function (err, result) {
+			res.render('admin_hotels', {
+				hotel : result[0],
+				places : result[1],
+				cities : result[2],
+				tags : result[3],
+				benefits : result[4]
+			});
+		});
+	});
+
+	router.get('/create/place', function (req, res, next) {
 		City.find({}, function (err, cities) {
 			res.render('admin_places', {
+				place : null,
 				cities : cities
+			});
+		});
+	});
+
+	router.get('/update/place/:id', function (req, res, next) {
+		var id = req.params.id;
+		async.series([
+		function (cb) {
+			Place.findById(id).populate('images mini_images').exec(function (err, place) {
+				cb(null, place);
+			});
+		}, function (cb) {
+			City.find({}, function (err, cities) {
+				cb(null, cities);
+			});
+		}], function (err, result) {
+			res.render('admin_places', {
+				place : result[0],
+				cities : result[1]
 			});
 		});
 	});
@@ -83,7 +153,7 @@ module.exports = function (express) {
 		t.save(function (err, readyTag) {
 			if (err) return next(err);
 			res.json({ message : 'ok' });
-		})
+		});
 	});
 
 	router.post('/city', function (req, res, next) {
@@ -93,7 +163,7 @@ module.exports = function (express) {
 		city.save(function (err, readyCity) {
 			if (err) return next(err);
 			res.json({ message : 'ok' });
-		})
+		});
 	});
 
 	router.post('/benefit', function (req, res, next) {
@@ -103,7 +173,7 @@ module.exports = function (express) {
 		ben.save(function (err, readyBenefit) {
 			if (err) return next(err);
 			res.json({ message : 'ok' });
-		})
+		});
 	});
 
 
@@ -140,6 +210,27 @@ module.exports = function (express) {
 		});
 	});
 
+	router.post('/restplace/:id', function (req, res, next) {
+		var body = req.body;
+		var id = req.params.id;
+		delete body._id;
+
+		RestPlace.findByIdAndUpdate(id, body, function (err, restplace) {
+			if (err) return next(err);
+			res.json({
+				message : 'ok'
+			});
+		});
+	});
+
+	router.delete('/restplace/:id', function (req, res, next) {
+		RestPlace.findByIdAndRemove(req.params.id, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
 	router.post('/place', function (req, res, next) {
 		var body = req.body;
 		
@@ -154,8 +245,21 @@ module.exports = function (express) {
 		});
 	});
 
+	router.post('/place/:id', function (req, res, next) {
+		var body = req.body;
+		var id = req.params.id;
+		delete body._id;
+
+		Place.findByIdAndUpdate(id, body, function (err, place) {
+			if (err) return next(err);
+			res.json({
+				message : 'ok'
+			});
+		});
+	});
+
 	return router;
-}
+};
 
 var fileSave = function (file, cb, cbFail) {
 	file = file[0];

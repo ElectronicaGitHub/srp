@@ -18,21 +18,23 @@
 						{{for mini_images}}
 							<div data-n="{{:#index}}" class="card-image {{:i==0?'current':''}}" style="background-image: url('{{:path}}')"></div>
 						{{/for}}
+					</div>
+				</div>
+				<div class="card-info">
+					{{if mini_images.length>1}}
 						<div class="radio-wrapper">
 							{{for mini_images}}
 								<span data-n="{{:#index}}" class="image-radio {{:j==0?'current':''}}"></span>
 							{{/for}}
 						</div>
-						<div class="price-wrapper">
-							<div class="price-with-icon">
-								<span class="fa fa-rub icon"></span>
-								<span class="price">{{:price[0]}}</span>	
-							</div>
-							<div class="per-x">за сутки</div>
+					{{/if}}
+					<div class="price-wrapper">
+						<div class="price-with-icon">
+							<span class="fa fa-rub icon"></span>
+							<span class="price">{{:price[0]}}</span>	
 						</div>
+						<div class="per-x">за сутки</div>
 					</div>
-				</div>
-				<div class="card-info">
 					<span class="left">
 						<p class="title">{{:title}}</p>
 						<p class="city"><span class="fa fa-map-marker icon"></span>{{:city.name}}</p>
@@ -109,20 +111,6 @@
 								<% for (var i = 0; i < hotel.mini_images.length; i++) { %>
 									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url(<%= hotel.mini_images[i].path %>)"></div>
 								<% } %>
-								<% if (hotel.mini_images.length > 1) { %>
-								<div class="radio-wrapper">
-									<% for (var j = 0; j < hotel.mini_images.length; j++) { %>
-										<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
-									<% } %>
-								</div>
-								<% } %>
-							</div>
-							<div class="price-wrapper">
-								<div class="price-with-icon">
-									<span class="fa fa-rub icon"></span>
-									<span class="price"><%= hotel.price[0] %></span>	
-								</div>
-								<div class="per-x">за сутки</div>
 							</div>
 						</div>
 						<div class="card-info">
@@ -133,6 +121,22 @@
 							<span class="right">
 								<button class="more-info">Подробнее</button>
 							</span>
+
+							<% if (hotel.mini_images.length > 1) { %>
+							<div class="radio-wrapper">
+								<% for (var j = 0; j < hotel.mini_images.length; j++) { %>
+									<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
+								<% } %>
+							</div>
+							<% } %>
+							
+							<div class="price-wrapper">
+								<div class="price-with-icon">
+									<span class="fa fa-rub icon"></span>
+									<span class="price"><%= hotel.price[0] %></span>	
+								</div>
+								<div class="per-x">за сутки</div>
+							</div>
 						</div>
 					</div>
 				</a>

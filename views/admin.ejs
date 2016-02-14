@@ -2,151 +2,122 @@
 <% block('title', 'Админка') -%>
 
 <script src="/libs/angular/angular.min.js"></script>
+<script src="/libs/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="/libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="/javascripts/admin.js"></script>
 <script>
 	window.tags = <%- JSON.stringify(tags) %>;
 	window.benefits = <%- JSON.stringify(benefits) %>;
-	window.places = <%- JSON.stringify(places) %>;
 	window.cities = <%- JSON.stringify(cities) %>;
+
+	window.restplaces = <%- JSON.stringify(restplaces) %>;
+	window.places = <%- JSON.stringify(places) %>;
 </script>
 <link rel="stylesheet" href="/stylesheets/builded/admin.css">
+<link rel="stylesheet" href="/libs/angular-bootstrap/ui-bootstrap-csp.css">
 
 <div ng-app="serpAdmin" ng-controller="MainCtrl" class="admin-container">
-	
+	<script type="text/ng-template" id="deleteModel.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Удаляем <span ng-bind="items.model.title"></span>?</h3>
+        </div>
+        <div class="modal-body">
+        	Удаляем {{ items.model.title }} ?
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+	<div class="admin-container container">
+		<p><a href="/admin/create/hotel" target="_blank">Добавить отель</a></p>
+		<p><a href="/admin/create/place" target="_blank">Добавить место</a></p>
+	</div>
+
+
 	<div class="left">
 
 		<div class="block">
-			<div class="title">Основная информация</div>
-			
+			<div class="title">Теги</div>
 			<div class="wrapper">
 				<div class="form-group">
-					<label for="title">Заголовок</label>
-					<input class="form-control" id="title" ng-class="{ fill : restplace.title }" type="text" ng-model="restplace.title">
-				</div>
-
-				<div class="form-group">
-					<label for="title">URL Заголовок( транслит)</label>
-					<input class="form-control" id="title" ng-class="{ fill : restplace.title_url }" type="text" ng-model="restplace.title_url" placeholder="Пример: hotel_spa_resort_super_dream_comes_true">
-				</div>
-
-				<div class="form-group">
-					<label for="description_full">Полное описание</label>
-					<textarea class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full"></textarea>
-				</div>
-
-				<div class="form-group">
-					<label for="description_mini">Краткое описание</label>
-					<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini"></textarea>
+					<label for="title">Название тега</label>
+					<input class="form-control" id="title" ng-class="{ fill : newTag.name }" type="text" ng-model="newTag.name">
+					<button ng-click="createTag(newTag)" class="btn btn-apply">Добавить тег</button>
 				</div>
 
 			</div>
 		</div>
-
 		<div class="block">
-			<div class="title">Цена</div>
-
+			<div class="title">Готовые теги</div>
 			<div class="wrapper">
-				<div class="form-group">
-					<label for="price">Категория цены</label>
-					<select ng-options="cat._id as cat.name for cat in _price_categories" ng-model="restplace.price_category"></select>
-				</div>
-
-				<div class="form-group">
-					<label for="price">Цена за 1-3 суток в рублях</label>
-					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price1 }" ng-model="restplace.price1"/>
-				</div>
-				<div class="form-group">
-					<label for="price">Цена за 4-6 суток в рублях</label>
-					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price2 }" ng-model="restplace.price2"/>
-				</div>
-				<div class="form-group">
-					<label for="price">Цена за 6-10 суток в рублях</label>
-					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price3 }" ng-model="restplace.price3"/>
-				</div>
-				<div class="form-group">
-					<label for="price">Цена за 10+ суток в рублях</label>
-					<input type="number" class="form-control" id="price" ng-class="{ fill : restplace.price4 }" ng-model="restplace.price4"/>
-				</div>
-
+				<p ng-repeat="t in tags" ng-model="benefit.name">{{ t.name }}</p>
 			</div>
 		</div>
 
 		<div class="block">
-			<div class="title">Расположение</div>
-			
+			<div class="title">Города</div>
 			<div class="wrapper">
 				<div class="form-group">
-					<label>Координаты</label>
-					<input class="form-control" ng-class="{ fill : restplace.coordinates }" type="text" ng-model="restplace.coordinates" placeholder="Координаты">
+					<label for="title">Название города</label>
+					<input class="form-control" id="title" ng-class="{ fill : newCity.name }" type="text" ng-model="newCity.name">
+					<button ng-click="createCity(newCity)" class="btn btn-apply">Добавить тег</button>
 				</div>
-
-				<div class="form-group">
-					<label>Адрес</label>
-					<input class="form-control" ng-class="{ fill : restplace.adress }" type="text" ng-model="restplace.adress" placeholder="Адрес">
-				</div>
-
-				<div class="form-group">
-					<label>Страна</label>
-					<input class="form-control" ng-class="{ fill : restplace.country }" type="text" ng-model="restplace.country" placeholder="Страна">
-				</div>
-
-				<div class="form-group">
-					<label>Город</label>
-					<select ng-options="city._id as city.name for city in _cities" ng-model="restplace.city"></select>
-				</div>
-
-				<div id="map" style="width: 100%; height: 500px"></div>
 
 			</div>
+		</div>
+		<div class="block">
+			<div class="title">Имеющиеся города</div>
+			<div class="wrapper">
+				<p ng-repeat="city in cities">{{ city.name }}</p>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Бенефиты</div>
+			<div class="wrapper">
+				<div class="form-group">
+					<label for="title">Название бенефита</label>
+					<input class="form-control" id="title" ng-class="{ fill : newBenefit.name }" type="text" ng-model="newBenefit.name">
+				</div>	
+				<div class="form-group images-load-container">
+					<label for="title">Иконка бенефита</label>
+					<input id="image" type="file" style="visibility:hidden">
+					<p><button class="btn btn-success" ng-click="loadImageForBenefit()">Загрузить иконку</button></p>
+					<div class="images-list" ng-if="newBenefit.image">
+						<div style="background-image:url('{{ newBenefit.image.path }}')" class="each-img"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<button ng-click="createBenefit(newBenefit)" class="btn btn-apply">Добавить бенефит</button>
+				</div>
+			</div>
+		</div>
 		
+		<div class="block">
+			<div class="title">Готовые бенефиты</div>
+			<div class="wrapper">
+				<div ng-repeat="ben in benefits" class="listed-objects">
+					<div style="background-image : url('{{ ben.image.path }}')" class="img"></div>
+					<span class="name">{{ ben.name }}</span>
+				</div>
+			</div>
 		</div>
-
 	</div>
+
 	<div class="right">
-		
-		<div class="images-load-container block">
-			<div class="title">Большие фото</div>
-			<div class="wrapper">
-				<input id="image" type="file" data-key="images" multiple="true" style="visibility:hidden">
-				<p><button class="btn btn-success" ng-click="imageLoad(true)">Загрузить фотки</button></p>
-				<div class="images-list">
-					<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in images">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="images-load-container block">
-			<div class="title">Мелкие фото</div>
-			<div class="wrapper">
-				<input id="mini-image" type="file" data-key="mini_images" multiple="true" style="visibility:hidden">
-				<p><button class="btn btn-success" ng-click="imageLoad()">Загрузить фотки</button></p>
-				<div class="images-list">
-					<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in mini_images">
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<div class="block">
-			<div class="title">Прочее</div>
-			<div class="wrapper">
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="restplace.best_offer"> Лучшее предложение</label>
-				</div>
-			</div>
-		</div>
-
-		<div class="block">
-			<div class="title">Места рядом</div>
+			<div class="title">Места</div>
 
 			<div class="wrapper">
 				<div class="form-group">
 					<label>Поиск по местам</label>
 					<input class="form-control" type="text" ng-model="places_filter">
 				</div>
-				<div ng-repeat="place in restplace._places | filter:places_filter" class="checkbox listed-objects">
+				<div ng-repeat="place in places | filter:places_filter" class="checkbox listed-objects">
+					<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
 					<label>
-						<input type="checkbox" ng-model="place.selected">
 						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
 						<span class="name">{{ place.title }}</span>
 					</label>
@@ -155,34 +126,24 @@
 		</div>
 
 		<div class="block">
-			<div class="title">Прочая информация</div>
+			<div class="title">Отели</div>
+
 			<div class="wrapper">
 				<div class="form-group">
-					<label>Характеристики (каждая с новой строки)</label>
-					<textarea rows="6" class="form-control" ng-class="{ fill : restplace.characteristics }" type="text" ng-model="restplace.characteristics"></textarea>
+					<label>Поиск по отелям</label>
+					<input class="form-control" type="text" ng-model="restplaces_filter">
 				</div>
+				<div ng-repeat="place in restplaces | filter:restplaces_filter" class="checkbox listed-objects">
+					<a href="/admin/update/hotel/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+					<span class="fa fa-times" ng-click="deleteModal('restplace', place, $index, 'restplaces')"></span>
 
-				<div class="form-group">
-					<label>Плюсы</label>
-					<div class="checkbox" ng-repeat="benefit in restplace._benefits">
-					  <label><input type="checkbox" ng-model="benefit.value">{{ benefit.name }}</label>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label>Теги</label>
-					<div class="checkbox" ng-repeat="tag in restplace._tags">
-					  <label><input type="checkbox" ng-model="tag.value">{{ tag.name }}</label>
-					</div>
+					<label>
+						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
+						<span class="name">{{ place.title }}</span>
+					</label>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
-	<div class="bottom">
-		<button class="btn btn-success" ng-click="saveRestPlace(restplace)">Сохранить</button>
-	</div>
-
 
 </div>

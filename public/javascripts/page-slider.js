@@ -6,7 +6,7 @@ $(function () {
 		points = [],
 		current_image = 0;
 
-	if ($('.image-panel').hasClass('single-image')) return;  
+	if ($('.image-panel').hasClass('single-image')) return;
 
 	$('.right-button').on('click', function (e) {
 		current_image = current_image + 1 > hotel.images.length - 1 ? 0 : current_image + 1;

@@ -1,13 +1,49 @@
 angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', function ($scope, $http) {
 
-	$scope.restplace = {};
-	$scope._cities = window.cities;
-	$scope.restplace = window.place;
-	if ($scope.restplace) {
+	$scope.restplace = window.hotel || {};
+
+	$scope.restplace._benefits = window.benefits;
+	$scope.restplace._tags = window.tags;
+	$scope.restplace._places = window.places;
+	
+	if (window.hotel) {
 		$scope.images = $scope.restplace.images;
 		$scope.mini_images = $scope.restplace.mini_images;
+
+		$scope.restplace._places = $scope.restplace._places.map(function (el) {
+			if ($scope.restplace.places.indexOf(el._id) != -1) {
+				el.selected = true;
+			}
+			return el;
+		});
+
+		$scope.restplace._tags = $scope.restplace._tags.map(function (el) {
+			if ($scope.restplace.tags.indexOf(el._id) != -1) {
+				el.value = true;
+			}
+			return el;
+		});
+
+		$scope.restplace._benefits = $scope.restplace._benefits.map(function (el) {
+			if ($scope.restplace.benefits.indexOf(el._id) != -1) {
+				el.value = true;
+			}
+			return el;
+		});
+
+		for (var i = 1; i < 5; i++) {
+			$scope.restplace['price' + i] = $scope.restplace.price[i - 1];
+		}
 	}
 	
+	$scope._price_categories = [
+		{ _id : 0, name : 'до 3000'},
+		{ _id : 1, name : 'от 3000 до 6000'},
+		{ _id : 2, name : 'от 6000'}
+	];
+
+	$scope._cities = window.cities;
+
 	var map;
 	
 	ymaps.ready(mapInit);
@@ -46,7 +82,7 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
                 });
             });
  
-			$scope.restplace.coordinates = coords;
+		    $scope.restplace.coordinates = coords;
 		});
 	}
 
@@ -56,7 +92,7 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		} else {
 			$('#mini-image').click();
 		}
-	};
+	}
 
 	$('#image, #mini-image').on('change', function (e) {
 		var key = $(this).attr('data-key');
@@ -80,25 +116,41 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 	});
 
 	$scope.saveRestPlace = function (place) {
-		post(place, '/admin/place');
+		post(place, '/admin/restplace');
 	};
 
 	$scope.updateRestPlace = function (place) {
-		post(place, '/admin/place/' + place._id);
+		post(place, '/admin/restplace/' + place._id);
 	};
 
 	function post(place, url) {
+
 		place.images = $scope.images.map(function (el) { return el._id; });
 		place.mini_images = $scope.mini_images.map(function (el) { return el._id; });
 
+		place.benefits = place._benefits.filter(function (el) { return el.value; }).map(function (el) {
+			return el._id;
+		});
+		place.tags = place._tags.filter(function (el) { return el.value; }).map(function (el) {
+			return el._id;
+		});
+
+		place.places = place._places.filter(function (el) { return el.selected; }).map(function (el) {
+			return el._id;
+		});
+
+		place.price = [];
+		for (var i = 1; i < 5; i++) {
+			place.price.push(place['price' + i]);
+		}
+
 		$http.post(url, place)
-			.success(function (data) {
-				console.log(data);
-			})
-			.error(function (data) {
-				console.log(data);
-			});
+		.success(function (data) {
+			console.log(data);
+		})
+		.error(function (data) {
+			console.log(data);
+		});
+
 	}
-
-
 }]);
