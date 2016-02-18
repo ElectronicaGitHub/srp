@@ -91,20 +91,18 @@ header {
 		font-weight: 700;
 		width: calc(100% - 50px);
 	}
-	span.fa-pencil,
-	span.fa-times {
-		cursor: pointer;
+	span.misc {
 		position: absolute;
 		display: none;
 		top: 5px;
 		right: 5px;
 		padding: 2px;
+		background: white;
+		span {
+			padding: 2px 3px;
+		}
 	}
-	span.fa-pencil {
-		top : 5px;
-		right: 20px;
-	}
-	&:hover span {
+	&:hover .misc {
 		display: inline-block;
 	}
 }

@@ -34,7 +34,7 @@
 				<div class="wrappers-container">
 					<div class="left-wrapper">
 						<h1 class="title"><%= hotel.title %></h1>
-						<p class="target-name"><span class="fa fa-map-marker"></span><%= hotel.city %></p>
+						<p class="target-name"><span class="fa fa-map-marker"></span><%= hotel.city.name %></p>
 					</div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 				<div class="info-wrapper">
 						
 					<div class="tab-content">
-						<div class="tab-pane"><%= hotel.description_full %></div>
+						<div class="tab-pane active"><%= hotel.description_full %></div>
 					</div>
 					<div class="map-wrapper">
 						<div id="map" style="width: 100%; height: 100%"></div>

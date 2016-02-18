@@ -75,7 +75,7 @@ module.exports = function (express) {
 		Place.findOne({
 			title_url : req.params.title_url
 		// }).populate('images mini_images city')
-		}).populate('images mini_images')
+		}).populate('images mini_images city')
 		.exec(function (err, place) {
 			console.log('place', place);
 			if(err) return next(err);

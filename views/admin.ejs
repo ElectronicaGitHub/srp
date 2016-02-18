@@ -116,7 +116,10 @@
 					<input class="form-control" type="text" ng-model="places_filter">
 				</div>
 				<div ng-repeat="place in places | filter:places_filter" class="checkbox listed-objects">
-					<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+					<span class="misc">
+						<a href="/place/{{ place.title_url }}" target="_blank"><span class="fa fa-eye"></span></a>
+						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+					</span>
 					<label>
 						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
 						<span class="name">{{ place.title }}</span>
@@ -134,8 +137,11 @@
 					<input class="form-control" type="text" ng-model="restplaces_filter">
 				</div>
 				<div ng-repeat="place in restplaces | filter:restplaces_filter" class="checkbox listed-objects">
-					<a href="/admin/update/hotel/{{ place._id }}"><span class="fa fa-pencil"></span></a>
-					<span class="fa fa-times" ng-click="deleteModal('restplace', place, $index, 'restplaces')"></span>
+					<span class="misc">
+						<a href="/hotel/{{ place.title_url }}" target="_blank"><span class="fa fa-eye"></span></a>
+						<a href="/admin/update/hotel/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+						<span class="fa fa-times" ng-click="deleteModal('restplace', place, $index, 'restplaces')"></span>
+					</span>
 
 					<label>
 						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
