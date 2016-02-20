@@ -2,6 +2,7 @@ var multiparty = require('multiparty');
 var path = require('path');
 var fs = require('fs');
 var async = require('async');
+var config = require('../configs/config_file');
 var RestPlace = require('../models/RestPlace.js');
 var Place = require('../models/Place.js');
 var Img = require('../models/Img.js');
@@ -11,6 +12,29 @@ var Benefit = require('../models/Benefit.js');
 
 module.exports = function (express) {
 	var router = express.Router();
+
+	router.use(function(req, res, next) {
+
+	    var auth;
+	    if (req.headers.authorization) {
+	      auth = new Buffer(req.headers.authorization.substring(6), 'base64')
+	        .toString()
+	        .split(':');
+	    }
+	    if (!auth || 
+	         auth[0] !== config.get('autentification:username') || 
+	         auth[1] !== config.get('autentification:password')
+	        ) {
+	        res.statusCode = 401;
+	        res.setHeader('WWW-Authenticate', 'Basic realm="Server God asks for your password sick hacker!!! Tell him!"');
+	        res.render('error', {
+	        	message : 'bad rights',
+	        	error : 'bad rights'
+	        });
+	    } else {
+	        next();
+	    }
+	});
 
 	router.get('/', function (req, res, next) {
 		async.series([
