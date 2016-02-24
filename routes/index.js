@@ -5,6 +5,7 @@ var Place = require('../models/Place.js');
 var Tag = require('../models/Tag.js');
 var City = require('../models/City.js');
 var async = require('async');
+var sm = require('sitemap');
 
 module.exports = function (express) {
 	var router = express.Router();
@@ -65,6 +66,7 @@ module.exports = function (express) {
 		.select('-_id')
 		.exec(function (err, hotel) {
 			if(err) return next(err);
+			if (!hotel) res.send(404);
 			res.render('hotel_card', {
 				hotel : hotel
 			});
@@ -79,10 +81,51 @@ module.exports = function (express) {
 		.exec(function (err, place) {
 			console.log('place', place);
 			if(err) return next(err);
+			if (!place) res.send(404);
 			res.render('place_card', {
 				hotel : place
 			});
 		});
+	});
+
+	router.get('/sitemap.xml', function (req, res, next) {
+		var urls = [];
+		var urls2 = [];
+		RestPlace.find({}, function (err, hotels) {
+			if (err) return next(err);
+			urls = hotels.map(function(el) {
+				return {
+					url : '/hotel/' + el.title_url,
+					changefreq : 'daily'
+				};
+			});
+			Place.find({}, function (err, places) {
+				if (err) return next(err);
+				urls2 = places.map(function(el) {
+					return {
+						url : '/place/' + el.title_url,
+						changefreq : 'daily'
+					};
+				});
+				sitemap = sm.createSitemap ({
+					hostname: req.headers.host,
+					cacheTime: 600000,        // 600 sec - cache purge period
+					urls: urls.concat(urls2)
+				});
+				sitemap.toXML( function (err, xml) {
+					if (err) {
+						return res.status(500).end();
+					}
+					res.header('Content-Type', 'application/xml');
+					res.send( xml );
+				});
+			});
+		});
+	});
+
+	router.get('/robots.txt', function(req, res) {
+		res.set('Content-Type', 'text/plain');
+		res.sendfile('robots.txt');
 	});
 
 	return router;

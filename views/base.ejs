@@ -17,6 +17,8 @@
 <body>
 <!-- <body class="container"> -->
 	<%- partial('particials/header') %>
+	<div class="bg"></div>
+	<div class="bg-fader"></div>
 	<%- body %>
 	<%- partial('particials/footer') %>
 
@@ -25,6 +27,27 @@
 	<style>
 	button:focus {
 		outline : none !important;
+	}
+	.bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		background-position: center;
+		background-size: cover;
+		background-image: url('/assets/bgmap.jpg');
+	}
+	.bg-fader {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		background: #ddd;
+		opacity: 0.3;
 	}
 	html, body {
 		height: 100%;

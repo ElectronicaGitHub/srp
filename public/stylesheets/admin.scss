@@ -11,6 +11,7 @@ header {
 	margin: 20px auto 0 auto;
 	.block {
 		border-radius: 5px;
+		background: white;
 		border: 1px solid lighten($serp_main_color2, 20%);
 		margin-bottom: 20px;
 		.title {

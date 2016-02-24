@@ -135,21 +135,16 @@ $image_height: 450px;
 		}
 		.hotel-info {
 			margin-bottom: 100px;
-			.info-wrapper {
-				float: left;
-				width: calc(100% - #{$offer_width});
+			.info-wrapper { 
 				min-height: 400px;
 				overflow: hidden;
 				background: white;
-				@include respond-to(handhelds) { width: 100%; }
-				@include respond-to(medium-screens) { width: 100%; }
-				@include respond-to(wide-screens) { width: calc(100% - #{$offer_width_mini}); }
-				@include respond-to(extra-screens) { width: calc(100% - #{$offer_width}); }
-
 				.tab-content {
+					width: 50%;
+					float: left;
 					padding: 50px 25px;
-					@include respond-to(handhelds) { padding: 40px 0; }
-					@include respond-to(mobile-screens) { padding: 40px 0; }
+					@include respond-to(handhelds) { padding: 20px; }
+					@include respond-to(under-768) { padding: 30px 20px; width: 100%; }
 					.tab-pane {
 						overflow: hidden;
 						clear: both;
@@ -160,10 +155,11 @@ $image_height: 450px;
 					}
 				}
 				.map-wrapper {
-					width: 100%;
+					width: 50%;
+					float: left;
 					height: 400px;
 					@include respond-to(handhelds) { height: 250px; }
-					@include respond-to(mobile-screens) { height: 250px; }
+					@include respond-to(under-768) { height: 250px; width: 100%; }
 				}
 			}
 		}

@@ -31,6 +31,7 @@
     "node-mandrill": "^1.0.1",
     "nodemailer": "^1.4.0",
     "nodemailer-mandrill-transport": "^0.3.0",
+    "sitemap": "^1.5.0",
     "static-favicon": "^1.0.2",
     "winston": "^0.7.3"
   },

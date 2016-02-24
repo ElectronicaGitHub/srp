@@ -1,6 +1,10 @@
 @import "main";
 
 footer {
+	// position: relative;
+	// z-index: 100;
+	clear: both;
+	border-top: 1px solid #f0f0f0;
 	// height: 200px;
 	background-color: white;
 	padding: 40px 0;

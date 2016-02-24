@@ -94,6 +94,7 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		$http.post(url, place)
 			.success(function (data) {
 				console.log(data);
+				window.location = '/admin';
 			})
 			.error(function (data) {
 				console.log(data);
