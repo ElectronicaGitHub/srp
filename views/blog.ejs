@@ -1,0 +1,19 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Серпантин') -%>
+
+<link rel="stylesheet" href="/stylesheets/builded/blog.css">
+	
+<div class="posts container">
+
+	<h3>Блог Серпантина</h3>
+	
+	<% for (var i = 0; i < posts.length; i++) { var post = posts[i]; %>
+		<a href="/blog/<%= post.title_url %>">
+			<div class="each-post">
+				<p class="title"><%= post.title %></p>
+				<p class="description"><%= post.description_mini %></p>
+			</div>
+		</a>
+	<% } %>
+
+</div>

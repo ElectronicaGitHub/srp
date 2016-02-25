@@ -5,6 +5,7 @@ var async = require('async');
 var config = require('../configs/config_file');
 var RestPlace = require('../models/RestPlace.js');
 var Place = require('../models/Place.js');
+var Post = require('../models/Post.js');
 var Img = require('../models/Img.js');
 var City = require('../models/City.js');
 var Tag = require('../models/Tag.js');
@@ -62,13 +63,35 @@ module.exports = function (express) {
 			Place.find({}).populate('images').exec(function (err, places) {
 				cb(null, places);
 			});
+		},
+		function (cb) {
+			Post.find({}).exec(function (err, posts) {
+				cb(null, posts);
+			});
 		}], function (err, result) {
 			res.render('admin', {
 				tags : result[0],
 				benefits : result[1],
 				cities : result[2],
 				restplaces : result[3],
-				places : result[4]
+				places : result[4],
+				posts : result[5]
+			});
+		});
+	});
+
+	router.get('/create/post', function (req, res, next) {
+		res.render('admin_post', {
+			post: null
+		});
+	});
+
+	router.get('/update/post/:id', function (req, res, next) {
+		var id = req.params.id;
+		Post.findById(id, function (err, post) {
+			if (err) return next(err);
+			res.render('admin_post', {
+				post : post
 			});
 		});
 	});
@@ -255,6 +278,14 @@ module.exports = function (express) {
 		});
 	});
 
+	router.delete('/post/:id', function (req, res, next) {
+		Post.findByIdAndRemove(req.params.id, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
 	router.post('/place', function (req, res, next) {
 		var body = req.body;
 		
@@ -275,6 +306,35 @@ module.exports = function (express) {
 		delete body._id;
 
 		Place.findByIdAndUpdate(id, body, function (err, place) {
+			if (err) return next(err);
+			res.json({
+				message : 'ok'
+			});
+		});
+	});
+
+	router.post('/post', function (req, res, next) {
+		var body = req.body;
+		
+		var p = new Post(body);
+
+		p.save(function (err, model) {
+			if (err) return next(err);
+			res.json({
+				message : 'ok'
+			});
+		});
+	});
+
+	router.post('/post/:id', function (req, res, next) {
+		var body = req.body;
+		var id = req.params.id;
+		delete body._id;
+
+		console.log(body);
+
+		Post.findByIdAndUpdate(id, body, function (err, post) {
+			console.log(err, post);
 			if (err) return next(err);
 			res.json({
 				message : 'ok'

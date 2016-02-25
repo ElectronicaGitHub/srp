@@ -5,6 +5,7 @@ angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope',
 	$scope.cities = window.cities;
 	$scope.places = window.places;
 	$scope.restplaces = window.restplaces;
+	$scope.posts = window.posts;
 
 	$scope.newBenefit = {};
 	$scope.newTag = {};

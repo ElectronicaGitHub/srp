@@ -30,7 +30,10 @@ header {
 	.fill {
 		background-color: lighten($green_color, 30%);
 	}
-
+	.full {
+		display: inline-block;
+		width: 100%;
+	}
 	.left, .right {
 		float: left;
 		display: inline-block;
@@ -76,6 +79,7 @@ header {
 .listed-objects {
 	position: relative;
 	clear: both;
+	overflow: hidden;
 	.img {
 		float: left;
 		width: 50px;

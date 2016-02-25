@@ -26,6 +26,7 @@
     "tinymce": "~4.1.10",
     "font-awesome": "~4.4.0",
     "vegas": "~2.2.0",
-    "angular-bootstrap": "~1.1.2"
+    "angular-bootstrap": "~1.1.2",
+    "textAngular": "~1.5.0"
   }
 }

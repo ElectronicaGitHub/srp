@@ -12,6 +12,8 @@
 
 	window.restplaces = <%- JSON.stringify(restplaces) %>;
 	window.places = <%- JSON.stringify(places) %>;
+
+	window.posts = <%- JSON.stringify(posts) %>;
 </script>
 <link rel="stylesheet" href="/stylesheets/builded/admin.css">
 <link rel="stylesheet" href="/libs/angular-bootstrap/ui-bootstrap-csp.css">
@@ -33,6 +35,7 @@
 	<div class="admin-container container">
 		<p><a href="/admin/create/hotel" target="_blank">Добавить отель</a></p>
 		<p><a href="/admin/create/place" target="_blank">Добавить место</a></p>
+		<p><a href="/admin/create/post" target="_blank">Добавить новость</a></p>
 	</div>
 
 
@@ -146,6 +149,20 @@
 						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
 						<span class="name">{{ place.title }}</span>
 					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="title">Блог</div>
+			<div class="wrapper">
+				<div ng-repeat="post in posts" class="listed-objects">
+					<label class="name">{{ post.title }}</label>
+					<span class="misc">
+						<a href="/blog/{{ post.title_url }}" target="_blank"><span class="fa fa-eye"></span></a>
+						<a href="/admin/update/post/{{ post._id }}"><span class="fa fa-pencil"></span></a>
+						<span class="fa fa-times" ng-click="deleteModal('post', post, $index, 'posts')"></span>
+					</span>
 				</div>
 			</div>
 		</div>

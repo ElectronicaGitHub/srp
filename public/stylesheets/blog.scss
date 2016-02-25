@@ -1,0 +1,22 @@
+header {
+	display: none;
+}
+
+.posts {
+	background-color: white;
+	overflow: hidden;
+	a {
+		text-decoration: none;
+		.each-post {
+			padding: 20px;
+			border-bottom: 1px solid #f5f5f5;
+			.title {
+				font-size: 20px;
+				font-weight: 700;
+			}
+			.description {
+				font-size: 16px;
+			}
+		}
+	}
+}

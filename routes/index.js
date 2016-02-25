@@ -2,6 +2,7 @@ var RestPlace = require('../models/RestPlace.js');
 var Img = require('../models/Img.js');
 var Benefit = require('../models/Benefit.js');
 var Place = require('../models/Place.js');
+var Post = require('../models/Post.js');
 var Tag = require('../models/Tag.js');
 var City = require('../models/City.js');
 var async = require('async');
@@ -54,6 +55,15 @@ module.exports = function (express) {
 				});
 			});
 	});
+
+	router.get('/blog', function (req, res, next) {
+		Post.find({}, function (err, results) {
+			if (err) return next(err);
+			res.render('blog', {
+				posts : results
+			});
+		})
+	})
 
 	router.post('/api/getHotels', function (req, res, next) {
 		var p = req.query.p;
