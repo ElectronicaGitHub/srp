@@ -7,6 +7,17 @@ var City = require('../models/City.js');
 var async = require('async');
 var sm = require('sitemap');
 
+var newRequestTmpl = require('../mailTemplate/newRequest.js');
+
+// почтовая залупа
+var nodemailer = require('nodemailer');
+var mandrillTransport = require('nodemailer-mandrill-transport');
+var transport = nodemailer.createTransport(mandrillTransport({
+	auth: {
+		apiKey: '4Xj9PqPRZMf48cOOLBohIg'
+	}
+}));
+
 module.exports = function (express) {
 	var router = express.Router();
 
@@ -84,6 +95,23 @@ module.exports = function (express) {
 			if (!place) res.send(404);
 			res.render('place_card', {
 				hotel : place
+			});
+		});
+	});
+
+	router.post('/create_offer', function (req, res, next) {
+
+		var body = req.body;
+
+		transport.sendMail({
+			from : "molo4nik11@gmail.com",
+			to: "antonovphilipdev@gmail.com",
+			subject: 'Поступил новый запрос)',
+			html: newRequestTmpl(body)
+		}, function (err, info) {
+			if (err) callback(err);
+			res.json({
+				message : 'ok'
 			});
 		});
 	});

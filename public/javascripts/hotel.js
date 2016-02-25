@@ -2,7 +2,9 @@ $(function () {
 
 	var hotel = window.hotel,
 		coords = window.hotel.coordinates,
-		map;
+		map,
+		priceForPerson,
+		lsPrefix = 'srp__req__';
 
 	ymaps.ready(function () {
 		map = new ymaps.Map("map", {
@@ -39,7 +41,8 @@ $(function () {
 		},
 	}).bind('datepicker-first-date-selected', function(event, obj) {
 		a = moment(obj.date1).locale('ru').format('D MMMM YYYY');
-	}).bind('datepicker-change',function(event,obj) {
+	}).bind('datepicker-change',function(event, obj) {
+
 		days = dateDiffInDays(obj.date1, obj.date2) + 1;
 		price = hotel.price[0];
 		if (days > 3) price = hotel.price[0];
@@ -47,10 +50,15 @@ $(function () {
 		if (days > 6 && days <= 10) price = hotel.price[2];
 		if (days > 10) price = hotel.price[3];
 
-		$('.price-container .price').text(days * price);
+		$('form #dates').val(obj.value);
+		$('form #price').val(days * price);
+
+		$('form .price').text(days * price);
 		if (!$('.offer-continue').is(':visible')) {
 			$('.offer-continue').slideToggle(300);
 		}
+
+		priceForPerson = days * price;
 	});
 
 	var _MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -61,5 +69,30 @@ $(function () {
 
 		return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 	}
+
+	$(document).on('click', '#offer-button', function (e) {
+		var btn = $(this);
+		e.preventDefault();
+		var data = btn.closest('form').serialize();
+
+		btn.html('<i class="fa fa-spinner fa-spin"></i>');
+
+		$.post('/create_offer', data, function (err, ok) {
+			console.log(err, ok);
+			localStorage.setItem(lsPrefix + hotel._id, 1);
+			btn.attr('disabled', true);
+			btn.text('Ваш заказ сформирован, в течение 15 минут мы свяжемся с вами для подтверждения заказа');
+		});
+	});
+
+	$(document).on('change keyup', '#count', function (e) {
+		var lp = $('form #price').val();
+		var c = $(this).val();
+
+		var np = priceForPerson * c;
+
+		$('form #price').val(np);
+		$('form .price').text(np);
+	});
 
 });

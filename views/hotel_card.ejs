@@ -88,36 +88,41 @@
 				</div>	
 
 				<div class="offer-panel">
-					<div class="picker-wrapper">
-						<div class="picker" id="picker"></div>
-						<div class="offer-continue">
-							<div class="price-container">
-								<div class="placeholder-fw">
-									<span class="placeholder">Итоговая стоимость</span>
+					<form>
+						<div class="picker-wrapper">
+							<div class="picker" id="picker"></div>
+							<input type="text" id="dates" name="dates" style="display: none">
+							<input type="text" name="title" style="display: none" value="<%= hotel.title %>">
+							<div class="offer-continue">
+								<div class="price-container">
+									<div class="placeholder-fw">
+										<span class="placeholder">Итоговая стоимость</span>
+									</div>
+									<span class="price"></span>
+									<input type="text" id="price" name="price" style="display:none">
 								</div>
-								<span class="price"></span>
-							</div>
-							<div class="input-container">
-								<div class="placeholder-fw">
-									<span class="placeholder">Количество мест</span>
+								<div class="input-container">
+									<div class="placeholder-fw">
+										<span class="placeholder">Количество мест</span>
+									</div>
+									<input type="text" id="count" name="count" value="1">
 								</div>
-								<input type="text" id="name">
-							</div>
-							<div class="input-container">
-								<div class="placeholder-fw">
-									<span class="placeholder">Ваше имя</span>
+								<div class="input-container">
+									<div class="placeholder-fw">
+										<span class="placeholder">Ваше имя</span>
+									</div>
+									<input type="text" name="name">
 								</div>
-								<input type="text" id="name">
-							</div>
-							<div class="input-container">
-								<div class="placeholder-fw">
-									<span class="placeholder" id="phone">Ваш телефон</span>
+								<div class="input-container">
+									<div class="placeholder-fw">
+										<span class="placeholder" id="phone">Ваш телефон</span>
+									</div>
+									<input type="text" name="phone">
 								</div>
-								<input type="text">
+								<button class="offer-button" id="offer-button">Оформить заказ</button>
 							</div>
-							<button class="offer-button" if="offer-button">Оформить заказ</button>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 
