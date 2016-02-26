@@ -3,17 +3,21 @@
 
 <link rel="stylesheet" href="/stylesheets/builded/blog.css">
 	
-<div class="posts container">
+<div class="container">
 
-	<h3>Блог Серпантина</h3>
-	
-	<% for (var i = 0; i < posts.length; i++) { var post = posts[i]; %>
-		<a href="/blog/<%= post.title_url %>">
-			<div class="each-post">
-				<p class="title"><%= post.title %></p>
-				<p class="description"><%= post.description_mini %></p>
-			</div>
-		</a>
-	<% } %>
+	<div class="header">
+		<p>Блог</p>
+	</div>
+
+	<div class="posts">
+		<% for (var i = 0; i < posts.length; i++) { var post = posts[i]; %>
+			<a href="/blog/<%= post.title_url %>">
+				<div class="each-post">
+					<p class="title"><%= post.title %></p>
+					<p class="description"><%= post.description_mini %></p>
+				</div>
+			</a>
+		<% } %>
+	</div>
 
 </div>

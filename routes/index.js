@@ -56,6 +56,19 @@ module.exports = function (express) {
 			});
 	});
 
+	router.get('/about', function (req, res, next) {
+		res.render('about');
+	});
+	router.get('/contacts', function (req, res, next) {
+		res.render('contacts');
+	});
+	router.get('/sogl', function (req, res, next) {
+		res.render('polz_sogl');
+	});
+	router.get('/oferta', function (req, res, next) {
+		res.render('oferta');
+	});
+
 	router.get('/blog', function (req, res, next) {
 		Post.find({}, function (err, results) {
 			if (err) return next(err);
