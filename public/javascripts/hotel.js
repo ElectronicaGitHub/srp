@@ -30,6 +30,8 @@ $(function () {
 		map.setBounds(map.geoObjects.getBounds());
 	});
 
+	$("#phone").mask("+9 (999) 999 99 99");
+
 	$('#picker').dateRangePicker({
 		inline: true,
 		container: '#picker',

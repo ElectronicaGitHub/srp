@@ -1,17 +1,17 @@
 <%- layout('base.ejs')%>
 <% block('title', 'Серпантин') -%>
 
-<script src="/javascripts/main.js"></script>
+<script src="/javascripts/slider.js"></script>
 
 <link rel="stylesheet" href="/stylesheets/builded/blog.css">
 	
-<div class="container">
+<div>
 
 	<div class="header">
-		<p>Блог</p>
+		<p class="title">Блог</p>
 	</div>
 
-	<div class="posts">
+	<div class="posts container">
 		<% for (var i = 0; i < posts.length; i++) { var post = posts[i]; %>
 			<a href="/blog/<%= post.title_url %>">
 				<div class="each-post">

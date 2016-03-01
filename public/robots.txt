@@ -1,5 +1,5 @@
 User-Agent: *
 Allow: /rss
 
-Host: www.tvoykosmos.ru
-Sitemap: http://www.tvoykosmos.ru/sitemap.xml
+Host: www.serpantin.moscow
+Sitemap: http://www.serpantin.moscow/sitemap.xml

@@ -1,10 +1,25 @@
 <%- layout('base.ejs')%>
-<% block('title', 'Серпантин') -%>
+<% block('title', 'Серпантин | Контакты') -%>
 
 <link rel="stylesheet" href="/stylesheets/builded/contacts.css">
+<script src="/javascripts/slider.js"></script>
+<script src="/javascripts/contacts.js"></script>
 	
-<div class="container">
+<div>
 
-	Контакты
+	<div class="header">
+		<p class="title">Контакты</p>
+	</div>
+
+	<div class="container">
+		<div class="content">
+			<div class="info">
+				<p>Телефон: +7 (495) 961 06 50</p>
+				<p>E-Mail: hello@serpantin.moscow</p>
+				<p>Адрес: г. Москва, Бартеневская набережная, 8, офис 194</p>
+			</div>
+			<div class="map" id="map"></div>
+		</div>
+	</div>
 
 </div>

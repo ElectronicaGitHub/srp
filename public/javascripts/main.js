@@ -1,23 +1,5 @@
 $(function () {
 
-	var color = "#fff",
-		slides = [
-			{ src : '/assets/main3.jpg' },
-			{ src : '/assets/main1.jpg' },
-			{ src : '/assets/main4.jpg' },
-			{ src : '/assets/main2.jpg' },
-			{ src : '/assets/main5.jpg' }
-		];
-
-	$(".header").vegas({
-		walk : function () {
-			$(".vegas-timer-progress").css("backgroundColor", color);
-		},
-		delay : 3000,
-		slides: slides
-		// overlay: '/libs/vegas/dist/overlays/07.png'
-	});
-
 	$('.image-radio').on('click', function (e) {
 
 		e.preventDefault();
