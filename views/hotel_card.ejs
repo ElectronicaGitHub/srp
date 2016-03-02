@@ -1,6 +1,7 @@
 <%- layout('base.ejs')%>
 <% block('title', hotel.title) -%>
 <% block('description', hotel.description_mini) -%>
+<% block('meta', partial('particials/hotel_meta')) %>
 
 <script>
 	window.hotel = <%- JSON.stringify(hotel) %>;
