@@ -86,6 +86,13 @@ angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope',
 		});
 	};
 
+	$scope.restore = function (type, model) {
+		$http.post('/admin/restore/' + type + '/' + model._id)
+		.success(function (data) {
+			model.deleted = false;
+		});
+	};
+
 	$scope.deleteModal = function (name, model, removeIndex, iterateModel) {
 		$scope.removeIndex = removeIndex;
 		$scope.iterateModel = iterateModel;

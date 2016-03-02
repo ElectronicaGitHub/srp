@@ -286,6 +286,46 @@ module.exports = function (express) {
 		});
 	});
 
+	router.delete('/city/:id', function (req, res, next) {
+		City.findByIdAndUpdate(req.params.id, {
+			deleted : true
+		}, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
+	router.delete('/tag/:id', function (req, res, next) {
+		Tag.findByIdAndUpdate(req.params.id, {
+			deleted : true
+		}, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
+	router.post('/restore/city/:id', function (req, res, next) {
+		City.findByIdAndUpdate(req.params.id, {
+			deleted : false
+		}, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
+	router.post('/restore/tag/:id', function (req, res, next) {
+		Tag.findByIdAndUpdate(req.params.id, {
+			deleted : false
+		}, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
 	router.post('/place', function (req, res, next) {
 		var body = req.body;
 		

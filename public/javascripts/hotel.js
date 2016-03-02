@@ -20,11 +20,18 @@ $(function () {
 		map.geoObjects.add(myPlacemark);
 
 		for (var i in hotel.places) {
-			mp = new ymaps.Placemark(hotel.places[i].coordinates, {}, {
-				preset: 'islands#icon',
-				iconColor: '#FBB958'
-			});
-			map.geoObjects.add(mp);
+			(function (place) {
+				mp = new ymaps.Placemark(place.coordinates, {
+					hintContent : place.title
+				}, {
+					preset: 'islands#icon',
+					iconColor: '#FBB958'
+				});
+				mp.events.add('click', function () {
+					window.open('/place/'+ place.title_url);
+				});
+				map.geoObjects.add(mp);
+			})(hotel.places[i]);
 		}
 
 		map.setBounds(map.geoObjects.getBounds());

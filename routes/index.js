@@ -26,12 +26,12 @@ module.exports = function (express) {
 	router.get('/', function (req, res, next) {
 		async.series([
 			function (cb) {
-				Tag.find({}, function (err, tags) {
+				Tag.find({ deleted : false }, function (err, tags) {
 					cb(null, tags);
 				});
 			},
 			function (cb) {
-				City.find(function (err, places) {
+				City.find({ deleted : false }, function (err, places) {
 					cb(null, places);
 				});
 			},
@@ -75,8 +75,17 @@ module.exports = function (express) {
 			res.render('blog', {
 				posts : results
 			});
-		})
-	})
+		});
+	});
+
+	router.get('/blog/:title_url', function (req, res, next) {
+		Post.findOne({ title_url : req.params.title_url }, function (err, result) {
+			if (err) return next(err);
+			res.render('blog_post', {
+				post : result
+			});
+		});
+	});
 
 	router.post('/api/getHotels', function (req, res, next) {
 		var p = req.query.p;

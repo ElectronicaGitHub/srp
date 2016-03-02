@@ -46,7 +46,7 @@
 				<div class="form-group">
 					<label for="title">Название тега</label>
 					<input class="form-control" id="title" ng-class="{ fill : newTag.name }" type="text" ng-model="newTag.name">
-					<button ng-click="createTag(newTag)" class="btn btn-apply">Добавить тег</button>
+					<button ng-click="createTag(newTag)" class="btn btn-apply" ng-show="newTag.name">Добавить тег</button>
 				</div>
 
 			</div>
@@ -54,7 +54,14 @@
 		<div class="block">
 			<div class="title">Готовые теги</div>
 			<div class="wrapper">
-				<p ng-repeat="t in tags" ng-model="benefit.name">{{ t.name }}</p>
+				<p ng-repeat="t in tags" ng-class="{ deleted : t.deleted }" class="listed-objects">
+					<span class="misc">
+						<span class="fa fa-times" ng-if="!t.deleted" ng-click="deleteModal('tag', t, $index, 'tags')"></span>
+						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+						<span class="fa fa-refresh" ng-if="t.deleted" ng-click="restore('tag', t)"></span>
+					</span>
+					<span>{{ t.name }}</span><span ng-if="t.deleted"> (Удалено)</span>
+				</p>
 			</div>
 		</div>
 
@@ -64,7 +71,7 @@
 				<div class="form-group">
 					<label for="title">Название города</label>
 					<input class="form-control" id="title" ng-class="{ fill : newCity.name }" type="text" ng-model="newCity.name">
-					<button ng-click="createCity(newCity)" class="btn btn-apply">Добавить тег</button>
+					<button ng-click="createCity(newCity)" class="btn btn-apply" ng-show="newCity.name">Добавить город</button>
 				</div>
 
 			</div>
@@ -72,7 +79,14 @@
 		<div class="block">
 			<div class="title">Имеющиеся города</div>
 			<div class="wrapper">
-				<p ng-repeat="city in cities">{{ city.name }}</p>
+				<p ng-repeat="city in cities" ng-class="{ deleted : city.deleted }" class="listed-objects">
+					<span class="misc">
+						<span class="fa fa-times" ng-if="!city.deleted" ng-click="deleteModal('city', city, $index, 'cities')"></span>
+						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+						<span class="fa fa-refresh" ng-if="city.deleted" ng-click="restore('city', city)"></span>
+					</span>
+					<span>{{ city.name }}</span><span ng-if="city.deleted"> (Удалено)</span>
+				</p>
 			</div>
 		</div>
 

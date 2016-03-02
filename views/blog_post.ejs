@@ -1,0 +1,20 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Серпантин | ' + post.title) -%>
+<% block('description', post.description_mini) -%>
+
+<link rel="stylesheet" href="/stylesheets/builded/blog_post.css">
+<script src="/javascripts/slider.js"></script>
+<script src="/javascripts/blog_post.js"></script>
+	
+<div>
+	<div class="header">
+		<p class="title"><%= post.title %></p>
+	</div>
+
+	<div class="container">
+		<div class="content">
+			<%- post.description %>
+		</div>
+	</div>
+
+</div>
