@@ -9,10 +9,12 @@ header {
 		position: relative;
 		.logo-wrapper {
 			position: absolute;
-			width: 60px;
-			height: 60px;
-			top: 40px;
-			left: 50px;
+			// width: 80px;
+			// height: 80px;
+			top: 30px;
+			width: 100%;
+			left: 0;
+			// left: 40px;
 			text-align: center;
 			z-index: 1000;
 			@include respond-to(handhelds) { width: 100%; left: 0; }
@@ -25,22 +27,22 @@ header {
 			}
 		}
 		.logo {
-			width: 60px;
-			height: 60px;
-			background-color: $serp_main_color;
-			border-radius: 2px;
-			transform: rotate(-45deg);
+			width: 80px;
+			height: 80px;
+			background-image: url(/assets/logoblack.png);
+			background-position: center;
+			background-size: 100%;
 			display: inline-block;
-
 			@include respond-to(handhelds) { width: 30px; height: 30px; }
-			@include respond-to(medium-screens) { width: 45px; height: 45px; }
-			@include respond-to(mobile-screens) { width: 35px; height: 35px; }
+			@include respond-to(medium-screens) { width: 70px; height: 70px; }
+			@include respond-to(mobile-screens) { width: 55px; height: 55px; }
 		}
 		.call-to-us {
 			position: absolute;
 			width: 100%;
 			left: 0px;
-			top: 40px;
+			// top: 40px;
+			top: 115px;
 			text-align: center;
 			@include respond-to(handhelds) { width: 100%; display: inline-block; top: 95px; }
 			@include respond-to(medium-screens) { width: 100%; display: inline-block; top: 115px; }

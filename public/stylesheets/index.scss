@@ -34,7 +34,7 @@ body .vegas-container {
 		z-index: 4;
 		height: 370px;
 		text-align: center;
-		line-height: 470px;
+		line-height: 540px;
 		@include respond-to(handhelds) { height: 280px; line-height: 400px; }
 		@include respond-to(medium-screens) { line-height: 500px; }
 		span {
