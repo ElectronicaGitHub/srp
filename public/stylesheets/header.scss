@@ -17,9 +17,9 @@ header {
 			// left: 40px;
 			text-align: center;
 			z-index: 1000;
-			@include respond-to(handhelds) { width: 100%; left: 0; }
+			@include respond-to(handhelds) { width: 100%; left: 0;  top: 50px;}
 			@include respond-to(medium-screens) { width: 100%; left: 0; }
-			@include respond-to(mobile-screens) { width: 100%; left: 0; }
+			@include respond-to(mobile-screens) { width: 100%; left: 0; top: 50px;}
 			a {
 				display: inline-block;
 				width: 100%;
@@ -27,15 +27,15 @@ header {
 			}
 		}
 		.logo {
-			width: 80px;
-			height: 80px;
+			width: 150px;
+			height: 150px;
 			background-image: url(/assets/logoblack.png);
 			background-position: center;
 			background-size: 100%;
 			display: inline-block;
-			@include respond-to(handhelds) { width: 30px; height: 30px; }
-			@include respond-to(medium-screens) { width: 70px; height: 70px; }
-			@include respond-to(mobile-screens) { width: 55px; height: 55px; }
+			@include respond-to(handhelds) { width: 90px; height: 90px; }
+			@include respond-to(medium-screens) { width: 150px; height: 150px; }
+			@include respond-to(mobile-screens) { width: 80px; height: 80px; }
 		}
 		.call-to-us {
 			position: absolute;
@@ -70,4 +70,10 @@ header {
 
 		}
 	}
+}
+
+.header.index {
+	@include respond-to(992-max) { height: 520px !important; }
+	@include respond-to(768-992) { height: 600px !important; }
+	@include respond-to(min-768) { height: 750px !important; }
 }

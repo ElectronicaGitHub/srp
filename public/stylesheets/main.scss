@@ -71,28 +71,42 @@ $medium : 768px;
 $large: 1024px;
 $big: 1200px;
 
+$header_resize_max : 992px;
+$header_resize_min : 768px;
+
 @mixin respond-to($media) {
-  @if $media == handhelds {
-    @media only screen and (max-width: $small) { @content; }
-  }
-  @else if $media == mobile-screens {
-    @media only screen and (min-width: $small + 1) and (max-width: $middle) { @content; }
-  }
-  @else if $media == picker-ok {
-    @media only screen and (min-width: $picker_2col_min) and (max-width: $large - 1) { @content; }
-  }
-  @else if $media == medium-screens {
-    @media only screen and (min-width: $small + 1) and (max-width: $large - 1) { @content; }
-  }
-  @else if $media == under-768 {
-    @media only screen and (min-width: $small) and (max-width: $medium - 1) { @content; }
-  }
-  @else if $media == wide-screens {
-    @media only screen and (min-width: $large) and (max-width: $big - 1) { @content; }
-  }
-  @else if $media == extra-screens {
-  	@media only screen and (min-width: $big) { @content; }	
-  }
+	@if $media == 992-max {
+		@media only screen and (min-width: $header_resize_max) { @content; }
+	} 
+	@else if $media == 768-992 {
+		@media only screen and (min-width: $header_resize_min) and (max-width: $header_resize_max - 1) { @content; }
+	} 
+	@else if $media == min-768 {
+		@media only screen and (min-width: $small) and (max-width: $header_resize_min - 1) { @content; }
+	} 
+
+
+	@else if $media == handhelds {
+		@media only screen and (max-width: $small) { @content; }
+	} 
+	@else if $media == mobile-screens {
+		@media only screen and (min-width: $small + 1) and (max-width: $middle) { @content; }
+	} 
+	@else if $media == picker-ok {
+		@media only screen and (min-width: $picker_2col_min) and (max-width: $large - 1) { @content; }
+	} 
+	@else if $media == medium-screens {
+		@media only screen and (min-width: $small + 1) and (max-width: $large - 1) { @content; }
+	} 
+	@else if $media == under-768 {
+		@media only screen and (min-width: $small) and (max-width: $medium - 1) { @content; }
+	} 
+	@else if $media == wide-screens {
+		@media only screen and (min-width: $large) and (max-width: $big - 1) { @content; }
+	} 
+	@else if $media == extra-screens {
+		@media only screen and (min-width: $big) { @content; }	
+	}
 }
 
 
