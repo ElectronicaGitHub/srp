@@ -52,7 +52,7 @@ module.exports = function (express) {
 						{ _id : 1, name : 'от 3000 до 6000'},
 						{ _id : 2, name : 'от 6000'}
 					],
-					host : req.headers.host
+					host : req.protocol + '://'+ req.headers.host
 				});
 			});
 	});
@@ -113,7 +113,7 @@ module.exports = function (express) {
 			if (!hotel) res.send(404);
 			res.render('hotel_card', {
 				hotel : hotel,
-				host : req.headers.host
+				host : req.protocol + '://'+ req.headers.host
 			});
 		});
 	});
