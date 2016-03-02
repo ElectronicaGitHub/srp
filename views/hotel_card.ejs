@@ -23,7 +23,7 @@
 			<div class="right-button"></div>
 			<div class="images-wrapper">
 				<% for (var i = 0; i < hotel.images.length; i++) { var img = hotel.images[i]; %>
-						<div data-n="<%= i %>" class="image <%= i == 0 ? 'current' : '' %>" style="background-image : url(<%= img.path %>)"></div>
+						<div data-n="<%= i %>" class="image <%= i == 0 ? 'current' : '' %>" style="background-image : url('<%= img.path %>')"></div>
 				<% } %>
 			</div>
 			<div class="radio-wrapper">

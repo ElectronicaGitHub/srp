@@ -6,6 +6,11 @@ $picker_width: $offer_width - 40px;
 $picker_width_mini: $offer_width_mini - 30px;
 
 $image_height: 450px;
+
+header {
+	display: none;
+}
+
 .hotel-card {
 	.main-panel {
 		width: 100%;
