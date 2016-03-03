@@ -99,7 +99,7 @@ module.exports = function (express) {
 	router.get('/create/hotel', function (req, res, next) {
 		async.series([
 		function (cb) {
-			Tag.find({}, function (err, tags) {
+			Tag.find({ deleted : false }, function (err, tags) {
 				cb(null, tags);
 			});
 		}, function (cb) {
@@ -113,7 +113,7 @@ module.exports = function (express) {
 			});
 		},
 		function (cb) {
-			City.find(function (err, places) {
+			City.find({ deleted : false }, function (err, places) {
 				cb(null, places);
 			});
 		}],
@@ -142,12 +142,12 @@ module.exports = function (express) {
 			});
 		},
 		function (cb) {
-			City.find({}, function (err, cities) {
+			City.find({ deleted : false }, function (err, cities) {
 				cb(null, cities);
 			});
 		},
 		function (cb) {
-			Tag.find({}, function (err, tags) {
+			Tag.find({ deleted : false }, function (err, tags) {
 				cb(null, tags);
 			});
 		}, function (cb) {
@@ -166,7 +166,7 @@ module.exports = function (express) {
 	});
 
 	router.get('/create/place', function (req, res, next) {
-		City.find({}, function (err, cities) {
+		City.find({ deleted : false }, function (err, cities) {
 			res.render('admin_places', {
 				place : null,
 				cities : cities
@@ -182,7 +182,7 @@ module.exports = function (express) {
 				cb(null, place);
 			});
 		}, function (cb) {
-			City.find({}, function (err, cities) {
+			City.find({ deleted : false }, function (err, cities) {
 				cb(null, cities);
 			});
 		}], function (err, result) {

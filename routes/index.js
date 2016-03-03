@@ -138,14 +138,24 @@ module.exports = function (express) {
 		var body = req.body;
 
 		transport.sendMail({
-			from : "molo4nik11@gmail.com",
-			to: "antonovphilipdev@gmail.com",
+			from : "antonovphilipdev@gmail.com",
+			to: "alexandrtito@gmail.com",
 			subject: 'Поступил новый запрос)',
 			html: newRequestTmpl(body)
 		}, function (err, info) {
 			if (err) callback(err);
+
 			res.json({
 				message : 'ok'
+			});
+			
+			transport.sendMail({
+				from : "antonovphilipdev@gmail.com",
+				to: "molo4nik11@gmail.com",
+				subject: 'Поступил новый запрос)',
+				html: newRequestTmpl(body)
+			}, function (err, info) {
+				if (err) callback(err);
 			});
 		});
 	});
