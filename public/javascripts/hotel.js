@@ -90,6 +90,7 @@ $(function () {
 			console.log(err, ok);
 			localStorage.setItem(lsPrefix + hotel._id, 1);
 			btn.attr('disabled', true);
+			ga('send', 'event', 'request', 'call_request');
 			btn.text('Ваш заказ сформирован, в течение 15 минут мы свяжемся с вами для подтверждения заказа');
 		});
 	});
