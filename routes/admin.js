@@ -50,7 +50,7 @@ module.exports = function (express) {
 			});
 		},
 		function (cb) {
-			City.find({}, function (err, cities) {
+			City.find({}).populate('image').exec(function (err, cities) {
 				cb(null, cities);
 			});
 		},
@@ -280,6 +280,16 @@ module.exports = function (express) {
 
 	router.delete('/post/:id', function (req, res, next) {
 		Post.findByIdAndRemove(req.params.id, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
+	router.post('/city/:id', function (req, res, next) {
+		var data = req.body;
+		delete req.body._id;
+		City.findByIdAndUpdate(req.params.id, data, function (err, success) {
 			res.json({
 				message: 'ok'
 			});

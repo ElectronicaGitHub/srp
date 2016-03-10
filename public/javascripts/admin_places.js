@@ -1,6 +1,10 @@
 angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', function ($scope, $http) {
 
 	$scope.restplace = {};
+	$scope._types = [
+		{ type : 'restaurant', name : 'Покушать' },
+		{ type : 'place', name : 'Посетить' }
+	]
 	$scope._cities = window.cities;
 	$scope.restplace = window.place;
 	if ($scope.restplace) {

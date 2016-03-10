@@ -31,7 +31,12 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				City.find({ deleted : false }, function (err, places) {
+				City.find({ deleted : false }).populate('image').exec(function (err, places) {
+					cb(null, places);
+				});
+			},
+			function (cb) {
+				City.find({ deleted : false, popular : true }).populate('image').exec(function (err, places) {
 					cb(null, places);
 				});
 			},
@@ -46,7 +51,8 @@ module.exports = function (express) {
 				res.render('index', {
 					tags : results[0],
 					cities : results[1],
-					hotels : results[2],
+					cities_popular : results[2],
+					hotels : results[3],
 					costs : [
 						{ _id : 0, name : 'до 3000'},
 						{ _id : 1, name : 'от 3000 до 6000'},
@@ -84,6 +90,46 @@ module.exports = function (express) {
 			if (err) return next(err);
 			res.render('blog_post', {
 				post : result
+			});
+		});
+	});
+
+	router.get('/city/:name_url', function (req, res, next) {
+		var id;
+		async.series([
+			function (cb) {
+				City.findOne({ name_url : req.params.name_url }).populate('image').exec(function (err, result) {
+					if (err) return next(err);
+					id = result._id;
+					cb(null, result);
+				});
+			},
+			function (cb) {
+				RestPlace
+					.find({ city : id})
+					.deepPopulate('city images mini_images tags benefits benefits.image places.city places.images places.mini_images')
+					.exec(function (err, results) {
+						if (err) return next(err);
+						cb(null, results);
+				});
+			},
+			function (cb) {
+				Place.find({ city : id }, function (err, results) {
+					if (err) return next(err);
+					cb(null, results);
+				});
+			}
+		], function (err, results) {
+			if (err) return next(err);
+
+			console.log(results[1].length);
+			console.log(results[2].length);
+
+			res.render('city', {
+				city : results[0],
+				hotels : results[1],
+				places : results[2],
+				host : req.protocol + '://'+ req.headers.host
 			});
 		});
 	});

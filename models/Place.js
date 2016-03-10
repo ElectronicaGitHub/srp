@@ -40,6 +40,7 @@ var Place = new Schema({
 		type : ObjectId,
 		ref : 'Img'
 	}],
+	type : String,
 	created: {
 	    type: Date,
 	    default: Date.now

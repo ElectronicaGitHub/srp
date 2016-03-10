@@ -8,6 +8,9 @@
 <script src="/javascripts/dropdown.js"></script>
 <script src="/custom/jq-render.min.js"></script>
 
+<script src="/custom/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="/custom/owl.carousel.css">
+
 <script>
 	window.hotels = <%- JSON.stringify(hotels) %>;
 </script>
@@ -105,6 +108,17 @@
 
 <div class="filters-content container">
 	<div class="content">
+		<div class="city-carousel">
+			<% for (var i in cities_popular) { var city = cities_popular[i]; %>
+				<a href="/city/<%= city.name_url %>">
+					<div style="background-image: url('<%= city.image.path %>');" class="item">
+						<div class="fader">
+							<span><%= city.name %></span>
+						</div>
+					</div>
+				</a>
+			<% } %>
+		</div>
 		<% for (var i in hotels) { var hotel = hotels[i]; %>
 			<div class="cell-wrapper col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<a href="/hotel/<%= hotel.title_url %>">

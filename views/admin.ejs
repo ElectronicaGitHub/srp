@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/libs/angular-bootstrap/ui-bootstrap-csp.css">
 
 <div ng-app="serpAdmin" ng-controller="MainCtrl" class="admin-container">
+	<div class="admin_hint">Сохранение успешно</div>
 	<script type="text/ng-template" id="deleteModel.html">
         <div class="modal-header">
             <h3 class="modal-title">Удаляем <span ng-bind="items.model.title"></span>?</h3>
@@ -57,7 +58,7 @@
 				<p ng-repeat="t in tags" ng-class="{ deleted : t.deleted }" class="listed-objects">
 					<span class="misc">
 						<span class="fa fa-times" ng-if="!t.deleted" ng-click="deleteModal('tag', t, $index, 'tags')"></span>
-						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+						<!-- <a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a> -->
 						<span class="fa fa-refresh" ng-if="t.deleted" ng-click="restore('tag', t)"></span>
 					</span>
 					<span>{{ t.name }}</span><span ng-if="t.deleted"> (Удалено)</span>
@@ -65,7 +66,7 @@
 			</div>
 		</div>
 
-		<div class="block">
+		<!-- <div class="block">
 			<div class="title">Города</div>
 			<div class="wrapper">
 				<div class="form-group">
@@ -87,6 +88,51 @@
 					</span>
 					<span>{{ city.name }}</span><span ng-if="city.deleted"> (Удалено)</span>
 				</p>
+			</div>
+		</div> -->
+
+		<div class="block">
+			<div class="title">Города</div>
+			<div class="wrapper">
+				<div class="form-group">
+					<label for="title">Название города ( Санкт-Петербург )</label>
+					<input class="form-control" id="title" ng-class="{ fill : newCity.name }" type="text" ng-model="newCity.name">
+					<label for="title">URL названия города ( saint_petersburg )</label>
+					<input class="form-control" id="title" ng-class="{ fill : newCity.name_url }" type="text" ng-model="newCity.name_url">
+					<label for="title">Описание </label>
+					<input class="form-control" id="title" ng-class="{ fill : newCity.description }" type="text" ng-model="newCity.description">
+					<label for="title">Мини описание</label>
+					<input class="form-control" id="title" ng-class="{ fill : newCity.description_mini }" type="text" ng-model="newCity.description_mini">
+				</div>	
+				<div class="form-group images-load-container">
+					<label for="title">Иконка города</label>
+					<input id="image_city" type="file" style="visibility:hidden">
+					<p><button class="btn btn-success" ng-click="loadImageForCity()">Загрузить иконку</button></p>
+					<div class="images-list" ng-if="newCity.image">
+						<div style="background-image:url('{{ newCity.image.path }}')" class="each-img"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<button ng-click="createCity(newCity)" ng-if="!newCity.updated && newCity.name && newCity.name_url && newCity.image" class="btn btn-apply">Добавить город</button>
+					<button ng-click="updateCity(newCity)" ng-if="newCity.updated && newCity.name && newCity.name_url && newCity.image" class="btn btn-apply">Редактировать город</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="block">
+			<div class="title">Готовые города</div>
+			<div class="wrapper">
+				<div ng-repeat="city in cities" ng-class="{ deleted : city.deleted }" class="listed-objects">
+					<span class="misc">
+						<a href="/hotel/{{ city.name_url }}" target="_blank"><span class="fa fa-eye"></span></a>
+						<span class="fa fa-times" ng-if="!city.deleted" ng-click="deleteModal('city', city, $index, 'cities')"></span>
+						<span class="fa fa-pencil" ng-click="preloadCity(city)"></span>
+						<span class="fa fa-refresh" ng-if="city.deleted" ng-click="restore('city', city)"></span>
+					</span>
+					<input type="checkbox" ng-model="city.popular" ng-change="updateCity({ _id : city._id, popular : city.popular });">
+					<div style="background-image : url('{{ city.image.path }}')" class="img"></div>
+					<span class="name">{{ city.name }}</span>
+				</div>
 			</div>
 		</div>
 

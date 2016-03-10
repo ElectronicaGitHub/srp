@@ -1,4 +1,34 @@
-angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope', '$http', '$uibModal', function ($scope, $http, $uibModal) {
+angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide) {
+	$provide.factory('myHttpInterceptor', function($q) {
+	    return {
+	      'request': function(config) {
+	        return config;
+	      },
+	     'requestError': function(rejection) {
+	        if (canRecover(rejection)) {
+	          return responseOrNewPromise
+	        }
+	        return $q.reject(rejection);
+	      },
+	      'response': function(response) {
+	        // do something on success
+	        $('.admin_hint').show();
+        	setTimeout(function () {
+	        	$('.admin_hint').hide();
+        	}, 1000);
+	        return response;
+	      },
+	     'responseError': function(rejection) {
+	        if (canRecover(rejection)) {
+	          return responseOrNewPromise;
+	        }
+	        return $q.reject(rejection);
+	      }
+	    };
+	  });
+
+    $httpProvider.interceptors.push('myHttpInterceptor');
+}).controller('MainCtrl', [ '$scope', '$http', '$uibModal', function ($scope, $http, $uibModal) {
 
 	$scope.tags = window.tags;
 	$scope.benefits = window.benefits;
@@ -12,6 +42,7 @@ angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope',
 	$scope.newCity = {};
 
 	$scope.createCity = function () {
+		$scope.newCity.image = $scope.newCity.image._id;
 		$http.post('/admin/city', $scope.newCity)
 			.success(function (data) {
 				console.log(data);
@@ -20,8 +51,28 @@ angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope',
 			})
 			.error(function (data) {
 				console.log(data);
+			});
+	};
+
+	$scope.updateCity = function (city) {
+		$scope.newCity = city || $scope.newCity;
+		if ($scope.newCity.image) {
+			$scope.newCity.image = $scope.newCity.image._id;
+		}
+		$http.post('/admin/city/' + $scope.newCity._id, $scope.newCity)
+			.success(function (data) {
+				console.log(data);
+				$scope.newCity = {};
 			})
-	}
+			.error(function (data) {
+				console.log(data);
+			});
+	};
+
+	$scope.preloadCity = function (city) {
+		$scope.newCity = city;
+		$scope.newCity.updated = true;
+	};
 
 	$scope.createTag = function () {
 		$http.post('/admin/tag', $scope.newTag)
@@ -32,8 +83,8 @@ angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope',
 			})
 			.error(function (data) {
 				console.log(data);
-			})
-	}
+			});
+	};
 
 	$scope.createBenefit = function () {
 		$scope.newBenefit.image = $scope.newBenefit.image._id;
@@ -47,6 +98,30 @@ angular.module('serpAdmin', ['ui.bootstrap']).controller('MainCtrl', [ '$scope',
 				console.log(data);
 			});
 	};
+
+	$scope.loadImageForCity = function () {
+		$('#image_city').click();
+	};
+
+	$('#image_city').on('change', function (e) {
+		var data = new FormData();
+
+		for (var i in e.target.files) {
+			data.append('file' + i, e.target.files[i]);
+		}
+
+		$http.post('/admin/loadImages', data, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined }
+		})
+			.success(function (data) {
+				$scope.newCity.image = data.filesArray[0];
+				console.log(data);
+			})
+			.error(function (data) {
+				console.log(data);
+			});
+	});
 
 	$scope.loadImageForBenefit = function () {
 		$('#image').click();

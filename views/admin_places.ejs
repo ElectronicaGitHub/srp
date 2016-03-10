@@ -40,6 +40,11 @@
 					<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini"></textarea>
 				</div>
 
+				<div class="form-group">
+					<label>Тип места</label>
+					<select ng-options="type.type as type.name for type in _types" ng-model="restplace.type"></select>
+				</div>
+
 			</div>
 		</div>
 
