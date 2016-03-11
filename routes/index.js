@@ -114,16 +114,13 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				Place.find({ city : id }, function (err, results) {
+				Place.find({ city : id }).populate('images').exec(function (err, results) {
 					if (err) return next(err);
 					cb(null, results);
 				});
 			}
 		], function (err, results) {
 			if (err) return next(err);
-
-			console.log(results[1].length);
-			console.log(results[2].length);
 
 			res.render('city', {
 				city : results[0],

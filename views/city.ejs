@@ -4,54 +4,64 @@
 <% block('meta', partial('particials/city_meta')) %>
 
 <script src="/javascripts/city.js"></script>
+<script src="/custom/owl.carousel.min.js"></script>
+
+<script>
+	window.places = <%- JSON.stringify(places) %>;
+</script>
 
 <link rel="stylesheet" href="/stylesheets/builded/city.css">
+<link rel="stylesheet" href="/custom/owl.carousel.css">
 
 <div class="header" style="background-image:url('<%= city.image.path %>')">
-		<p class="title"><%= city.name %></p>
-	</div>
+	<p class="title"><%= city.name %></p>
+</div>
 
 <div class="filters-content container">
 	<div class="content">
- 		<% for (var i in hotels) { var hotel = hotels[i]; %>
-			<div class="cell-wrapper col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="part-wrapper carousel hotels-slider">
+	 		<% for (var i in hotels) { var hotel = hotels[i]; %>
 				<a href="/hotel/<%= hotel.title_url %>">
-					<div class="cell">
-						<div class="images-with-radio-wrapper">
-							<div class="images-wrapper">
-								<% for (var i = 0; i < hotel.mini_images.length; i++) { %>
-									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url(<%= hotel.mini_images[i].path %>)"></div>
-								<% } %>
-							</div>
-						</div>
-						<div class="card-info">
-							<span class="left">
+					<div class="block-wrapper item">
+						<div style="background-image: url('<%= hotel.images[0].path %>');" class="block">
+							<div class="info-bottom">
 								<p class="title"><%= hotel.title %></p>
-								<p class="city"><span class="fa fa-map-marker icon"></span><%= hotel.city.name %></p>
-							</span>
-							<span class="right">
-								<button class="more-info">Подробнее</button>
-							</span>
-
-							<% if (hotel.mini_images.length > 1) { %>
-							<div class="radio-wrapper">
-								<% for (var j = 0; j < hotel.mini_images.length; j++) { %>
-									<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
-								<% } %>
-							</div>
-							<% } %>
-							
-							<div class="price-wrapper">
-								<div class="price-with-icon">
-									<span class="fa fa-rub icon"></span>
-									<span class="price"><%= hotel.price[0] %></span>	
-								</div>
-								<div class="per-x">за сутки</div>
 							</div>
 						</div>
 					</div>
 				</a>
-			</div>
-		<% } %>
+			<% } %>
+		</div>
+		<div class="part-wrapper">
+			<% for (var i = 0; i < 4; i++) { var place = places[i]; if (place) { %>
+				<div class="block-wrapper col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<a href="/place/<%= place.title_url %>">
+						<div style="background-image: url('<%= place.images[0].path %>');" class="block">
+							<div class="fader">
+								<span class="info">
+									<p class="title"><%= place.title %></p> 
+									<p class="tip"><%= place.type == 'restaurant' ? 'Покушать' : 'Посетить' %></p> 
+								</span>
+							</div>
+						</div>
+					</a>
+				</div>
+			<% } } %>
+		</div>
+
+		<% if (places.length >= 4) { for (var i = 4, ii = places.length; i < ii; i++) { var place = places[i]; %>
+			<a href="/place/<%= place.title_url %>">
+				<div class="block-wrapper single">
+					<div style="background-image: url('<%= place.mini_images[0].path %>');" class="block">
+						<div class="fader">
+							<span class="info">
+								<p class="title"><%= place.title %></p> 
+								<p class="tip"><%= place.type == 'restaurant' ? 'Покушать' : 'Посетить' %></p> 
+							</span>
+						</div>
+					</div>
+				</div>
+			</a>
+		<% } } %>
 	</div>
 </div>
