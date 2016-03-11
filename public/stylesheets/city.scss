@@ -27,8 +27,17 @@
 		float: left;
 		height: 400px;
 		overflow: hidden;
+		@include respond-to(medium-screens) { width: 100%; }
+		@include respond-to(mobile-screens) { width: 100%; }
+		@include respond-to(handhelds) { width: 100%; }
 		&.carousel {
 			padding: 5px;
+			@include respond-to(mobile-screens) { height: 250px; }
+			@include respond-to(handhelds) { height: 250px; }
+			.item {
+				@include respond-to(mobile-screens) { height: 250px; }
+				@include respond-to(handhelds) { height: 250px; }
+			}
 		}
 	}
 	.block-wrapper {
@@ -81,7 +90,7 @@
 			}
 			.info-bottom {
 				background: rgba(0,0,0,.3);
-				line-height: 30px;
+				line-height: 22px;
 				font-weight: 700;
 				font-size: 18px;
 				position: absolute;
