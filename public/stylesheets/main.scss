@@ -162,6 +162,8 @@ $dark-grey: #bdc3c7;
 	dd {
 		position: relative;
 		ul {
+			max-height: 200px;
+			overflow: auto;
 			display: none;
 			position: absolute;
 			left: 0;
