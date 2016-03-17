@@ -16,8 +16,14 @@
 		}
 	},
 	"autentification" : {
-		"username" : "serp",
-		"password" : "serpserpserp"
+		"create" : {
+			"username" : "serp",
+			"password" : "serpserpserp"
+		},
+		"requests" : {
+			"username" : "req",
+			"password" : "gHHHktoEivje8Gyq729"
+		}
 	},
 	"session" : {
 		"secret" : "serpantin..serpantin",

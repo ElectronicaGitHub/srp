@@ -1,0 +1,33 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Серпантин | Планируйте отдых с нами.') -%>
+<% block('description', tag.description_mini) -%>
+<% block('meta', partial('particials/tag_meta')) %>
+
+<script src="/javascripts/city.js"></script>
+<script src="/custom/owl.carousel.min.js"></script>
+
+<link rel="stylesheet" href="/stylesheets/builded/tag.css">
+<link rel="stylesheet" href="/custom/owl.carousel.css">
+
+<div class="header" style="background-image:url('<%= tag.image.path %>')">
+	<p class="title"><%= tag.name %></p>
+</div>
+
+<div class="filters-content container">
+	<div class="content">
+		<div class="cities-container">
+			<p class="title">Города</p>
+			<% for (var i in cities) { var city = cities[i]; %>
+				<a href="/city/<%= city.name_url %>">
+					<span class="item-wrapper col-md-4 col-sm-6 col-xs-12">
+						<div class="item" style="background-image: url('<%= city.image.path %>');">
+							<div class="fader">
+								<span><%= city.name %></span>
+							</div>
+						</div>
+					</span>
+				</a>
+			<% } %>
+		</div>
+	</div>
+</div>

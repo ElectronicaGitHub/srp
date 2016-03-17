@@ -101,7 +101,7 @@
 				</div>
 			</div>
 			<div class="input-wrapper col-md-4 col-sm-12 col-xs-12">
-				<div class="search-button index" id="search-button">Искать</div>
+				<div class="search-button" id="search-button">Искать</div>
 			</div>
 		</div>
 </div>
@@ -119,21 +119,7 @@
 				</a>
 			<% } %>
 		</div>
-		<div class="tags-container">
-			<p class="title">Популярные категории</p>
-			<% for (var i in tags) { var tag = tags[i]; %>
-				<a href="/tag/<%= tag.name_url %>">
-					<span class="item-wrapper col-md-4 col-sm-6 col-xs-12">
-						<div class="item" style="background-image: url('<%= tag.image.path %>');">
-							<div class="fader">
-								<span><%= tag.name %></span>
-							</div>
-						</div>
-					</span>
-				</a>
-			<% } %>
-		</div>
-		<!-- <% for (var i in hotels) { var hotel = hotels[i]; %>
+		<% for (var i in hotels) { var hotel = hotels[i]; %>
 			 <div class="cell-wrapper col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<a href="/hotel/<%= hotel.title_url %>">
 					<div class="cell">
@@ -172,6 +158,6 @@
 					</div>
 				</a>
 			</div> 
-		<% } %> -->
+		<% } %>
 	</div>
 </div>

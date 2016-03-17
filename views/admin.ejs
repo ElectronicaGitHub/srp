@@ -45,6 +45,49 @@
 			<div class="title">Теги</div>
 			<div class="wrapper">
 				<div class="form-group">
+					<label for="title">Название тега ( Горнолыжный отдых )</label>
+					<input class="form-control" id="title" ng-class="{ fill : newTag.name }" type="text" ng-model="newTag.name">
+					<label for="title">URL названия тега ( mountains_... )</label>
+					<input class="form-control" id="title" ng-class="{ fill : newTag.name_url }" type="text" ng-model="newTag.name_url">
+					<label for="title">Описание </label>
+					<input class="form-control" id="title" ng-class="{ fill : newTag.description }" type="text" ng-model="newTag.description">
+					<label for="title">Мини описание</label>
+					<input class="form-control" id="title" ng-class="{ fill : newTag.description_mini }" type="text" ng-model="newTag.description_mini">
+				</div>	
+				<div class="form-group images-load-container">
+					<label for="title">Иконка тега</label>
+					<input id="image_tag" type="file" style="visibility:hidden">
+					<p><button class="btn btn-success" ng-click="loadImageForTag()">Загрузить иконку</button></p>
+					<div class="images-list" ng-if="newTag.image">
+						<div style="background-image:url('{{ newTag.image.path }}')" class="each-img"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<button ng-click="createTag(newTag)" ng-if="!newTag.updated && newTag.name && newTag.name_url && newTag.image" class="btn btn-apply">Добавить тег</button>
+					<button ng-click="updateTag(newTag)" ng-if="newTag.updated && newTag.name && newTag.name_url && newTag.image" class="btn btn-apply">Редактировать тег</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="block">
+			<div class="title">Готовые теги</div>
+			<div class="wrapper">
+				<div ng-repeat="tag in tags" ng-class="{ deleted : tag.deleted }" class="listed-objects">
+					<span class="misc">
+						<a href="/tag/{{ tag.name_url }}" target="_blank"><span class="fa fa-eye"></span></a>
+						<span class="fa fa-times" ng-if="!tag.deleted" ng-click="deleteModal('tag', tag, $index, 'tags')"></span>
+						<span class="fa fa-pencil" ng-click="preloadTag(tag)"></span>
+						<span class="fa fa-refresh" ng-if="tag.deleted" ng-click="restore('tag', tag)"></span>
+					</span>
+					<div style="background-image : url('{{ tag.image.path }}')" class="img"></div>
+					<span class="name">{{ tag.name }}</span>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="block">
+			<div class="title">Теги</div>
+			<div class="wrapper">
+				<div class="form-group">
 					<label for="title">Название тега</label>
 					<input class="form-control" id="title" ng-class="{ fill : newTag.name }" type="text" ng-model="newTag.name">
 					<button ng-click="createTag(newTag)" class="btn btn-apply" ng-show="newTag.name">Добавить тег</button>
@@ -58,13 +101,13 @@
 				<p ng-repeat="t in tags" ng-class="{ deleted : t.deleted }" class="listed-objects">
 					<span class="misc">
 						<span class="fa fa-times" ng-if="!t.deleted" ng-click="deleteModal('tag', t, $index, 'tags')"></span>
-						<!-- <a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a> -->
+						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
 						<span class="fa fa-refresh" ng-if="t.deleted" ng-click="restore('tag', t)"></span>
 					</span>
 					<span>{{ t.name }}</span><span ng-if="t.deleted"> (Удалено)</span>
 				</p>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- <div class="block">
 			<div class="title">Города</div>

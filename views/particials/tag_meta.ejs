@@ -1,0 +1,16 @@
+<% var full_url = host + tag.image.path %>
+
+<meta property="og:site_name" content="Серпантин" />
+
+<meta property="og:site_name" content="Серпантин" />
+<meta property="og:title" content="<%= tag.name %>" />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="ru_RU" />
+
+<meta property="og:description" content="<%= tag.description_mini %>" />
+
+<link rel="image_src" href="<%= full_url %>">
+<meta property="og:image" content="<%= full_url %>" />
+<meta property="og:image:width" content="800" />
+<meta property="og:image:height" content="420" />
+<meta name="twitter:image" content="<%= full_url %>" />

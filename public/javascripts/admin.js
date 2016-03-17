@@ -54,6 +54,18 @@ angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide)
 			});
 	};
 
+	$scope.createTag = function () {
+		$http.post('/admin/tag', $scope.newTag)
+			.success(function (data) {
+				console.log(data);
+				$scope.tags.push($scope.newTag);
+				$scope.newTag = {};
+			})
+			.error(function (data) {
+				console.log(data);
+			});
+	};
+
 	$scope.updateCity = function (city) {
 		$scope.newCity = city || $scope.newCity;
 		if ($scope.newCity.image) {
@@ -69,21 +81,28 @@ angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide)
 			});
 	};
 
-	$scope.preloadCity = function (city) {
-		$scope.newCity = city;
-		$scope.newCity.updated = true;
-	};
-
-	$scope.createTag = function () {
-		$http.post('/admin/tag', $scope.newTag)
+	$scope.updateTag = function (tag) {
+		$scope.newTag = tag || $scope.newTag;
+		if ($scope.newTag.image) {
+			$scope.newTag.image = $scope.newTag.image._id;
+		}
+		$http.post('/admin/tag/' + $scope.newTag._id, $scope.newTag)
 			.success(function (data) {
 				console.log(data);
-				$scope.tags.push($scope.newTag);
 				$scope.newTag = {};
 			})
 			.error(function (data) {
 				console.log(data);
 			});
+	};
+
+	$scope.preloadCity = function (city) {
+		$scope.newCity = city;
+		$scope.newCity.updated = true;
+	};
+	$scope.preloadTag = function (tag) {
+		$scope.newTag = tag;
+		$scope.newTag.updated = true;
 	};
 
 	$scope.createBenefit = function () {
@@ -99,9 +118,33 @@ angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide)
 			});
 	};
 
+	$scope.loadImageForTag = function () {
+		$('#image_tag').click();
+	};
+
 	$scope.loadImageForCity = function () {
 		$('#image_city').click();
 	};
+
+	$('#image_tag').on('change', function (e) {
+		var data = new FormData();
+
+		for (var i in e.target.files) {
+			data.append('file' + i, e.target.files[i]);
+		}
+
+		$http.post('/admin/loadImages', data, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined }
+		})
+			.success(function (data) {
+				$scope.newTag.image = data.filesArray[0];
+				console.log(data);
+			})
+			.error(function (data) {
+				console.log(data);
+			});
+	});
 
 	$('#image_city').on('change', function (e) {
 		var data = new FormData();

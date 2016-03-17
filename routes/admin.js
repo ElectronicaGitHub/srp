@@ -23,8 +23,8 @@ module.exports = function (express) {
 	        .split(':');
 	    }
 	    if (!auth || 
-	         auth[0] !== config.get('autentification:username') || 
-	         auth[1] !== config.get('autentification:password')
+	         auth[0] !== config.get('autentification:create:username') || 
+	         auth[1] !== config.get('autentification:create:password')
 	        ) {
 	        res.statusCode = 401;
 	        res.setHeader('WWW-Authenticate', 'Basic realm="Server God asks for your password sick hacker!!! Tell him!"');
@@ -40,7 +40,7 @@ module.exports = function (express) {
 	router.get('/', function (req, res, next) {
 		async.series([
 		function (cb) {
-			Tag.find({}, function (err, tags) {
+			Tag.find({}).populate('image').exec(function (err, tags) {
 				cb(null, tags);
 			});
 		},
@@ -280,6 +280,16 @@ module.exports = function (express) {
 
 	router.delete('/post/:id', function (req, res, next) {
 		Post.findByIdAndRemove(req.params.id, function (err, success) {
+			res.json({
+				message: 'ok'
+			});
+		});
+	});
+
+	router.post('/tag/:id', function (req, res, next) {
+		var data = req.body;
+		delete req.body._id;
+		Tag.findByIdAndUpdate(req.params.id, data, function (err, success) {
 			res.json({
 				message: 'ok'
 			});

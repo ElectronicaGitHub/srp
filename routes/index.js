@@ -26,7 +26,7 @@ module.exports = function (express) {
 	router.get('/', function (req, res, next) {
 		async.series([
 			function (cb) {
-				Tag.find({ deleted : false }, function (err, tags) {
+				Tag.find({ deleted : false }).populate('image').exec(function (err, tags) {
 					cb(null, tags);
 				});
 			},
@@ -49,6 +49,90 @@ module.exports = function (express) {
 			}],
 			function (err, results) {
 				res.render('index', {
+					tags : results[0],
+					cities : results[1],
+					cities_popular : results[2],
+					hotels : results[3],
+					costs : [
+						{ _id : 0, name : 'до 3000'},
+						{ _id : 1, name : 'от 3000 до 6000'},
+						{ _id : 2, name : 'от 6000'}
+					],
+					host : req.protocol + '://'+ req.headers.host
+				});
+			});
+	});
+
+	router.get('/tag/:name_url', function (req, res, next) {
+		var id;
+		// Ищем отели с этим тегом
+		// Берем все иды городов по этому тегу
+		// Ищем по этим идам города
+		async.series([
+			function (cb) {
+				Tag.findOne({ name_url : req.params.name_url}).populate('image').exec(function (err, result) {
+					id = result._id;
+					cb(null, result);
+				});
+			},
+			function (cb) {
+				RestPlace.find({ tags : id }).populate('city').exec(function (err, places) {
+					var obj = {};
+					places.map(function (el) {
+						obj[el.city._id] = true;
+						return el.city._id;
+					});
+					City.find({
+						_id : {
+							'$in' : Object.keys(obj)
+						}
+					}).populate('image').exec(function (err, result) {
+						if (err) return next(err);
+						id = result._id;
+						cb(null, result);
+					});
+				})
+			}
+		], function (err, results) {
+			if (err) return next(err);
+
+			res.render('tag', {
+				tag : results[0],
+				cities : results[1],
+				host : req.protocol + '://'+ req.headers.host
+			});
+		});
+	})
+
+	router.get('/hotels', function (req, res, next) {
+		console.log(req.query);
+		async.series([
+			function (cb) {
+				Tag.find({ deleted : false }).populate('image').exec(function (err, tags) {
+					cb(null, tags);
+				});
+			},
+			function (cb) {
+				City.find({ deleted : false }).populate('image').exec(function (err, places) {
+					cb(null, places);
+				});
+			},
+			function (cb) {
+				City.find({ deleted : false, popular : true }).populate('image').exec(function (err, places) {
+					cb(null, places);
+				});
+			},
+			function (cb) {
+				RestPlace
+				.find(req.query)
+				.deepPopulate('city images mini_images tags benefits benefits.image places.city places.images places.mini_images')
+				.limit(10)
+				.exec(function (err, hotels) {
+					cb(null, hotels);
+				});
+			}],
+			function (err, results) {
+				res.render('hotels_list', {
 					tags : results[0],
 					cities : results[1],
 					cities_popular : results[2],
@@ -95,18 +179,31 @@ module.exports = function (express) {
 	});
 
 	router.get('/city/:name_url', function (req, res, next) {
-		var id;
+		var sobj = {}, fromTag;
+		var d = req.headers.referer && req.headers.referer.split('/');
+		if (d && d[d.length -2 ] == 'tag') {
+			fromTag = true;
+		}
 		async.series([
+			function (cb) {
+				if (fromTag) {
+					Tag.findOne({ name_url : d[d.length - 1]}, function (err, result) {
+						sobj.tags  = result._id;
+						cb(null);
+					});
+				} else cb(null);
+			},
 			function (cb) {
 				City.findOne({ name_url : req.params.name_url }).populate('image').exec(function (err, result) {
 					if (err) return next(err);
-					id = result._id;
+					sobj.city = result._id;
 					cb(null, result);
 				});
 			},
 			function (cb) {
+				console.log(sobj);
 				RestPlace
-					.find({ city : id})
+					.find(sobj)
 					.deepPopulate('city images mini_images tags benefits benefits.image places.city places.images places.mini_images')
 					.exec(function (err, results) {
 						if (err) return next(err);
@@ -114,7 +211,7 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				Place.find({ city : id }).populate('images').exec(function (err, results) {
+				Place.find({ city : sobj.city }).populate('mini_images').exec(function (err, results) {
 					if (err) return next(err);
 					cb(null, results);
 				});
@@ -122,10 +219,12 @@ module.exports = function (express) {
 		], function (err, results) {
 			if (err) return next(err);
 
+			console.log(results);
+
 			res.render('city', {
-				city : results[0],
-				hotels : results[1],
-				places : results[2],
+				city : results[1],
+				hotels : results[2],
+				places : results[3],
 				host : req.protocol + '://'+ req.headers.host
 			});
 		});

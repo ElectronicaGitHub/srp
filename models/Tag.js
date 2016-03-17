@@ -3,9 +3,17 @@ Schema = mongoose.Schema;
 
 var Tag = new Schema({
 	name : String,
+	name_url : String,
+	popular : Boolean,
+	description : String,
+	description_mini : String,
 	deleted : {
-		type : Boolean, 
+		type : Boolean,
 		default : false
+	},
+	image : {
+		type : ObjectId,
+		ref : 'Img'
 	}
 });
 

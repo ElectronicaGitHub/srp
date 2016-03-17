@@ -32,24 +32,8 @@
 				</a>
 			<% } %>
 		</div>
-		<div class="part-wrapper">
-			<% for (var i = 0; i < 4; i++) { var place = places[i]; if (place) { %>
-				<div class="block-wrapper col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<a href="/place/<%= place.title_url %>">
-						<div style="background-image: url('<%= place.images[0].path %>');" class="block">
-							<div class="fader">
-								<span class="info">
-									<p class="title"><%= place.title %></p> 
-									<p class="tip"><%= place.type == 'restaurant' ? 'Покушать' : 'Посетить' %></p> 
-								</span>
-							</div>
-						</div>
-					</a>
-				</div>
-			<% } } %>
-		</div>
 
-		<% if (places.length >= 4) { for (var i = 4, ii = places.length; i < ii; i++) { var place = places[i]; %>
+		<% for (var i = 0, ii = places.length; i < ii; i++) { var place = places[i]; %>
 			<a href="/place/<%= place.title_url %>">
 				<div class="block-wrapper single">
 					<div style="background-image: url('<%= place.mini_images[0].path %>');" class="block">
@@ -62,6 +46,6 @@
 					</div>
 				</div>
 			</a>
-		<% } } %>
+		<% } %>
 	</div>
 </div>

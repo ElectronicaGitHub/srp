@@ -55,7 +55,11 @@ $(function () {
 
 		PAGE = 0;
 		NO_MORE_DATA = false;
-		getData();
+		if (!$(this).hasClass('index')) {
+			getData();
+		} else {
+			window.location = '/hotels?' + $.param(SEARCH_OBJ);
+		}
 	});
 
 	function getData(append) {

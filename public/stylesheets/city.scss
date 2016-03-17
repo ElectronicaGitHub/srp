@@ -23,18 +23,15 @@
 	overflow: hidden;
 	padding: 20px 5px;
 	.part-wrapper {
-		width: 50%;
-		float: left;
-		height: 400px;
 		overflow: hidden;
-		@include respond-to(medium-screens) { width: 100%; }
-		@include respond-to(mobile-screens) { width: 100%; }
-		@include respond-to(handhelds) { width: 100%; }
 		&.carousel {
 			padding: 5px;
+			@include respond-to(medium-screens) { height: 300px; }
 			@include respond-to(mobile-screens) { height: 250px; }
 			@include respond-to(handhelds) { height: 250px; }
 			.item {
+				height: 350px;
+				@include respond-to(medium-screens) { height: 300px; }
 				@include respond-to(mobile-screens) { height: 250px; }
 				@include respond-to(handhelds) { height: 250px; }
 			}

@@ -76,5 +76,5 @@ header {
 .header.index {
 	@include respond-to(992-max) { height: 520px !important; }
 	@include respond-to(768-992) { height: 600px !important; }
-	@include respond-to(min-768) { height: 750px !important; }
+	@include respond-to(min-768) { height: 670px !important; }
 }
