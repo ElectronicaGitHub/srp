@@ -5,6 +5,7 @@
 
 <script>
 	window.hotel = <%- JSON.stringify(hotel) %>;
+	window.user = <%- JSON.stringify(user) %>;
 </script>
 <script src="/javascripts/page-slider.js"></script>
 <script src="/javascripts/hotel.js"></script>
@@ -93,37 +94,50 @@
 				<div class="offer-panel">
 					<form>
 						<div class="picker-wrapper">
-							<div class="picker" id="picker"></div>
-							<input type="text" id="dates" name="dates" style="display: none">
-							<input type="text" name="title" style="display: none" value="<%= hotel.title %>">
-							<div class="offer-continue">
-								<div class="price-container">
-									<div class="placeholder-fw">
-										<span class="placeholder">Итоговая стоимость</span>
-									</div>
-									<span class="price"></span>
-									<input type="text" id="price" name="price" style="display:none">
-								</div>
-								<div class="input-container">
-									<div class="placeholder-fw">
-										<span class="placeholder">Количество мест</span>
-									</div>
-									<input type="text" id="count" name="count" value="1">
-								</div>
-								<div class="input-container">
-									<div class="placeholder-fw">
-										<span class="placeholder">Ваше имя</span>
-									</div>
-									<input type="text" name="name">
-								</div>
-								<div class="input-container">
-									<div class="placeholder-fw">
-										<span class="placeholder">Ваш телефон</span>
-									</div>
-									<input type="text" name="phone" id="phone">
-								</div>
-								<button class="offer-button" id="offer-button">Оформить заказ</button>
+							<% if (user) { %>
+							<div class="has-offer">
+								Заявка оставлена.
 							</div>
+							<div class="no-offer">
+								<div class="picker" id="picker"></div>
+								<input type="text" id="dates" name="dates" style="display: none">
+								<input type="text" name="title" style="display: none" value="<%= hotel.title %>">
+								<input type="text" name="hotel" style="display: none" value="<%= hotel._id %>">
+								<div class="offer-continue">
+									<div class="price-container">
+										<div class="placeholder-fw">
+											<span class="placeholder">Итоговая стоимость</span>
+										</div>
+										<span class="price"></span>
+										<input type="text" id="price" name="price" style="display:none">
+									</div>
+									<div class="input-container">
+										<div class="placeholder-fw">
+											<span class="placeholder">Количество мест</span>
+										</div>
+										<input type="text" id="count" name="count" value="1">
+									</div>
+									<div class="input-container">
+										<div class="placeholder-fw">
+											<span class="placeholder">Ваше имя</span>
+										</div>
+										<input type="text" name="owner_name" value='<%= user.name %>'>
+									</div>
+									<div class="input-container">
+										<div class="placeholder-fw">
+											<span class="placeholder">Ваш телефон</span>
+										</div>
+										<input type="text" name="phone" id="phone">
+									</div>
+									<button class="offer-button" id="offer-button">Оформить заказ</button>
+								</div>
+							</div>
+							<% } else { %>
+								<div class="auth">
+									<p>Авторизируйтесь для входа</p>
+									<a href="/auth/vk">через ВК</a>
+								</div>	
+							<% } %>
 						</div>
 					</form>
 				</div>

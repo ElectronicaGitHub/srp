@@ -1,0 +1,41 @@
+@import "main";
+
+.header {
+	width: 100%;
+	height: 450px;
+	p {
+		text-align: center;
+		line-height: 450px;
+		font-weight: 700;
+		font-size: 50px;
+		color: white;
+		@include respond-to(handhelds) { font-size: 25px; }
+		@include respond-to(medium-screens) { font-size: 35px; }
+	}
+}
+
+.content {
+	background: white;
+	padding: 20px;
+	.requests {
+		> .title {
+			text-align: center;
+			font-weight: 700;
+			font-size: 25px;
+		}
+		.request {
+			position: relative;
+			background: #f7f7f7;
+			padding: 20px;
+			border-bottom: 1px solid rgba(0,0,0,.1);
+			.title {
+				font-size: 20px;
+			}
+			.status {
+				position: absolute;
+				top: 25px;
+				right: 25px;
+			}
+		}
+	}
+}

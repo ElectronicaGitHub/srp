@@ -1,0 +1,35 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Серпантин | Мои заказы') -%>
+
+<script src="/libs/angular/angular.min.js"></script>
+<script src="/javascripts/cabinet.js"></script>
+<script src="/javascripts/slider.js"></script>
+
+<script>
+	window.requests = <%- JSON.stringify(requests) %>;
+</script>
+
+<link rel="stylesheet" href="/stylesheets/builded/cabinet.css">
+
+<div class="header">
+	<p class="title">Мои заказы</p>
+</div>
+
+<div class="content" ng-app="app" ng-controller="cabinet">
+	<div class="container">
+		<div class="requests">
+			<p class="title">Мои заказы</p>
+				<div class="request" ng-repeat="r in requests">
+					<p><a class="title" href="/hotel/{{ r.hotel.title_url }}" target="_blank">{{ r.hotel.title }}</a></p>
+					<p class="count">Отдыхающих: {{ r.count }}</p>
+					<p class="dates">{{ r.dates }}</p>
+					<p class="price">Цена: {{ r.price }}</p>
+					<span class="status">
+						<p ng-if="!r.status">Заказ обрабатывается</p>
+						<p ng-if="r.status == 1"><button ng-click="requestPay(r)">Оплатить | {{ r.final_price }}</button></p>
+						<p ng-if="r.status == 2">Заказ оплачен</p>
+					</span>
+				</div>
+		</div>		
+	</div>
+</div>

@@ -2,12 +2,30 @@
 <script src="/javascripts/header.js"></script>
 
 <header>
+
+	<div class="top">
+		<div class="container">
+			<% if (user) { %>
+				<a class="login" href="/auth/vk/logout">Выйти</a>
+				<a class="cabinet" href="/cabinet">Мои заказы</a>
+				<span class="username">
+					<img src="<%= user.image %>">
+					<%= user.name %>
+				</span>
+			<% } else { %>
+				<a class="login" href="/auth/vk">Войти VK</a>
+			<% } %>
+		</div>
+	</div>
+
 	<div class="container">
-			<div class="logo-wrapper">
-				<a href="/">
-					<div class="logo"></div>
-				</a>
-			</div>
+
+		<div class="logo-wrapper">
+			<a href="/">
+				<div class="logo"></div>
+			</a>
+		</div>
+
 		<!-- <div class="call-to-us"> -->
 			<!-- <p>Позвоните нам, и начните отдыхать прямо сейчас</p> -->
 			<!-- <p class="tel">+7 (495) 961 06 50</p> -->

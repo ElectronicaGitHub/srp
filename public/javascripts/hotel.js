@@ -1,10 +1,18 @@
 $(function () {
 
+
 	var hotel = window.hotel,
 		coords = window.hotel.coordinates,
 		map,
 		priceForPerson,
 		lsPrefix = 'srp__req__';
+
+	if (user && user.requests.map(function (el) {
+		return el.hotel;
+	}).indexOf(hotel._id) != -1 ) {
+		$('.offer-panel .no-offer').hide(0);
+		$('.offer-panel .has-offer').show(0);
+	}
 
 	ymaps.ready(function () {
 		map = new ymaps.Map("map", {
@@ -39,7 +47,7 @@ $(function () {
 
 	$("#phone").mask("+9 (999) 999 99 99");
 
-	$('#picker').dateRangePicker({
+	user && $('#picker').dateRangePicker({
 		inline: true,
 		container: '#picker',
 		alwaysOpen: true,

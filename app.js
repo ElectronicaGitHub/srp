@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('./configs/mongoose');
 var log = require('./configs/logger')(module);
 var config = require('./configs/config_file');
+var passport = require('passport');
 
 var app = express();
 var session = require('express-session');
@@ -27,14 +28,28 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+    store : new MongoStore({
+        url : config.get('mongoose:uri'),
+        ttl : 14 *  24 * 60 * 60
+    })
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(require('./middleware/sendHttpError'));
-// app.use(require('./middleware/loadUser'));
+app.use(require('./middleware/loadUser'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 // лендинг и регистрации
 app.use('/', require('./routes/index.js')(express));
+app.use('/auth', require('./routes/auth.js')(express));
 app.use('/admin', require('./routes/admin.js')(express));
+app.use('/rq', require('./routes/requests.js')(express));
 
 
 /// catch 404 and forward to error handler

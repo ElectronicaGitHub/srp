@@ -7,7 +7,7 @@ $picker_width_mini: $offer_width_mini - 30px;
 
 $image_height: 450px;
 
-header {
+header .logo-wrapper {
 	display: none;
 }
 
@@ -318,6 +318,16 @@ header {
 					@include respond-to(medium-screens) { width: $picker_width_mini; float: initial; margin: 0 auto; border-radius: 0; box-shadow: none }
 					@include respond-to(picker-ok) { width: 100%; border-radius: 0; box-shadow: none }
 					@include respond-to(wide-screens) { width: $picker_width_mini; float: right; }
+					.auth {
+						
+					}
+					.has-offer {
+						text-align: center;
+						height: 100px;
+						line-height: 100px;
+						font-size: 20px;
+						display: none;
+					}
 					.single-month {
 						.month-wrapper {
 							width: 100% !important;

@@ -5,6 +5,8 @@ var Place = require('../models/Place.js');
 var Post = require('../models/Post.js');
 var Tag = require('../models/Tag.js');
 var City = require('../models/City.js');
+var User = require('../models/User.js');
+var Request = require('../models/Request.js');
 var async = require('async');
 var sm = require('sitemap');
 
@@ -61,6 +63,19 @@ module.exports = function (express) {
 					host : req.protocol + '://'+ req.headers.host
 				});
 			});
+	});
+
+	router.get('/cabinet', function (req, res, next) {
+		if (!req.user) {
+			res.redirect('/');
+		} else {
+			Request.find({ owner : req.user._id}).populate('hotel owner').exec(function (err, requests) {
+				if (err) return next(err);
+				res.render('cabinet', {
+					requests : requests
+				});
+			});
+		}
 	});
 
 	router.get('/tag/:name_url', function (req, res, next) {
@@ -201,7 +216,6 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				console.log(sobj);
 				RestPlace
 					.find(sobj)
 					.deepPopulate('city images mini_images tags benefits benefits.image places.city places.images places.mini_images')
@@ -218,8 +232,6 @@ module.exports = function (express) {
 			}
 		], function (err, results) {
 			if (err) return next(err);
-
-			console.log(results);
 
 			res.render('city', {
 				city : results[1],
@@ -246,17 +258,33 @@ module.exports = function (express) {
 	});
 
 	router.get('/hotel/:title_url', function (req, res, next) {
+
 		RestPlace.findOne({
 			title_url : req.params.title_url
 		}).deepPopulate('images mini_images city tags benefits benefits.image places places.city places.images places.mini_images')
-		.select('-_id')
+		// .select('-_id')
 		.exec(function (err, hotel) {
 			if(err) return next(err);
 			if (!hotel) res.send(404);
-			res.render('hotel_card', {
-				hotel : hotel,
-				host : req.protocol + '://'+ req.headers.host
-			});
+
+			if (req.user) {
+				User.findById(req.user._id).populate('requests').exec(function (err, user) {
+					if(err) return next(err);
+
+					req.user = res.locals.user = user;
+
+					res.render('hotel_card', {
+						hotel : hotel,
+						host : req.protocol + '://'+ req.headers.host
+					});
+				});
+			} else {
+				res.render('hotel_card', {
+					hotel : hotel,
+					host : req.protocol + '://'+ req.headers.host
+				});
+			}
+
 		});
 	});
 
@@ -278,28 +306,44 @@ module.exports = function (express) {
 	router.post('/create_offer', function (req, res, next) {
 
 		var body = req.body;
+		body.owner = req.user;
 
-		transport.sendMail({
-			from : "antonovphilipdev@gmail.com",
-			to: "alexandrtito@gmail.com",
-			subject: 'Поступил новый запрос)',
-			html: newRequestTmpl(body)
-		}, function (err, info) {
-			if (err) callback(err);
+		Request.create(body, function (err, result) {
+			// transport.sendMail({
+			// 	from : "antonovphilipdev@gmail.com",
+			// 	to: "alexandrtito@gmail.com",
+			// 	subject: 'Поступил новый запрос)',
+			// 	html: newRequestTmpl(body)
+			// }, function (err, info) {
+			// 	if (err) callback(err);
 
-			res.json({
-				message : 'ok'
+			// 	res.json({
+			// 		message : 'ok'
+			// 	});
+				
+			// 	transport.sendMail({
+			// 		from : "antonovphilipdev@gmail.com",
+			// 		to: "molo4nik11@gmail.com",
+			// 		subject: 'Поступил новый запрос)',
+			// 		html: newRequestTmpl(body)
+			// 	}, function (err, info) {
+			// 		if (err) callback(err);
+			// 	});
+			// });
+
+			User.findByIdAndUpdate(req.user._id, {
+				'$addToSet' : { requests : result._id }
+			}, function (err, upd) {
+				if (err) return next(err);
+
+				res.json({
+					message : 'ok'
+				});
+
 			});
-			
-			transport.sendMail({
-				from : "antonovphilipdev@gmail.com",
-				to: "molo4nik11@gmail.com",
-				subject: 'Поступил новый запрос)',
-				html: newRequestTmpl(body)
-			}, function (err, info) {
-				if (err) callback(err);
-			});
+
 		});
+
 	});
 
 	router.get('/sitemap.xml', function (req, res, next) {
