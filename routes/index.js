@@ -225,7 +225,7 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				Place.find({ city : sobj.city }).populate('mini_images').exec(function (err, results) {
+				Place.find({ city : sobj.city }).populate('mini_images images').exec(function (err, results) {
 					if (err) return next(err);
 					cb(null, results);
 				});
@@ -335,6 +335,8 @@ module.exports = function (express) {
 				'$addToSet' : { requests : result._id }
 			}, function (err, upd) {
 				if (err) return next(err);
+
+				req.session.update_user = true;
 
 				res.json({
 					message : 'ok'

@@ -96,7 +96,10 @@
 						<div class="picker-wrapper">
 							<% if (user) { %>
 							<div class="has-offer">
-								Заявка оставлена.
+								<span>
+									<p>Заявка оставлена.</p>
+									<p>Вы можете посмотреть ваши заявки <a href="/cabinet">здесь.</a></p>
+								</span>
 							</div>
 							<div class="no-offer">
 								<div class="picker" id="picker"></div>
@@ -129,13 +132,15 @@
 										</div>
 										<input type="text" name="phone" id="phone">
 									</div>
-									<button class="offer-button" id="offer-button">Оформить заказ</button>
+									<button class="offer-button" disabled="true" id="offer-button">Оформить заказ</button>
 								</div>
 							</div>
 							<% } else { %>
 								<div class="auth">
-									<p>Авторизируйтесь для входа</p>
-									<a href="/auth/vk">через ВК</a>
+									<p>Для отправки заявки, войдите с помощью соц сетей
+										<a href="/auth/vk"><div class="fa-container vk"><i class="fa fa-vk"></i></div></a>
+										<a href="/auth/facebook"><div class="fa-container facebook"><i class="fa fa-facebook"></i></div></a>
+									</p>
 								</div>	
 							<% } %>
 						</div>

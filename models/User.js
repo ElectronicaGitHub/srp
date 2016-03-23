@@ -8,6 +8,7 @@ var User = new Schema({
 	facebook_id : String,
 	odnoklassniki_id : String,
 	image : String,
+	email : String,
 	url : String,
 	requests : [{
 		type : ObjectId,

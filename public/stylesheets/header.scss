@@ -32,15 +32,48 @@ header {
 					margin-right: 8px;
 				}
 			}
-			a.login, a.cabinet {
+			.login, .cabinet {
 				margin-left: 8px;
 				display: inline-block;
 				float: right;
 				height: 40px;
 				padding-right: 5px;
 				padding-left: 5px;
-				transition: background .2s;
+				transition: background .1s;
 				text-decoration: none;
+				.fa-container {
+					display: inline-block;
+					width: 30px;
+					height: 30px;
+					line-height: 30px;
+					text-align: center;
+					border-radius: 3px;
+					margin-left: 10px;
+					transition: background .1s, color .1s;
+					&.facebook {
+						background : #3b5998;
+						&:hover {
+							background: white;
+							i {
+								color: #3b5998;
+							}
+						}
+					}
+					&.vk {
+						background : #45668e;
+						&:hover {
+							background: white;
+							i {
+								color: #45668e;
+							}
+						}
+					}
+					.fa {
+						font-size: 18px;
+						position: relative;
+						top: 2px;
+					}
+				}
 				&:hover {
 					background: rgba(0,0,0,.4);
 				}

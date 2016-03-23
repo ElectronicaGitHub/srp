@@ -43,6 +43,7 @@ app.use(passport.session());
 
 app.use(require('./middleware/sendHttpError'));
 app.use(require('./middleware/loadUser'));
+app.use(require('./middleware/getLastUrl'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 // лендинг и регистрации

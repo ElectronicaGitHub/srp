@@ -44,8 +44,15 @@ $(function () {
 
 		map.setBounds(map.geoObjects.getBounds());
 	});
-
-	$("#phone").mask("+9 (999) 999 99 99");
+	$("#phone").mask("+9 (999) 999 99 99", {
+		onComplete: function() {
+			$('#offer-button').attr('disabled', false);
+		}, 
+		onChange: function () {
+			console.log('kek');
+			$('#offer-button').attr('disabled', true);		
+		}
+	});
 
 	user && $('#picker').dateRangePicker({
 		inline: true,
@@ -67,10 +74,13 @@ $(function () {
 		if (days > 6 && days <= 10) price = hotel.price[2];
 		if (days > 10) price = hotel.price[3];
 
-		$('form #dates').val(obj.value);
-		$('form #price').val(days * price);
+		var c = $('form #count').val();
 
-		$('form .price').text(days * price);
+		$('form #dates').val(obj.value);
+
+		$('form #price').val(days * price * c);
+		$('form .price').text(days * price * c);
+
 		if (!$('.offer-continue').is(':visible')) {
 			$('.offer-continue').slideToggle(300);
 		}
@@ -92,14 +102,20 @@ $(function () {
 		e.preventDefault();
 		var data = btn.closest('form').serialize();
 
+		btn.attr('disabled', true);
+
 		btn.html('<i class="fa fa-spinner fa-spin"></i>');
 
 		$.post('/create_offer', data, function (err, ok) {
-			console.log(err, ok);
-			localStorage.setItem(lsPrefix + hotel._id, 1);
-			btn.attr('disabled', true);
 			ga('send', 'event', 'request', 'call_request');
 			btn.text('Ваш заказ сформирован, в течение 15 минут мы свяжемся с вами для подтверждения заказа');
+			setTimeout(function () {
+				$('.offer-continue').slideToggle(300);
+				setTimeout(function () {
+					$('.offer-panel .no-offer').hide(0);
+					$('.offer-panel .has-offer').show(0);
+				}, 400);
+			}, 1000);
 		});
 	});
 

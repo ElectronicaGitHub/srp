@@ -6,14 +6,23 @@
 	<div class="top">
 		<div class="container">
 			<% if (user) { %>
-				<a class="login" href="/auth/vk/logout">Выйти</a>
-				<a class="cabinet" href="/cabinet">Мои заказы</a>
+				<a class="login" href="/auth/logout">Выйти</a>
+				<a class="cabinet" href="/cabinet">Мои заявки
+					<% if (user.requests.length) { %>
+					<span> (<%= user.requests.length %>)</span>
+					<% } %>
+				</a>
 				<span class="username">
 					<img src="<%= user.image %>">
 					<%= user.name %>
 				</span>
 			<% } else { %>
-				<a class="login" href="/auth/vk">Войти VK</a>
+				<span class="login">Авторизация
+					<a href="/auth/vk"><div class="fa-container vk"><i class="fa fa-vk"></i></div></a>
+					<a href="/auth/facebook"><div class="fa-container facebook"><i class="fa fa-facebook"></i></div></a>
+				</span>
+				<!-- <a class="login" href="/auth/vk">Войти VK</a> -->
+				<!-- <a class="login" href="/auth/facebook">Войти FB</a> -->
 			<% } %>
 		</div>
 	</div>

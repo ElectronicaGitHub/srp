@@ -6,12 +6,18 @@
 <script src="/javascripts/city.js"></script>
 <script src="/custom/owl.carousel.min.js"></script>
 
+<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="/javascripts/places-modal.js"></script>
+
 <script>
 	window.places = <%- JSON.stringify(places) %>;
 </script>
 
 <link rel="stylesheet" href="/stylesheets/builded/city.css">
 <link rel="stylesheet" href="/custom/owl.carousel.css">
+
+<%- partial('particials/places-modal') %>
 
 <div class="header" style="background-image:url('<%= city.image.path %>')">
 	<p class="title"><%= city.name %></p>
@@ -34,8 +40,8 @@
 		</div>
 
 		<% for (var i = 0, ii = places.length; i < ii; i++) { var place = places[i]; %>
-			<a href="/place/<%= place.title_url %>">
-				<div class="block-wrapper single">
+			<a href="/place/<%= place.title_url %>" target="_blank">
+				<div class="block-wrapper single js-init-place col-xs-12 col-sm-4 col-md-3 col-lg-3" data-id="<%= place._id %>">
 					<div style="background-image: url('<%= place.mini_images[0].path %>');" class="block">
 						<div class="fader">
 							<span class="info">

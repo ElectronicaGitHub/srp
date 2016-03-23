@@ -319,14 +319,55 @@ header .logo-wrapper {
 					@include respond-to(picker-ok) { width: 100%; border-radius: 0; box-shadow: none }
 					@include respond-to(wide-screens) { width: $picker_width_mini; float: right; }
 					.auth {
-						
+						text-align: center;
+						padding: 20px 30px;
+						font-size: 16px;
+						i {
+							color: white;
+						}
+						.fa-container {
+							margin-top: 5px;
+							display: inline-block;
+							width: 30px;
+							height: 30px;
+							line-height: 30px;
+							text-align: center;
+							border-radius: 3px;
+							margin-left: 10px;
+							transition: background .1s, color .1s;
+							&.facebook {
+								background : #3b5998;
+							}
+							&.vk {
+								background : #45668e;
+							}
+							.fa {
+								font-size: 18px;
+								position: relative;
+								top: 2px;
+							}
+						}
 					}
 					.has-offer {
 						text-align: center;
 						height: 100px;
 						line-height: 100px;
-						font-size: 20px;
+						font-size: 16px;
 						display: none;
+						padding: 0px 20px;
+						span {
+							display: inline-block;
+							vertical-align: middle;
+							line-height: 25px;
+							p {
+								margin: 0;
+								padding: 0;
+							}
+							a {
+								color: darkblue;
+								text-decoration: underline;
+							}
+						}
 					}
 					.single-month {
 						.month-wrapper {
@@ -419,6 +460,10 @@ header .logo-wrapper {
 						    color: white;
 						    font-size: 20px;
 						    font-weight: 700;
+							&[disabled] {
+								background-color: lighten($serp_main_color, 20%);
+								border: 2px solid lighten($serp_main_color, 20%);
+							}
 						}
 					}
 				}

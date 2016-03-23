@@ -1,5 +1,5 @@
 <%- layout('base.ejs')%>
-<% block('title', 'Серпантин | Мои заказы') -%>
+<% block('title', 'Серпантин | Мои заявки') -%>
 
 <script src="/libs/angular/angular.min.js"></script>
 <script src="/javascripts/cabinet.js"></script>
@@ -12,13 +12,13 @@
 <link rel="stylesheet" href="/stylesheets/builded/cabinet.css">
 
 <div class="header">
-	<p class="title">Мои заказы</p>
+	<p class="title">Мои заявки</p>
 </div>
 
 <div class="content" ng-app="app" ng-controller="cabinet">
 	<div class="container">
 		<div class="requests">
-			<p class="title">Мои заказы</p>
+			<p class="title">Мои заявки</p>
 				<div class="request" ng-repeat="r in requests">
 					<p><a class="title" href="/hotel/{{ r.hotel.title_url }}" target="_blank">{{ r.hotel.title }}</a></p>
 					<p class="count">Отдыхающих: {{ r.count }}</p>

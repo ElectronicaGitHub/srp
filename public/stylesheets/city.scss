@@ -1,4 +1,5 @@
 @import "main";
+@import "places-modal";
 
 .header {
 	width: 100%;
@@ -47,8 +48,8 @@
 			line-height: 400px;
 		}
 		&.single {
-			width: 25%;
-			float: left;
+			// width: 25%;
+			// float: left;
 		}
 		.block {
 			background-position: center;
