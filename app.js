@@ -87,8 +87,8 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(8080, '10.20.30.40');
-console.log('Magic happens on port 10.20.30.40:8080');
+app.listen(8080);
+console.log('Magic happens on port 8080');
 
 
 
