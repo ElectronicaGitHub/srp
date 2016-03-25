@@ -6,6 +6,8 @@ var Request = require('../models/Request.js');
 module.exports = function (express) {
 	var router = express.Router();
 
+	// TEST HANDLERS
+
 	router.post('/democheck', function (req, res, next) {
 		console.log('democheck', req.body);
 		var data = {
@@ -31,7 +33,7 @@ module.exports = function (express) {
 			shopId : req.body.shopId,
 			code : 0
 		};
-		
+
 		var xmlbody = '<paymentAvisoResponse performedDatetime="' + data.performedDatetime + 
 						'" code="' + data.code + 
 						'" invoiceId="' + data.invoiceId + 
@@ -42,14 +44,40 @@ module.exports = function (express) {
 		});
 	});
 
+	// REAL HANDLERS
+
 	router.post('/check', function (req, res, next) {
-		console.log('check', req.body);
-		send(0);
+		var data = {
+			performedDatetime : req.body.requestDatetime,
+			invoiceId : req.body.invoiceId, 
+			shopId : req.body.shopId,
+			code : 0
+		};
+
+		var xmlbody = '<checkOrderResponse performedDatetime="' + data.performedDatetime + 
+						'" code="' + data.code + 
+						'" invoiceId="' + data.invoiceId + 
+						'" shopId="' + data.shopId + '"/>';
+
+		res.end(xmlbody);
 	});
 
 	router.post('/aviso', function (req, res, next) {
-		console.log('aviso', req.body);
-		send(0);
+		var data = {
+			performedDatetime : req.body.requestDatetime,
+			invoiceId : req.body.invoiceId, 
+			shopId : req.body.shopId,
+			code : 0
+		};
+
+		var xmlbody = '<paymentAvisoResponse performedDatetime="' + data.performedDatetime + 
+						'" code="' + data.code + 
+						'" invoiceId="' + data.invoiceId + 
+						'" shopId="' + data.shopId + '"/>';
+
+		Request.findByIdAndUpdate(req.body.orderNumber, { status : 2 }, function (err, result) {
+			res.end(xmlbody);
+		});
 	});
 
 
