@@ -7,12 +7,19 @@ module.exports = function (express) {
 
 	router.post('/democheck', function (req, res, next) {
 		console.log('democheck', req.body);
-		res.json({
+		var data = {
 			performedDatetime : req.body.requestDatetime,
 			invoiceId : req.body.invoiceId, 
 			shopId : req.body.shopId,
 			code : 0
-		});
+		};
+
+		var xmlbody = '<checkOrderResponse performedDatetime="' + data.performedDatetime + 
+						'" code="' + data.code + 
+						'" invoiceId="' + data.invoiceId + 
+						'" shopId="' + data.shopId + '"/>';
+
+		res.end(xmlbody);
 	});
 
 	router.post('/demoaviso', function (req, res, next) {
