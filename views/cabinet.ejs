@@ -20,10 +20,15 @@
 		<div class="requests">
 			<p class="title">Мои заявки</p>
 				<div class="request" ng-repeat="r in requests">
-					<p><a class="title" href="/hotel/{{ r.hotel.title_url }}" target="_blank">{{ r.hotel.title }}</a></p>
-					<p class="count">Отдыхающих: {{ r.count }}</p>
-					<p class="dates">{{ r.dates }}</p>
-					<p class="price">Цена: {{ r.price }}</p>
+					<div class="image">
+						<div style="background-image: url({{ r.hotel.mini_images[0].path }})"></div>
+					</div>
+					<div class="info">
+						<p><a class="title" href="/hotel/{{ r.hotel.title_url }}" target="_blank">{{ r.hotel.title }}</a></p>
+						<p class="count">Отдыхающих: {{ r.count }}</p>
+						<p class="dates">Даты: {{ r.dates }}</p>
+						<p class="price">Цена: {{ r.price }}</p>
+					</div>
 					<span class="status">
 						<div class="status-text order_2" ng-if="!r.status">Заказ обрабатывается</div>
 						<div class="status-text order_1" ng-if="r.status == 1">
