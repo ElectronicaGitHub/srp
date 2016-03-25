@@ -35,6 +35,31 @@
 				position: absolute;
 				top: 25px;
 				right: 25px;
+				.status-text {
+					padding: 4px 10px;
+					border-radius: 3px;
+					font-weight: 500;
+					font-size: 14px;
+					box-shadow: 0 1px 2px rgba(0,0,0,.2);
+					&.order_0 {
+						background: $serp_main_color2;
+					}
+					&.order_1 { 
+						background: $serp_main_color2;
+						button {
+							background: transparent;
+							border: transparent;
+						}
+					}
+					&.order_2 {
+						background: #4EBA6F;
+						color: white;
+						i {
+							padding-right: 5px;
+							color: white;
+						}
+					}
+				}
 			}
 		}
 	}

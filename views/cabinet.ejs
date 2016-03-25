@@ -25,10 +25,8 @@
 					<p class="dates">{{ r.dates }}</p>
 					<p class="price">Цена: {{ r.price }}</p>
 					<span class="status">
-						<div ng-if="!r.status">Заказ обрабатывается</div>
-						<div ng-if="r.status == 1">
-							<!-- <button ng-click="requestPay(r)" >Оплатить | {{ r.final_price }}</button> -->
-							<!-- Яндекс Деньги тест -->
+						<div class="status-text order_2" ng-if="!r.status">Заказ обрабатывается</div>
+						<div class="status-text order_1" ng-if="r.status == 1">
 							<form action="<%= yandexMoney.postUrl %>" method="post">
 								<input name="shopId" value="<%= yandexMoney.shopId %>" type="hidden"/>
 							    <input name="scid" value="<%= yandexMoney.scid %>" type="hidden"/>
@@ -38,10 +36,10 @@
 							    <input name="orderNumber" value="{{ r._id }}" type="hidden"/>
 							    <input name="cps_phone" value="{{ r.phone }}" type="hidden"/>
 							    <input name="cps_email" value="<%= user.email %>" type="hidden"/>
-								<input type="submit" value="Оплатить | {{ r.final_price }}">
+								<button type="submit">Оплатить ( {{ r.final_price }} руб.)</button>
 							</form>
 						</div>
-						<div ng-if="r.status == 2">Заказ оплачен</div>
+						<div class="status-text order_2" ng-if="r.status == 2"><i class="fa fa-check"></i>Заказ оплачен</div>
 					</span>
 				</div>
 		</div>		
