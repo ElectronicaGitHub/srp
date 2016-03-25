@@ -8,10 +8,10 @@ module.exports = function (express) {
 	router.post('/democheck', function (req, res, next) {
 		console.log('democheck', req.body);
 		res.json({
-			performedDateTime : new Date(),
-			code : 0,
+			performedDatetime : req.body.requestDatetime,
 			invoiceId : req.body.invoiceId, 
-			shopId : req.body.shopId
+			shopId : req.body.shopId,
+			code : 0
 		});
 	});
 
