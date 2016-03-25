@@ -13,7 +13,7 @@ var User = require('../models/User.js');
 passport.use(new VKontakteStrategy({
     clientID:     VKONTAKTE_APP_ID, // VK.com docs call it 'API ID'
     clientSecret: VKONTAKTE_APP_SECRET,
-    callbackURL:  "serpantin.moscow/auth/vk/callback"
+    callbackURL:  "/auth/vk/callback"
 }, function(accessToken, refreshToken, params, profile, done) {
 
 		User.findOne({ vk_id : profile.id }, function (err, user) {
@@ -37,7 +37,7 @@ passport.use(new VKontakteStrategy({
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "serpantin.moscow/auth/facebook/callback",
+    callbackURL: "/auth/facebook/callback",
     profileFields: ['id', 'displayName', 'photos', 'email']
 }, function(accessToken, refreshToken, params, profile, done) {
 
