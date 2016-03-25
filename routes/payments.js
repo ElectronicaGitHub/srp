@@ -7,7 +7,12 @@ module.exports = function (express) {
 
 	router.post('/democheck', function (req, res, next) {
 		console.log('democheck', req.body);
-		send(0);
+		res.json({
+			performedDateTime : new Date(),
+			code : 0,
+			invoiceId : req.body.invoiceId, 
+			shopId : req.body.shopId
+		});
 	});
 
 	router.post('/demoaviso', function (req, res, next) {
