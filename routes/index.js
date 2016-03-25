@@ -9,6 +9,7 @@ var User = require('../models/User.js');
 var Request = require('../models/Request.js');
 var async = require('async');
 var sm = require('sitemap');
+var config = require('./../configs/config_file');
 
 var newRequestTmpl = require('../mailTemplate/newRequest.js');
 
@@ -72,7 +73,8 @@ module.exports = function (express) {
 			Request.find({ owner : req.user._id}).populate('hotel owner').exec(function (err, requests) {
 				if (err) return next(err);
 				res.render('cabinet', {
-					requests : requests
+					requests : requests,
+					yandexMoney : config.get('yandex.money')
 				});
 			});
 		}
@@ -306,9 +308,12 @@ module.exports = function (express) {
 	router.post('/create_offer', function (req, res, next) {
 
 		var body = req.body;
-		body.owner = req.user;
+		body.owner = req.user._id;
 
 		Request.create(body, function (err, result) {
+
+			console.log(err);
+			if (err) return next(err);
 			// transport.sendMail({
 			// 	from : "antonovphilipdev@gmail.com",
 			// 	to: "alexandrtito@gmail.com",

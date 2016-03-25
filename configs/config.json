@@ -15,6 +15,11 @@
 			}
 		}
 	},
+	"yandex.money" : {
+		"shopId" : 51180,
+		"scid" : 533684,
+		"postUrl" : "https://demomoney.yandex.ru/eshop.xml"
+	},
 	"autentification" : {
 		"create" : {
 			"username" : "serp",

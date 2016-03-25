@@ -17,12 +17,6 @@ angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide)
 	        	$('.admin_hint').hide();
         	}, 1000);
 	        return response;
-	      },
-	     'responseError': function(rejection) {
-	        if (canRecover(rejection)) {
-	          return responseOrNewPromise;
-	        }
-	        return $q.reject(rejection);
 	      }
 	    };
 	  });
@@ -55,6 +49,7 @@ angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide)
 	};
 
 	$scope.createTag = function () {
+		$scope.newTag.image = $scope.newTag.image._id;
 		$http.post('/admin/tag', $scope.newTag)
 			.success(function (data) {
 				console.log(data);

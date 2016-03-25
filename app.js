@@ -48,6 +48,7 @@ app.use(require('./middleware/getLastUrl'));
 app.use(express.static(path.join(__dirname, 'public')));
 // лендинг и регистрации
 app.use('/', require('./routes/index.js')(express));
+app.use('/', require('./routes/payments.js')(express));
 app.use('/auth', require('./routes/auth.js')(express));
 app.use('/admin', require('./routes/admin.js')(express));
 app.use('/rq', require('./routes/requests.js')(express));
