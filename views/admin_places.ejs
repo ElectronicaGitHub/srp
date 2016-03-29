@@ -32,7 +32,7 @@
 
 				<div class="form-group">
 					<label for="description_full">
-						<span>Полное описание.</span>
+						<span>Полное описание, не более 500 символов.</span>
 						<span ng-class="{ wrong : restplace.description_full.length > 500 }"> (Символов: {{ restplace.description_full.length }})</span>
 					</label>
 					<textarea rows="7" class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full"></textarea>
