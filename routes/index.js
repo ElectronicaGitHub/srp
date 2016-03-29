@@ -229,7 +229,7 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				Place.find({ city : sobj.city }).populate('mini_images images').exec(function (err, results) {
+				Place.find({ city : sobj.city }).populate('city mini_images images').exec(function (err, results) {
 					if (err) return next(err);
 					cb(null, results);
 				});

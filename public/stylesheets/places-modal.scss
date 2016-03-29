@@ -2,8 +2,13 @@
 	.modal-body {
 		overflow: hidden;
 		padding: 0;
+		button.close {
+			position: absolute;
+			top: 5px;
+			right: 10px;
+		}
 		.left, .right {
-			height: 250px;
+			height: 300px;
 			width: 50%;
 			float: left;
 			display: inline-block;
@@ -17,8 +22,21 @@
 			}
 		}
 		.right {	
-			.description {
-				padding: 20px;
+			.info {
+				padding: 15px 20px;
+				.title {
+					font-size: 20px;
+					font-weight: 700;
+				}
+				.city-wrapper {
+					margin-top: 5px;
+					i {
+						margin-right: 5px;
+					}
+				}
+				.description {
+					margin-top: 10px;
+				}
 			}
 		}
 	}

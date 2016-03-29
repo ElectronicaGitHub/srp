@@ -44,15 +44,16 @@ $(function () {
 
 		map.setBounds(map.geoObjects.getBounds());
 	});
-	$("#phone").mask("+9 (999) 999 99 99", {
-		onComplete: function() {
+	$("#phone").inputmask("+9 (999) 999 99 99", {
+		oncomplete: function() {
 			$('#offer-button').attr('disabled', false);
 		}, 
-		onChange: function () {
-			console.log('kek');
+		onincomplete: function () {
 			$('#offer-button').attr('disabled', true);		
 		}
-	});
+	}).on('input', function () {
+		$('#offer-button').attr('disabled', true);		
+	})
 
 	user && $('#picker').dateRangePicker({
 		inline: true,

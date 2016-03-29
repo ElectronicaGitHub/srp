@@ -12,6 +12,7 @@ $(function () {
 
 					$('#placesModal .title').text(place.title);
 					$('#placesModal .description').text(place.description_full);
+					$('#placesModal .city').text(place.city.name);
 					$('#placesModal .image').css({
 						'background-image' : 'url(' + place.images[0].path + ')'
 					});

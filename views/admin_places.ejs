@@ -31,13 +31,16 @@
 				</div>
 
 				<div class="form-group">
-					<label for="description_full">Полное описание</label>
-					<textarea class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full"></textarea>
+					<label for="description_full">
+						<span>Полное описание.</span>
+						<span ng-class="{ wrong : restplace.description_full.length > 500 }"> (Символов: {{ restplace.description_full.length }})</span>
+					</label>
+					<textarea rows="7" class="form-control" id="description_full" ng-class="{ fill : restplace.description_full }" ng-model="restplace.description_full"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="description_mini">Краткое описание</label>
-					<textarea class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini"></textarea>
+					<textarea rows="3" class="form-control" id="description_mini" ng-class="{ fill : restplace.description_mini }" ng-model="restplace.description_mini"></textarea>
 				</div>
 
 				<div class="form-group">
