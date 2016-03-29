@@ -8,16 +8,12 @@
 
 <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="/javascripts/places-modal.js"></script>
-
 <script>
 	window.places = <%- JSON.stringify(places) %>;
 </script>
 
 <link rel="stylesheet" href="/stylesheets/builded/city.css">
 <link rel="stylesheet" href="/custom/owl.carousel.css">
-
-<%- partial('particials/places-modal') %>
 
 <div class="header" style="background-image:url('<%= city.image.path %>')">
 	<p class="title"><%= city.name %></p>

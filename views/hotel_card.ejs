@@ -6,6 +6,7 @@
 <script>
 	window.hotel = <%- JSON.stringify(hotel) %>;
 	window.user = <%- JSON.stringify(user) %>;
+	window.places = window.hotel.places;
 </script>
 <script src="/javascripts/page-slider.js"></script>
 <script src="/javascripts/hotel.js"></script>
@@ -74,7 +75,7 @@
 						<div role="tabpanel" class="tab-pane fade places-wrapper" id="places">
 							<% for (var i = 0, characts = hotel.places.length; i < characts ; i++ ) { %>
 								<a href="/place/<%= hotel.places[i].title_url %>" target="_blank">
-									<div class="each-place">
+									<div class="each-place js-init-place" data-id="<%= hotel.places[i]._id %>">
 									<div class="image" style="background-image:url('<%= hotel.places[i].mini_images[0].path%>')"></div>
 									<div class="info">
 										<span>

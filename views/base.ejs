@@ -12,9 +12,13 @@
 	<!-- // <script src="/libs/angular/angular.min.js"></script> -->
 	<script src="/libs/vegas/dist/vegas.js"></script>
 	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+	<script src="/javascripts/places-modal.js"></script>
+
 	<link rel="stylesheet" href="/libs/vegas/dist/vegas.css">
 	<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+
 
 	<link rel="icon" href="/assets/favicon.png" type="image/gif" sizes="128x128">
 </head>
@@ -27,7 +31,7 @@
 	<%- body %>
 	<%- partial('particials/footer') %>
 
-	<message></message>
+	<%- partial('particials/places-modal') %>
 
 	<style>
 	button:focus {
