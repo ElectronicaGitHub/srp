@@ -75,7 +75,8 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 			headers: {'Content-Type': undefined }
 		})
 			.success(function (data) {
-				$scope[key] = data.filesArray;
+				$scope[key] = $scope[key] || [];
+				$scope[key] = $scope[key].concat(data.filesArray);
 				console.log(data);
 			})
 			.error(function (data) {
@@ -93,7 +94,6 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 
 	function post(place, url) {
 		place.images = $scope.images.map(function (el) { return el._id; });
-		place.mini_images = $scope.mini_images.map(function (el) { return el._id; });
 
 		$http.post(url, place)
 			.success(function (data) {

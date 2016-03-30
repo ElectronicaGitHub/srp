@@ -1,6 +1,7 @@
 var multiparty = require('multiparty');
 var path = require('path');
 var fs = require('fs');
+var gm = require('gm').subClass({imageMagick: true});
 var async = require('async');
 var config = require('../configs/config_file');
 var RestPlace = require('../models/RestPlace.js');
@@ -413,36 +414,47 @@ var fileSave = function (file, cb, cbFail) {
   		});
   	} else {
       	var filename = makeID() + 'uid' + file.originalFilename;
-      	async.waterfall([
+      	async.series([
       		function (callback) {
 		      	// сохранить файл в фс
 			  	var p = path.join(__dirname, "../public/attachments/" + filename);
       			fs.readFile(file.path, function (err, data) {
       				if (err) callback(err);
 					fs.writeFile(p, data, function (err) {
-						var realPath = '/attachments/' + filename;
+						var path_high = '/attachments/' + filename;
 						if (err) callback(err);
-						callback(null, realPath);
+						callback(null, path_high);
 					});
 				});
       		},
-      		function (path, callback) {
-		      	// добавить модель файла
-		      	var img = new Img({
-		      		name : file.originalFilename,
-		      		path : path
-		      	})
-		      	img.save(function (err, att) {
-		      		if (err) callback(err);
-		      		callback(null, att);
-		      	})	
-      		}
-      	], function (err, attachment) {
-      		if (err) cbFail({ message : err });
-      		cb(attachment);
-      	})
-  	}
-}
+      		function (callback) {
+		      	var filename = 'low_' + makeID() + 'uid' + file.originalFilename;
+			  	var p = path.join(__dirname, "../public/attachments/" + filename);
+      			gm(file.path).quality(40).write(p, function (err) {
+				  	var path_low = '/attachments/' + filename;
+      				if (err) { 
+						callback(err) 
+      				}
+  					else {
+	      				callback(null, path_low);
+  					}
+      			});
+			}
+		], function (err, results) {
+			if (err) cbFail({ message : err });
+			// добавить модель файла
+			var img = new Img({
+				name : file.originalFilename,
+				path : results[0],
+				path_low : results[1]
+			});
+			img.save(function (err, att) {
+				if (err) cbFail({ message : err });
+				cb(att);
+			});
+		});
+	}
+};
 
 var makeID = function() {
   function s4() {

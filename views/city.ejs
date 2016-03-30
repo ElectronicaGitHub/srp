@@ -25,7 +25,7 @@
 	 		<% for (var i in hotels) { var hotel = hotels[i]; %>
 				<a href="/hotel/<%= hotel.title_url %>">
 					<div class="block-wrapper item">
-						<div style="background-image: url('<%= hotel.images[0].path %>');" class="block">
+						<div style="background-image: url('<%= hotel.mini_images[0].path %>');" class="block">
 							<div class="info-bottom">
 								<p class="title"><%= hotel.title %></p>
 							</div>

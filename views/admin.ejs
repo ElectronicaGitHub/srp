@@ -59,7 +59,7 @@
 					<input id="image_tag" type="file" style="visibility:hidden">
 					<p><button class="btn btn-success" ng-click="loadImageForTag()">Загрузить иконку</button></p>
 					<div class="images-list" ng-if="newTag.image">
-						<div style="background-image:url('{{ newTag.image.path }}')" class="each-img"></div>
+						<div style="background-image:url('{{ newTag.image.path_low }}')" class="each-img"></div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -79,7 +79,7 @@
 						<span class="fa fa-pencil" ng-click="preloadTag(tag)"></span>
 						<span class="fa fa-refresh" ng-if="tag.deleted" ng-click="restore('tag', tag)"></span>
 					</span>
-					<div style="background-image : url('{{ tag.image.path }}')" class="img"></div>
+					<div style="background-image : url('{{ tag.image.path_low }}')" class="img"></div>
 					<span class="name">{{ tag.name }}</span>
 				</div>
 			</div>
@@ -152,7 +152,7 @@
 					<input id="image_city" type="file" style="visibility:hidden">
 					<p><button class="btn btn-success" ng-click="loadImageForCity()">Загрузить иконку</button></p>
 					<div class="images-list" ng-if="newCity.image">
-						<div style="background-image:url('{{ newCity.image.path }}')" class="each-img"></div>
+						<div style="background-image:url('{{ newCity.image.path_low }}')" class="each-img"></div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -173,7 +173,7 @@
 						<span class="fa fa-refresh" ng-if="city.deleted" ng-click="restore('city', city)"></span>
 					</span>
 					<input type="checkbox" ng-model="city.popular" ng-change="updateCity({ _id : city._id, popular : city.popular });">
-					<div style="background-image : url('{{ city.image.path }}')" class="img"></div>
+					<div style="background-image : url('{{ city.image.path_low }}')" class="img"></div>
 					<span class="name">{{ city.name }}</span>
 				</div>
 			</div>
@@ -191,7 +191,7 @@
 					<input id="image" type="file" style="visibility:hidden">
 					<p><button class="btn btn-success" ng-click="loadImageForBenefit()">Загрузить иконку</button></p>
 					<div class="images-list" ng-if="newBenefit.image">
-						<div style="background-image:url('{{ newBenefit.image.path }}')" class="each-img"></div>
+						<div style="background-image:url('{{ newBenefit.image.path_low }}')" class="each-img"></div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -204,7 +204,7 @@
 			<div class="title">Готовые бенефиты</div>
 			<div class="wrapper">
 				<div ng-repeat="ben in benefits" class="listed-objects">
-					<div style="background-image : url('{{ ben.image.path }}')" class="img"></div>
+					<div style="background-image : url('{{ ben.image.path_low }}')" class="img"></div>
 					<span class="name">{{ ben.name }}</span>
 				</div>
 			</div>
@@ -226,7 +226,7 @@
 						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
 					</span>
 					<label>
-						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
+						<div style="background-image : url('{{ place.images[0].path_low }}')" class="img"></div>
 						<span class="name">{{ place.title }}</span>
 					</label>
 				</div>
@@ -249,7 +249,7 @@
 					</span>
 
 					<label>
-						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
+						<div style="background-image : url('{{ place.images[0].path_low }}')" class="img"></div>
 						<span class="name">{{ place.title }}</span>
 					</label>
 				</div>
