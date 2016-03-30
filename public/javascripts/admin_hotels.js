@@ -86,6 +86,21 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		});
 	}
 
+	$scope.removeImage = function (imgId, placeId, index) {
+		if (!placeId) {
+			$scope.images.splice(index, 1);
+		} else {
+			$http.delete('/admin/image/' + imgId)
+			.success(function (data) {
+				console.log(data);
+				$scope.images.splice(index, 1);
+			})
+			.error(function (data) {
+				console.log(data);
+			});
+		}
+	};
+
 	$scope.imageLoad = function (bool) {
 		if (bool) {
 			$('#image').click();

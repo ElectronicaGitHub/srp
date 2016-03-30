@@ -403,6 +403,31 @@ module.exports = function (express) {
 		});
 	});
 
+	router.delete('/image/:id', function (req, res, next) {
+		async.waterfall([
+			function (callback) {
+				Img.findById(req.params.id, function (err, img1) {
+					callback(null, img1);
+				});
+			},
+			function (img, callback) {
+				fs.unlink(path.join(__dirname, '../public' + img.path), function (err, msg) {
+					if (err) return next(err);
+					fs.unlink(path.join(__dirname, '../public' + img.path_low), function (err, msg) {
+						if (err) return next(err);
+						img.remove(function (err, ok) {
+							if (err) return next(err);
+							callback(null);
+						});
+					});
+				});
+			}
+		], function (err, results) {
+			if (err) return next(err);
+			res.json({ message : 'ok'});
+		});
+	});
+
 	return router;
 };
 

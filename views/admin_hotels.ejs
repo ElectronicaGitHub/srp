@@ -114,6 +114,7 @@
 				<p><button class="btn btn-success" ng-click="imageLoad(true)">Загрузить фотки</button></p>
 				<div class="images-list">
 					<div style="background-image:url('{{ image.path }}')" class="each-img" ng-repeat="image in images">
+						<span class="img-remove" ng-click="removeImage(image._id, restplace._id, $index)">x</span>
 					</div>
 				</div>
 			</div>
