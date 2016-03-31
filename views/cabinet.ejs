@@ -21,7 +21,7 @@
 			<p class="title">Мои заявки</p>
 				<div class="request" ng-repeat="r in requests">
 					<div class="image">
-						<div style="background-image: url({{ r.hotel.mini_images[0].path }})"></div>
+						<div style="background-image: url({{ r.hotel.images[0].path_low }})"></div>
 					</div>
 					<div class="info">
 						<p><a class="title" href="/hotel/{{ r.hotel.title_url }}" target="_blank">{{ r.hotel.title }}</a></p>

@@ -198,6 +198,7 @@ module.exports = function (express) {
 	});
 
 	router.get('/city/:name_url', function (req, res, next) {
+		if (req.params.name_url == 'undefined') return next();
 		var sobj = {}, fromTag;
 		var d = req.headers.referer && req.headers.referer.split('/');
 		if (d && d[d.length -2 ] == 'tag') {

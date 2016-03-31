@@ -25,7 +25,7 @@
 	 		<% for (var i in hotels) { var hotel = hotels[i]; %>
 				<a href="/hotel/<%= hotel.title_url %>">
 					<div class="block-wrapper item">
-						<div style="background-image: url('<%= hotel.mini_images[0].path %>');" class="block">
+						<div style="background-image: url('<%= hotel.images[0].path_low %>');" class="block">
 							<div class="info-bottom">
 								<p class="title"><%= hotel.title %></p>
 							</div>
@@ -38,7 +38,7 @@
 		<% for (var i = 0, ii = places.length; i < ii; i++) { var place = places[i]; %>
 			<a href="/place/<%= place.title_url %>" target="_blank">
 				<div class="block-wrapper single js-init-place col-xs-12 col-sm-4 col-md-3 col-lg-3" data-id="<%= place._id %>">
-					<div style="background-image: url('<%= place.mini_images[0].path %>');" class="block">
+					<div style="background-image: url('<%= place.images[0].path_low %>');" class="block">
 						<div class="fader">
 							<span class="info">
 								<p class="title"><%= place.title %></p> 

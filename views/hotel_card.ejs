@@ -76,7 +76,7 @@
 							<% for (var i = 0, characts = hotel.places.length; i < characts ; i++ ) { %>
 								<a href="/place/<%= hotel.places[i].title_url %>" target="_blank">
 									<div class="each-place js-init-place" data-id="<%= hotel.places[i]._id %>">
-									<div class="image" style="background-image:url('<%= hotel.places[i].mini_images[0].path%>')"></div>
+									<div class="image" style="background-image:url('<%= hotel.places[i].images[0].path_low %>')"></div>
 									<div class="info">
 										<span>
 											<p><%= hotel.places[i].title %></p>

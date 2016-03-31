@@ -21,15 +21,15 @@
 			<div class="cell">
 				<div class="images-with-radio-wrapper">
 					<div class="images-wrapper">
-						{{for mini_images}}
-							<div data-n="{{:#index}}" class="card-image {{:i==0?'current':''}}" style="background-image: url('{{:path}}')"></div>
+						{{for images}}
+							<div data-n="{{:#index}}" class="card-image {{:i==0?'current':''}}" style="background-image: url('{{:path_low }}')"></div>
 						{{/for}}
 					</div>
 				</div>
 				<div class="card-info">
-					{{if mini_images.length>1}}
+					{{if images.length>1}}
 						<div class="radio-wrapper">
-							{{for mini_images}}
+							{{for images}}
 								<span data-n="{{:#index}}" class="image-radio {{:j==0?'current':''}}"></span>
 							{{/for}}
 						</div>
@@ -111,7 +111,7 @@
 		<div class="city-carousel">
 			<% for (var i in cities_popular) { var city = cities_popular[i]; %>
 				<a href="/city/<%= city.name_url %>">
-					<div class="item" style="background-image: url('<%= city.image.path %>');">
+					<div class="item" style="background-image: url('<%= city.image.path_low %>');">
 						<div class="fader">
 							<span><%= city.name %></span>
 						</div>
@@ -125,8 +125,8 @@
 					<div class="cell">
 						<div class="images-with-radio-wrapper">
 							<div class="images-wrapper">
-								<% for (var i = 0; i < hotel.mini_images.length; i++) { %>
-									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url(<%= hotel.mini_images[i].path %>)"></div>
+								<% for (var i = 0; i < hotel.images.length; i++) { %>
+									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url(<%= hotel.images[i].path_low %>)"></div>
 								<% } %>
 							</div>
 						</div>
@@ -139,9 +139,9 @@
 								<button class="more-info">Подробнее</button>
 							</span>
 
-							<% if (hotel.mini_images.length > 1) { %>
+							<% if (hotel.images.length > 1) { %>
 							<div class="radio-wrapper">
-								<% for (var j = 0; j < hotel.mini_images.length; j++) { %>
+								<% for (var j = 0; j < hotel.images.length; j++) { %>
 									<span data-n="<%= j %>" class="image-radio <%= j == 0 ? 'current' : '' %>"></span>
 								<% } %>
 							</div>
