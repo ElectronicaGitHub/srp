@@ -32,10 +32,6 @@ var Place = new Schema({
 		type: ObjectId,
 		ref : 'City'
 	},
-	mini_images : [{
-		type : ObjectId,
-		ref : 'Img'
-	}],
 	images : [{
 		type : ObjectId,
 		ref : 'Img'

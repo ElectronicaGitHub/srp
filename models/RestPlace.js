@@ -20,10 +20,6 @@ var RestPlace = new Schema({
 		type: String,
 		required: true
 	},
-	mini_images : [{
-		type : ObjectId,
-		ref : 'Img'
-	}],
 	images : [{
 		type : ObjectId,
 		ref : 'Img'

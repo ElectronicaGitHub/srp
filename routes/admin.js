@@ -272,9 +272,22 @@ module.exports = function (express) {
 	});
 
 	router.delete('/restplace/:id', function (req, res, next) {
-		RestPlace.findByIdAndRemove(req.params.id, function (err, success) {
-			res.json({
-				message: 'ok'
+		RestPlace.findById(req.params.id).populate('images').exec(function (err, rp) {
+			async.each(rp.images, function (file, callback) {
+				imageRemove(null, file, function () {
+					callback();
+				}, function (err) {
+					callback(err);
+				})
+			}, function (err) {
+				if (err) return next(err);
+				rp.remove(function (err, ok) {
+					if (err) return next(err);
+					res.json({
+						message: 'ok'
+					});
+					
+				})
 			});
 		});
 	});
@@ -404,32 +417,49 @@ module.exports = function (express) {
 	});
 
 	router.delete('/image/:id', function (req, res, next) {
-		async.waterfall([
-			function (callback) {
-				Img.findById(req.params.id, function (err, img1) {
-					callback(null, img1);
-				});
-			},
-			function (img, callback) {
-				fs.unlink(path.join(__dirname, '../public' + img.path), function (err, msg) {
-					if (err) return next(err);
-					fs.unlink(path.join(__dirname, '../public' + img.path_low), function (err, msg) {
-						if (err) return next(err);
-						img.remove(function (err, ok) {
-							if (err) return next(err);
-							callback(null);
-						});
-					});
-				});
-			}
-		], function (err, results) {
-			if (err) return next(err);
-			res.json({ message : 'ok'});
+		imageRemove(req.params.id, null, function () {
+			res.json({
+				message : 'ok'
+			})
+		}, function (err) {
+			next(err);
 		});
 	});
 
 	return router;
 };
+
+var imageRemove = function (id, image, cbSuccess, cbError) {
+	console.log('image remove');
+	async.waterfall([
+		function (callback) {
+			if (id) {
+				Img.findById(id, function (err, img1) {
+					callback(null, img1);
+				});
+			} else {
+				callback(null, image);
+			}
+		},
+		function (img, callback) {
+			fs.unlink(path.join(__dirname, '../public' + img.path), function (err, msg) {
+				fs.unlink(path.join(__dirname, '../public' + img.path_low), function (err, msg) {
+					img.remove(function (err, ok) {
+						if (err) cbError(err);
+						else {
+							callback(null);
+						}
+					});
+				});
+			});
+		}
+	], function (err, results) {
+		if (err) return cbError(err);
+		else {
+			cbSuccess();
+		}
+	});
+}
 
 var fileSave = function (file, cb, cbFail) {
 	file = file[0];
