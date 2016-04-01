@@ -1,6 +1,5 @@
 $(function () {
 
-
 	var hotel = window.hotel,
 		coords = window.hotel.coordinates,
 		map,
@@ -13,6 +12,11 @@ $(function () {
 		$('.offer-panel .no-offer').hide(0);
 		$('.offer-panel .has-offer').show(0);
 	}
+
+	$('#back-link').on('click', function (e) {
+		e.preventDefault();
+		window.location = document.referrer;
+	})
 
 	ymaps.ready(function () {
 		map = new ymaps.Map("map", {

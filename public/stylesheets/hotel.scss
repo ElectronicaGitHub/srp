@@ -8,7 +8,7 @@ $picker_width_mini: $offer_width_mini - 30px;
 $image_height: 450px;
 
 header .logo-wrapper {
-	// display: none;
+	display: none;
 }
 
 .hotel-card {
@@ -102,7 +102,7 @@ header .logo-wrapper {
 				.wrappers-container {
 					position: relative;
 					width: calc(100% - #{$offer_width});
-					padding: 15px;
+					padding: 15px 15px 0 15px;
 					overflow: hidden;
 					@include respond-to(handhelds) { width: 100%; padding: 20px 0 10px 0; }
 					@include respond-to(mobile-screens) { width: 100%; padding: 20px 0 10px 0; }
@@ -179,6 +179,24 @@ header .logo-wrapper {
 							top: -7px;
 							@include respond-to(mobile-screens) { font-size: 10px; top: -5px; }
 							@include respond-to(handhelds) { font-size: 8px; top: -3px; }
+						}
+					}
+				}
+				.breadcrumps {
+					padding: 0 15px 15px;
+					@include respond-to(handhelds) { padding: 0 0 10px 0; }
+					@include respond-to(mobile-screens) { padding: 0 0 10px 0; }
+					* {
+						color: white;
+					}
+					a {
+						cursor: pointer;
+						text-decoration: underline;
+						@include respond-to(handhelds) { font-size: 12px; }
+						@include respond-to(mobile-screens) { font-size: 12px; }
+
+						i {
+							padding-right: 5px;
 						}
 					}
 				}

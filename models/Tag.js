@@ -6,7 +6,8 @@ var Tag = new Schema({
 	name_url : String,
 	popular : Boolean,
 	description : String,
-	description_mini : String,
+	seo_title : String,
+	seo_description : String,
 	deleted : {
 		type : Boolean,
 		default : false

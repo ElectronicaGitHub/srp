@@ -1,6 +1,6 @@
 <%- layout('base.ejs')%>
-<% block('title', 'Серпантин | Планируйте отдых с нами.') -%>
-<% block('description', city.description_mini) -%>
+<% block('title', 'Серпантин | ' + city.seo_title) -%>
+<% block('description', city.seo_description) -%>
 <% block('meta', partial('particials/city_meta')) %>
 
 <script src="/javascripts/city.js"></script>
