@@ -85,7 +85,7 @@
 	<div class="right">
 		
 		<div class="images-load-container block">
-			<div class="title">Большие фото</div>
+			<div class="title">Фото</div>
 			<div class="wrapper">
 				<input id="image" type="file" data-key="images" multiple="true" style="visibility:hidden">
 				<p><button class="btn btn-success" ng-click="imageLoad(true)">Загрузить фотки</button></p>
@@ -100,9 +100,9 @@
 
 	<div class="bottom">
 		<% if (place) { %>
-			<button class="btn btn-success" ng-click="updateRestPlace(restplace)">Редактировать</button>
+			<button ng-if="restplace.city && images.length" class="btn btn-success" ng-click="updateRestPlace(restplace)">Редактировать</button>
 		<%} else { %>
-			<button class="btn btn-success" ng-click="saveRestPlace(restplace)">Сохранить</button>
+			<button ng-if="restplace.city && images.length" class="btn btn-success" ng-click="saveRestPlace(restplace)">Сохранить</button>
 		<%} %>
 	</div>
 
