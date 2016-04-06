@@ -143,7 +143,11 @@ module.exports = function (express) {
 			},
 			function (cb) {
 				RestPlace
-				.find(req.query)
+				.find(req.query, {}, { 
+					sort : { 
+						title : 1 
+					} 
+				})
 				.deepPopulate('city images mini_images tags benefits benefits.image places.city places.images places.mini_images')
 				.limit(10)
 				.exec(function (err, hotels) {
@@ -222,7 +226,11 @@ module.exports = function (express) {
 			},
 			function (cb) {
 				RestPlace
-					.find(sobj)
+					.find(sobj, {}, { 
+						sort : { 
+							title : 1 
+						} 
+					})
 					.deepPopulate('city images mini_images tags benefits benefits.image places.city places.images places.mini_images')
 					.exec(function (err, results) {
 						if (err) return next(err);
@@ -250,7 +258,11 @@ module.exports = function (express) {
 	router.post('/api/getHotels', function (req, res, next) {
 		var p = req.query.p;
 
-		RestPlace.find(req.body)
+		RestPlace.find(req.body, {}, { 
+			sort : { 
+				title : 1 
+			} 
+		})
 		.deepPopulate('images mini_images city tags benefits benefits.image places places.city places.images places.mini_images')
 		.skip(p * 10)
 		.limit(10)
