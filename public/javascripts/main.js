@@ -19,7 +19,7 @@ $(function () {
 	    }
 	});
 
-	$('.image-radio').on('click', function (e) {
+	$(document).on('click', '.image-radio', function (e) {
 
 		e.preventDefault();
 

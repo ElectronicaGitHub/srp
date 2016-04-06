@@ -22,7 +22,7 @@
 				<div class="images-with-radio-wrapper">
 					<div class="images-wrapper">
 						{{for images}}
-							<div data-n="{{:#index}}" class="card-image {{:i==0?'current':''}}" style="background-image: url('{{:path_low }}')"></div>
+							<div data-n="{{:#index}}" class="card-image {{:#index==0?'current':''}}" style="background-image: url('{{:path_low}}')"></div>
 						{{/for}}
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 					{{if images.length>1}}
 						<div class="radio-wrapper">
 							{{for images}}
-								<span data-n="{{:#index}}" class="image-radio {{:j==0?'current':''}}"></span>
+								<span data-n="{{:#index}}" class="image-radio {{:#index==0?'current':''}}"></span>
 							{{/for}}
 						</div>
 					{{/if}}
