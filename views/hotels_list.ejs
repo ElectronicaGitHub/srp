@@ -108,7 +108,7 @@
 
 <div class="filters-content container">
 	<div class="content">
-		<div class="city-carousel">
+		<!-- <div class="city-carousel">
 			<% for (var i in cities_popular) { var city = cities_popular[i]; %>
 				<a href="/city/<%= city.name_url %>">
 					<div class="item" style="background-image: url('<%= city.image.path_low %>');">
@@ -117,6 +117,25 @@
 						</div>
 					</div>
 				</a>
+			<% } %>
+		</div> -->
+		<div class="city-carousel">
+			<% for (var i = 0, ii = cities_popular.length; i < ii; i+=4) { %>
+					<div class="item">
+						<% for (var j = 0; j < 4; j++) { %>
+							<% if (cities_popular[i+j]) { %>
+								<a href="/city/<%= cities_popular[i+j].name_url %>">
+									<div class="img-wrapper">
+										<div class="img" style="background-image: url('<%= cities_popular[i+j].image.path %>');">
+											<div class="fader">
+												<span><%= cities_popular[i+j].name %></span>
+											</div>
+										</div>
+									</div>
+								</a>
+							<% } %>
+						<% } %>
+					</div>
 			<% } %>
 		</div>
 		<% for (var i in hotels) { var hotel = hotels[i]; %>

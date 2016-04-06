@@ -2,7 +2,7 @@ $(function () {
 
 	$('.city-carousel').owlCarousel({
 	    loop: true,
-	    margin: 15,
+	    margin: 0,
 	    autoplay : true,
 	    autoplayTimeout: 4000,
 	    autoplayHoverPause: true,
@@ -14,7 +14,7 @@ $(function () {
 	            items: 2
 	        },
 	        1000: {
-	            items: 3
+	            items: 2
 	        }
 	    }
 	});
