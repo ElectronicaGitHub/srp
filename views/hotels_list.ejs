@@ -13,6 +13,7 @@
 
 <script>
 	window.hotels = <%- JSON.stringify(hotels) %>;
+	window.query = <%- JSON.stringify(query) %>;
 </script>
 
 <script id="cells" type="text/x-jsrender">
@@ -67,11 +68,20 @@
 			<div class="input-wrapper col-md-4 col-sm-6 col-xs-12">
 				<h4>Город</h4>
 				<div class="dropdown" data-type="city">
-					<dt><a><span>Выберите город</span></a></dt>
+					<% var m = cities.filter(function (el) {
+						return el.selected;
+					})[0] %>
+					<% if (m) { %>
+						<dt><a><span class="selected"><%= m.name %></span></a></dt>
+					<% } else { %>
+						<dt><a><span>Выберите город</span></a></dt>
+					<% } %>
 					<dd><ul>
 						<li><a>Любой</a></li>
 						<% for (var i in cities) { var city = cities[i]; %>
-							<li><a data-id="<%= city._id %>"><%= city.name %></a></li>
+							<li>
+								<a class="<%= city.selected ? 'selected' : '' %>" data-id="<%= city._id %>"><%= city.name %></a>
+							</li>
 						<% } %>
 					</ul></dd>
 				</div>
@@ -91,11 +101,20 @@
 			<div class="input-wrapper col-md-4 col-sm-6 col-xs-12">
 				<h4>Тип отдыха</h4>
 				<div class="dropdown" data-type="tags">
-					<dt><a><span>Выберите тип отдыха</span></a></dt>
+					<% var m = tags.filter(function (el) {
+						return el.selected;
+					})[0] %>
+					<% if (m) { %>
+						<dt><a><span class="selected"><%= m.name %></span></a></dt>
+					<% } else { %>
+						<dt><a><span>Выберите тип отдыха</span></a></dt>
+					<% } %>
 					<dd><ul>
 						<li><a>Любой</a></li>
 						<% for (var i in tags) { var tag = tags[i]; %>
-							<li><a data-id="<%= tag._id %>"><%= tag.name %></a></li>
+							<li>
+								<a class="<%= tag.selected ? 'selected' : '' %>" data-id="<%= tag._id %>"><%= tag.name %></a>
+							</li>
 						<% } %>
 					</ul></dd>
 				</div>
