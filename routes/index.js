@@ -34,12 +34,20 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				City.find({ deleted : false }).populate('image').exec(function (err, places) {
+				City.find({ deleted : false }, {}, { 
+					sort : { 
+						title : 1 
+					} 
+				}).populate('image').exec(function (err, places) {
 					cb(null, places);
 				});
 			},
 			function (cb) {
-				City.find({ deleted : false, popular : true }).populate('image').exec(function (err, places) {
+				City.find({ deleted : false, popular : true }, {}, { 
+					sort : { 
+						title : 1 
+					} 
+				}).populate('image').exec(function (err, places) {
 					cb(null, places);
 				});
 			},
@@ -132,12 +140,20 @@ module.exports = function (express) {
 				});
 			},
 			function (cb) {
-				City.find({ deleted : false }).populate('image').exec(function (err, places) {
+				City.find({ deleted : false }, {}, { 
+					sort : { 
+						title : 1 
+					} 
+				}).populate('image').exec(function (err, places) {
 					cb(null, places);
 				});
 			},
 			function (cb) {
-				City.find({ deleted : false, popular : true }).populate('image').exec(function (err, places) {
+				City.find({ deleted : false, popular : true }, {}, { 
+					sort : { 
+						title : 1 
+					} 
+				}).populate('image').exec(function (err, places) {
 					cb(null, places);
 				});
 			},
