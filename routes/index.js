@@ -36,7 +36,7 @@ module.exports = function (express) {
 			function (cb) {
 				City.find({ deleted : false }, {}, { 
 					sort : { 
-						title : 1 
+						name : 1 
 					} 
 				}).populate('image').exec(function (err, places) {
 					cb(null, places);
@@ -45,7 +45,7 @@ module.exports = function (express) {
 			function (cb) {
 				City.find({ deleted : false, popular : true }, {}, { 
 					sort : { 
-						title : 1 
+						name : 1 
 					} 
 				}).populate('image').exec(function (err, places) {
 					cb(null, places);
@@ -142,7 +142,7 @@ module.exports = function (express) {
 			function (cb) {
 				City.find({ deleted : false }, {}, { 
 					sort : { 
-						title : 1 
+						name : 1 
 					} 
 				}).populate('image').exec(function (err, places) {
 					cb(null, places);
@@ -151,7 +151,7 @@ module.exports = function (express) {
 			function (cb) {
 				City.find({ deleted : false, popular : true }, {}, { 
 					sort : { 
-						title : 1 
+						name : 1 
 					} 
 				}).populate('image').exec(function (err, places) {
 					cb(null, places);
