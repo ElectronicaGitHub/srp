@@ -12,10 +12,12 @@ angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide)
 	      },
 	      'response': function(response) {
 	        // do something on success
-	        $('.admin_hint').show();
-        	setTimeout(function () {
-	        	$('.admin_hint').hide();
-        	}, 1000);
+	        if (typeof response.data != 'string') {
+		        $('.admin_hint').show();
+	        	setTimeout(function () {
+		        	$('.admin_hint').hide();
+	        	}, 1000);
+	        }
 	        return response;
 	      }
 	    };
