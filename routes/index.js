@@ -172,8 +172,18 @@ module.exports = function (express) {
 			}],
 			function (err, results) {
 				res.render('hotels_list', {
-					tags : results[0],
-					cities : results[1],
+					tags : results[0].map(function (el) {
+						if (el._id == req.query.tags) {
+							el.selected = true;
+						}
+						return el;
+					}),
+					cities : results[1].map(function (el) {
+						if (el._id == req.query.city) {
+							el.selected = true;
+						}
+						return el;
+					}),
 					cities_popular : results[2],
 					hotels : results[3],
 					costs : [
@@ -181,7 +191,8 @@ module.exports = function (express) {
 						{ _id : 1, name : 'от 3000 до 6000'},
 						{ _id : 2, name : 'от 6000'}
 					],
-					host : req.protocol + '://'+ req.headers.host
+					host : req.protocol + '://'+ req.headers.host,
+					query : req.query
 				});
 			});
 	});
