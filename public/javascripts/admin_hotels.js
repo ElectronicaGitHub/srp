@@ -149,6 +149,10 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 			return el._id;
 		});
 
+		delete place._tags;
+		delete place._places;
+		delete place._benefits;
+
 		place.price = [];
 		for (var i = 1; i < 5; i++) {
 			place.price.push(place['price' + i]);
