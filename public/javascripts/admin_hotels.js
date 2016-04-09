@@ -119,8 +119,11 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 		})
 			.success(function (data) {
 				$scope[key] = $scope[key] || [];
-				$scope[key] = $scope[key].concat(data.filesArray);
-				console.log(data);
+				if (data.filesArray) {
+					$scope[key] = $scope[key].concat(data.filesArray);
+				} else {
+					$scope.images_msg = 'Одна или несколько фотографий больше указанного размера'
+				}
 			})
 			.error(function (data) {
 				console.log(data);
