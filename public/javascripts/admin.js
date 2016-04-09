@@ -191,10 +191,17 @@ angular.module('serpAdmin', ['ui.bootstrap'], function ($httpProvider, $provide)
 	$scope.iterateModel = null;
 
 	$scope.delete = function (name, model) {
+
 		$http.delete('/admin/' + name + '/' + model._id)
 		.success(function (data) {
 			console.log(data);
-			$scope[$scope.iterateModel].splice($scope.removeIndex, 1);
+			// $scope[$scope.iterateModel].splice($scope.removeIndex, 1);
+			for (var i in $scope[$scope.iterateModel]) {
+				if ($scope[$scope.iterateModel][i]._id == model._id) {
+					$scope[$scope.iterateModel].splice(i, 1);
+				}
+			}
+			
 		})
 		.error(function (data) {
 			console.log(data);

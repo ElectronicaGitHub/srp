@@ -41,7 +41,7 @@ module.exports = function (express) {
 	router.get('/', function (req, res, next) {
 		async.series([
 		function (cb) {
-			Tag.find({}).populate('image').exec(function (err, tags) {
+			Tag.find({}, {}, { sort : { name : 1 }}).populate('image').exec(function (err, tags) {
 				cb(null, tags);
 			});
 		},
@@ -51,17 +51,17 @@ module.exports = function (express) {
 			});
 		},
 		function (cb) {
-			City.find({}).populate('image').exec(function (err, cities) {
+			City.find({}, {}, { sort : { name : 1 }}).populate('image').exec(function (err, cities) {
 				cb(null, cities);
 			});
 		},
 		function (cb) {
-			RestPlace.find({}).populate('images').exec(function (err, restplaces) {
+			RestPlace.find({}, {}, { sort : { title : 1 }}).populate('images').exec(function (err, restplaces) {
 				cb(null, restplaces);
 			});
 		},
 		function (cb) {
-			Place.find({}).populate('images').exec(function (err, places) {
+			Place.find({}, {}, { sort : { title : 1 }}).populate('images').exec(function (err, places) {
 				cb(null, places);
 			});
 		},
@@ -267,6 +267,27 @@ module.exports = function (express) {
 			if (err) return next(err);
 			res.json({
 				message : 'ok'
+			});
+		});
+	});
+
+	router.delete('/place/:id', function (req, res, next) {
+		Place.findById(req.params.id).populate('images').exec(function (err, rp) {
+			async.each(rp.images, function (file, callback) {
+				imageRemove(null, file, function () {
+					callback();
+				}, function (err) {
+					callback(err);
+				})
+			}, function (err) {
+				if (err) return next(err);
+				rp.remove(function (err, ok) {
+					if (err) return next(err);
+					res.json({
+						message: 'ok'
+					});
+					
+				})
 			});
 		});
 	});

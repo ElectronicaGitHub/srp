@@ -224,15 +224,14 @@
 					<label>Поиск по местам</label>
 					<input class="form-control" type="text" ng-model="places_filter">
 				</div>
-				<div ng-repeat="place in places | filter:places_filter" class="checkbox listed-objects">
+				<div ng-repeat="place in places | filter:places_filter" class="listed-objects">
 					<span class="misc">
 						<a href="/place/{{ place.title_url }}" target="_blank"><span class="fa fa-eye"></span></a>
 						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
+						<span class="fa fa-times" ng-click="deleteModal('place', place, $index, 'places')"></span>
 					</span>
-					<label>
-						<div style="background-image : url('{{ place.images[0].path_low }}')" class="img"></div>
-						<span class="name">{{ place.title }}</span>
-					</label>
+					<div style="background-image : url('{{ place.images[0].path_low }}')" class="img"></div>
+					<span class="name">{{ place.title }}</span>
 				</div>
 			</div>
 		</div>
@@ -245,17 +244,14 @@
 					<label>Поиск по отелям</label>
 					<input class="form-control" type="text" ng-model="restplaces_filter">
 				</div>
-				<div ng-repeat="place in restplaces | filter:restplaces_filter" class="checkbox listed-objects">
+				<div ng-repeat="place in restplaces | filter:restplaces_filter" class="listed-objects">
 					<span class="misc">
 						<a href="/hotel/{{ place.title_url }}" target="_blank"><span class="fa fa-eye"></span></a>
 						<a href="/admin/update/hotel/{{ place._id }}"><span class="fa fa-pencil"></span></a>
 						<span class="fa fa-times" ng-click="deleteModal('restplace', place, $index, 'restplaces')"></span>
 					</span>
-
-					<label>
-						<div style="background-image : url('{{ place.images[0].path_low }}')" class="img"></div>
-						<span class="name">{{ place.title }}</span>
-					</label>
+					<div style="background-image : url('{{ place.images[0].path_low }}')" class="img"></div>
+					<span class="name">{{ place.title }}</span>
 				</div>
 			</div>
 		</div>
