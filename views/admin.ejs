@@ -72,7 +72,10 @@
 		</div>
 		
 		<div class="block">
-			<div class="title">Готовые теги</div>
+			<div class="title">
+				Готовые теги
+				<span> ({{ tags.length }})</span>
+				</div>
 			<div class="wrapper">
 				<div ng-repeat="tag in tags" ng-class="{ deleted : tag.deleted }" class="listed-objects">
 					<span class="misc">
@@ -167,7 +170,10 @@
 		</div>
 		
 		<div class="block">
-			<div class="title">Готовые города</div>
+			<div class="title">
+				Готовые города
+				<span> ({{ cities.length }})</span>
+			</div>
 			<div class="wrapper">
 				<div ng-repeat="city in cities" ng-class="{ deleted : city.deleted }" class="listed-objects">
 					<span class="misc">
@@ -217,14 +223,20 @@
 
 	<div class="right">
 		<div class="block">
-			<div class="title">Места</div>
+			<div class="title">
+				Места
+				<span> ({{ places.length }})</span>
+				</div>
 
 			<div class="wrapper">
 				<div class="form-group">
-					<label>Поиск по местам</label>
-					<input class="form-control" type="text" ng-model="places_filter">
+					<label>Поиск по названию</label>
+					<input class="form-control" type="text" ng-model="places_filter.title">
+					<label>Поиск по городу</label>
+					<select class="form-control" ng-options="city._id as city.name for city in cities" ng-model="places_filter.city"></select>
 				</div>
-				<div ng-repeat="place in places | filter:places_filter" class="listed-objects">
+				<div ng-if="!places_filter.title.length && !places_filter.city">Введи название или выбери город для поиска</div>
+				<div ng-repeat="place in places | filter:places_filter" class="listed-objects" ng-if="places_filter.title.length || places_filter.city">
 					<span class="misc">
 						<a href="/place/{{ place.title_url }}" target="_blank"><span class="fa fa-eye"></span></a>
 						<a href="/admin/update/place/{{ place._id }}"><span class="fa fa-pencil"></span></a>
@@ -237,14 +249,20 @@
 		</div>
 
 		<div class="block">
-			<div class="title">Отели</div>
+			<div class="title">
+				Отели
+				<span> ({{ restplaces.length }})</span>
+			</div>
 
 			<div class="wrapper">
 				<div class="form-group">
-					<label>Поиск по отелям</label>
-					<input class="form-control" type="text" ng-model="restplaces_filter">
+					<label>Поиск по названию</label>
+					<input class="form-control" type="text" ng-model="restplaces_filter.title">
+					<label>Поиск по городу</label>
+					<select class="form-control" ng-options="city._id as city.name for city in cities" ng-model="restplaces_filter.city"></select>
 				</div>
-				<div ng-repeat="place in restplaces | filter:restplaces_filter" class="listed-objects">
+				<div ng-if="!restplaces_filter.title.length && !restplaces_filter.city">Введи название или выбери город для поиска</div>
+				<div ng-repeat="place in restplaces | filter:restplaces_filter" class="listed-objects" ng-if="restplaces_filter.title.length || restplaces_filter.city">
 					<span class="misc">
 						<a href="/hotel/{{ place.title_url }}" target="_blank"><span class="fa fa-eye"></span></a>
 						<a href="/admin/update/hotel/{{ place._id }}"><span class="fa fa-pencil"></span></a>

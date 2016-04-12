@@ -135,10 +135,13 @@
 
 			<div class="wrapper">
 				<div class="form-group">
-					<label>Поиск по местам</label>
-					<input class="form-control" type="text" ng-model="places_filter">
+					<label>Поиск по названию</label>
+					<input class="form-control" type="text" ng-model="places_filter.title">
+					<label>Поиск по городу</label>
+					<select class="form-control" ng-options="city._id as city.name for city in _cities" ng-model="places_filter.city"></select>
 				</div>
-				<div ng-repeat="place in restplace._places | filter:places_filter" class="listed-objects">
+				<div ng-if="!places_filter.title.length && !places_filter.city">Введи название или выбери город для поиска</div>
+				<div ng-repeat="place in restplace._places | filter:places_filter" class="listed-objects" ng-if="places_filter.title.length || places_filter.city">
 					<input type="checkbox" ng-model="place.selected">
 					<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
 					<span class="name">{{ place.title }}</span>
