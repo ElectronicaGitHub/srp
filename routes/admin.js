@@ -61,7 +61,7 @@ module.exports = function (express) {
 			});
 		},
 		function (cb) {
-			Place.find({}, {}, { sort : { title : 1 }}).populate('images').exec(function (err, places) {
+			Place.find({}).populate('images').exec(function (err, places) {
 				cb(null, places);
 			});
 		},

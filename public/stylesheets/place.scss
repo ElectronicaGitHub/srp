@@ -7,6 +7,10 @@ $picker_width_mini: $offer_width_mini - 30px;
 
 $image_height: 450px;
 
+$header_text_color: #333;
+$header_color: #fafafa;
+
+
 header {
 	display: none;
 }
@@ -97,7 +101,9 @@ header {
 		}
 		.title-content {
 			overflow: hidden;
-			background-color: #151413;
+			background-color: $header_color;
+			box-shadow: 0 1px 2px rgba(0,0,0,.2);
+			position: relative;
 			> div {
 				.wrappers-container {
 					position: relative;
@@ -118,19 +124,19 @@ header {
 							margin: 0;
 							font-size: 24px;
 							font-weight: 700;
-							color: white;
+							color: $header_text_color;
 							@include respond-to(handhelds) { font-size: 14px; }
 							@include respond-to(mobile-screens) { font-size: 16px; }
 						}
 						.target-name {
 							font-size: 16px;
 							padding: 0;
-							color: white;
+							color: $header_text_color;
 							margin-top: 4px;
 							@include respond-to(handhelds) { font-size: 11px; }
 							@include respond-to(mobile-screens) { font-size: 12px; }
 							span {
-								color: white;
+								color: $header_text_color;
 								margin-right: 8px;
 							}
 						}

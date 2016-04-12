@@ -138,12 +138,10 @@
 					<label>Поиск по местам</label>
 					<input class="form-control" type="text" ng-model="places_filter">
 				</div>
-				<div ng-repeat="place in restplace._places | filter:places_filter" class="checkbox listed-objects">
-					<label>
-						<input type="checkbox" ng-model="place.selected">
-						<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
-						<span class="name">{{ place.title }}</span>
-					</label>
+				<div ng-repeat="place in restplace._places | filter:places_filter" class="listed-objects">
+					<input type="checkbox" ng-model="place.selected">
+					<div style="background-image : url('{{ place.images[0].path }}')" class="img"></div>
+					<span class="name">{{ place.title }}</span>
 				</div>
 			</div>
 		</div>
