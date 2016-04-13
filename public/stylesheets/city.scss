@@ -13,6 +13,7 @@
 		font-weight: 700;
 		font-size: 50px;
 		color: white;
+		font-family: 'Lisa';		
 		@include respond-to(handhelds) { font-size: 25px; line-height: 360px; }
 		@include respond-to(medium-screens) { font-size: 35px; line-height: 450px; }
 	}
