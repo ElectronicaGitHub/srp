@@ -484,7 +484,7 @@ var imageRemove = function (id, image, cbSuccess, cbError) {
 
 var fileSave = function (file, cb, cbFail) {
 	file = file[0];
-	if (file.size > (300 * 1024)) {
+	if (file.size > (240 * 1024)) {
   		cbFail({
   			message : 'Файл превышает указанный размер в 300 Кб.'
   		});
