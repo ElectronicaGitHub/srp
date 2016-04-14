@@ -53,6 +53,18 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 	        center: [55.76, 37.64], 
 	        zoom: 7
 	    });
+
+	    for (var i in places) {
+	    
+	    	myPlacemark = new ymaps.Placemark(places[i].coordinates, {
+				hintContent : places[i].title
+			}, {
+		    	preset: 'islands#icon',
+	            iconColor: '#blue'
+		    });	
+		    map.geoObjects.add(myPlacemark);
+	    }
+
 	    map.events.add('click', function (e) {
 
 	    	map.geoObjects.removeAll();
