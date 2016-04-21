@@ -44,26 +44,51 @@ angular.module('serpAdmin', []).controller('MainCtrl', [ '$scope', '$http', func
 
 	$scope._cities = window.cities;
 
-	var map;
+	var map, myPlacemark;
 	
 	ymaps.ready(mapInit);
 
 	function mapInit() {
 	 	map = new ymaps.Map("map", {
-	        center: [55.76, 37.64], 
+	        center: $scope.restplace.coordinates || [55.76, 37.64], 
 	        zoom: 7
 	    });
-	    map.events.add('click', function (e) {
 
-	    	map.geoObjects.removeAll();
+	    for (var i in places) {
+	    
+	    	a = new ymaps.Placemark(places[i].coordinates, {
+				hintContent : places[i].title
+			}, {
+		    	preset: 'islands#icon',
+	            iconColor: '#blue'
+		    });	
+		    map.geoObjects.add(a);
+	    }
 
-		    var coords = e.get('coords');
-
-		    myPlacemark = new ymaps.Placemark(coords, {}, {
+	    if ($scope.restplace.coordinates) {
+	    	myPlacemark = new ymaps.Placemark($scope.restplace.coordinates, {}, {
 		    	preset: 'islands#icon',
 	            iconColor: '#E82C0C'
 		    });	
 		    map.geoObjects.add(myPlacemark);
+	    }
+
+	    map.events.add('click', function (e) {
+
+	    	// map.geoObjects.removeAll();
+	    	// myPlacemark.remove();
+
+		    var coords = e.get('coords');
+
+		    if (myPlacemark) {
+		    	myPlacemark.geometry.setCoordinates(coords);
+		    } else {{
+			    myPlacemark = new ymaps.Placemark(coords, {}, {
+			    	preset: 'islands#icon',
+		            iconColor: '#E82C0C'
+			    });	
+			    map.geoObjects.add(myPlacemark);
+		    }}
 
 		    // Отправим запрос на геокодирование.
             var names = [];
