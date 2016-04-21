@@ -46,21 +46,14 @@ module.exports = function  (express) {
 	});
 	
 	router.get('/result', function (req, res, next) {
-		console.log(req.params);
-		console.log(req.query);
-	    // if(r.checkPayment(req.params)){
-	        // console.log("PAYMENT SUCCESS!");
-			// Request.findByIdAndUpdate(req.query.shp_payId, { status : 2 }, function (err, result) {
-				// res.redirect('/cabinet');
-			// });
-	    // }else{
-	        // console.log("PAYMENT NOT SUCCESS!");
-			res.redirect('/cabinet');
-	    // }
+		res.send(1);
 	});
 	
 	router.get('/success', function (req, res, next) {
-		res.redirect('/cabinet');
+		Request.findByIdAndUpdate(req.query.shp_payId, { status : 2 }, function (err, result) {
+			if (err) console.log(err);
+			res.redirect('/cabinet');
+		});
 	});
 
 	router.get('/fail', function (req, res, next) {
