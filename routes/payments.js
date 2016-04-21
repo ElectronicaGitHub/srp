@@ -25,26 +25,15 @@ var robokassa = {
 }
 module.exports = function  (express) {
 	var router = express.Router();
-//	console.log(req.params);
 	router.get('/success', function (req, res, next) {
 		 Request.findByIdAndUpdate(req.query.shp_payId, { status : 2 }, function (err, result) {
-		 //res.json({
-		 //	 message : 'ok'
-	 	 // })
 			res.redirect('/cabinet');
 		 });
-	//	console.log(req.params);
-	//	console.log(req.query);
-
-	//	res.send('1');
 	});
-
 
 	router.get('/fail', function (req, res, next) {
 		res.redirect('/cabinet');
-	})
-
-
+	});
 
 	return router;
 	
