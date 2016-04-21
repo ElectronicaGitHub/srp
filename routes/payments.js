@@ -29,13 +29,13 @@ module.exports = function  (express) {
 	var router = express.Router();
 
 	router.post('/link', function (req, res, next) {
-	    link = { 
+	    link = {
+	    	// InvId : 2147483647 ((2^31) - 1)
 	    	isTest : 1,
 	    	MerchantLogin : robokassa.login,
 	    	OutSum : req.body.sum + '.00',
 	    	InvDesc: "Оплата услуг по организации вашего отдыха",
-	    	SignatureValue : '92974876b454919ce9be7fa2e9073727',
-	    	// SignatureValue : md5([robokassa.login, req.body.sum, '', robokassa.env['test'].pass2].join(':')),
+	    	SignatureValue : md5([robokassa.login, req.body.sum, '', robokassa.env['test'].pass2].join(':')),
 	    	Encoding : 'UTF-8',
 	    	shp_payId: req.body.id
 	    };

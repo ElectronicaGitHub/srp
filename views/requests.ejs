@@ -34,7 +34,7 @@
 					<span class="status">
 						<div ng-if="!r.status">
 							<p>Установить тариф</p>
-							<p><button ng-click="updateReq(r, { tariff : 1 , status : 1, final_price : r.price * 0.02 } )">Подтвердить</button></p>
+							<p><button ng-click="updateReq(r, { tariff : 1 , status : 1, final_price : r.price * 0.02 } )">Подтвердить ({{ r.price * 0.02 }} руб.) </button></p>
 							<!-- <p><button ng-click="updateReq(r, { tariff : 2 , status : 1, final_price : r.price * 1.04 } )">Помощь в подборе</button></p>
 							<p><button ng-click="updateReq(r, { tariff : 3 , status : 1, final_price : r.price * 1.1  } )">Полное Сопровождение</button></p> -->
 						</div>
