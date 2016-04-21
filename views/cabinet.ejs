@@ -32,17 +32,7 @@
 					<span class="status">
 						<div class="status-text order_2" ng-if="!r.status">Заказ обрабатывается</div>
 						<div class="status-text order_1" ng-if="r.status == 1">
-							<form action="<%= yandexMoney.postUrl %>" method="post">
-								<input name="shopId" value="<%= yandexMoney.shopId %>" type="hidden"/>
-							    <input name="scid" value="<%= yandexMoney.scid %>" type="hidden"/>
-							    <input name="sum" value="{{ r.final_price }}" type="hidden">
-							    <input name="customerNumber" value="<%= user._id  %>" type="hidden"/>
-							    <input name="paymentType" value="AC" type="hidden"/>
-							    <input name="orderNumber" value="{{ r._id }}" type="hidden"/>
-							    <input name="cps_phone" value="{{ r.phone }}" type="hidden"/>
-							    <input name="cps_email" value="<%= user.email %>" type="hidden"/>
-								<button type="submit">Оплатить ( {{ r.final_price }} руб.)</button>
-							</form>
+							<button ng-click="makeLink(r)">Оплатить ( {{ r.final_price }} руб.)</button>
 						</div>
 						<div class="status-text order_2" ng-if="r.status == 2"><i class="fa fa-check"></i>Заказ оплачен</div>
 					</span>

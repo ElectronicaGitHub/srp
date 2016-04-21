@@ -1,6 +1,5 @@
-var shopId = 51180;
-var scid = 533684;
-var paymentUrl = 'https://demomoney.yandex.ru/eshop.xml';
+var crypto = require('crypto');
+var md5 = require('md5');
 var Request = require('../models/Request.js');
 
 var robokassa = {
@@ -16,6 +15,8 @@ var robokassa = {
 			pass2 : 'lv0N2J1ozoDMi9ad0fxo'
 		},
 	},
+	base : 'https://auth.robokassa.ru/Merchant/Index.aspx',
+	login : 'serpantinmoscow',
 	urls : {
 		methods : 'POST, POST, POST',
 		result : 'serpantin.moscow/result',
@@ -23,12 +24,41 @@ var robokassa = {
 		fail : 'serpantin.moscow/fail'
 	}
 }
+
 module.exports = function  (express) {
 	var router = express.Router();
-	router.get('/success', function (req, res, next) {
-		 Request.findByIdAndUpdate(req.query.shp_payId, { status : 2 }, function (err, result) {
+
+	router.post('/link', function (req, res, next) {
+	    link = { 
+	    	isTest : 1,
+	    	MerchantLogin : robokassa.login,
+	    	OutSum : req.body.sum + '.00',
+	    	InvDesc: "Оплата услуг по организации вашего отдыха",
+	    	SignatureValue : '92974876b454919ce9be7fa2e9073727',
+	    	// SignatureValue : md5([robokassa.login, req.body.sum, '', robokassa.env['test'].pass2].join(':')),
+	    	Encoding : 'UTF-8',
+	    	shp_payId: req.body.id
+	    };
+	    res.json({
+	    	base : robokassa.base,
+	    	link : link
+	    });
+	});
+	
+	router.get('/result', function (req, res, next) {
+	    if(r.checkPayment(req.params)){
+	        console.log("PAYMENT SUCCESS!");
+			Request.findByIdAndUpdate(req.query.shp_payId, { status : 2 }, function (err, result) {
+				res.redirect('/cabinet');
+			});
+	    }else{
+	        console.log("PAYMENT NOT SUCCESS!");
 			res.redirect('/cabinet');
-		 });
+	    }
+	});
+	
+	router.get('/success', function (req, res, next) {
+		res.redirect('/cabinet');
 	});
 
 	router.get('/fail', function (req, res, next) {
@@ -37,6 +67,13 @@ module.exports = function  (express) {
 
 	return router;
 	
+}
+
+function hash(data) {
+	console.log(data);
+	return crypto.createHash('md5')
+		.update(data)
+		.digest('hex');
 }
 
 // module.exports = function (express) {
