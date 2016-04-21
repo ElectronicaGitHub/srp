@@ -79,7 +79,7 @@ module.exports = function (express) {
 			res.redirect('/');
 		} else {
 			Request.find({ owner : req.user._id})
-				.deepPopulate('hotel owner hotel.mini_images')
+				.deepPopulate('hotel owner hotel.images')
 				.exec(function (err, requests) {
 				if (err) return next(err);
 				res.render('cabinet', {
