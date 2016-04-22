@@ -35,7 +35,7 @@ module.exports = function  (express) {
 	    	MerchantLogin : robokassa.login,
 	    	OutSum : req.body.sum + '.00',
 	    	InvDesc: "Оплата услуг по организации вашего отдыха",
-	    	SignatureValue : md5([robokassa.login, req.body.sum, '', robokassa.env['test'].pass2].join(':')),
+	    	SignatureValue : md5([robokassa.login, req.body.sum, '', robokassa.env['test'].pass1].join(':')),
 	    	Encoding : 'UTF-8',
 	    	shp_payId: req.body.id
 	    };
