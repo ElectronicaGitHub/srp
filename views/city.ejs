@@ -31,7 +31,7 @@
 						<div class="cell block-wrapper item">
 							<div class="images-with-radio-wrapper">
 								<div class="images-wrapper">
-									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url('<%= hotel.images[0].path_low %>')"></div>
+									<div class="card-image current" style="background-image: url('<%= hotel.images[0].path_low %>')"></div>
 								</div>
 							</div>
 
@@ -72,8 +72,8 @@
 
 		<% for (var i = 0, ii = places.length; i < ii; i++) { var place = places[i]; %>
 			<a href="/place/<%= place.title_url %>" target="_blank">
-				<div class="block-wrapper single js-init-place col-xs-12 col-sm-4 col-md-3 col-lg-3" data-id="<%= place._id %>">
-					<div style="background-image: url('<%= place.images[0].path_low %>');" class="block">
+				<div class="place-wrapper single js-init-place col-xs-12 col-sm-4 col-md-3 col-lg-3" data-id="<%= place._id %>">
+					<div style="background-image: url('<%= place.images[0].path_low %>');" class="place">
 						<div class="fader">
 							<span class="info">
 								<p class="title"><%= place.title %></p> 

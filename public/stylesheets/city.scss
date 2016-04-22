@@ -39,70 +39,70 @@
 			}
 		}
 	}
-	// .block-wrapper {
-	// 	padding: 5px;
-	// 	height: 200px;
-	// 	line-height: 200px;
-	// 	&.item {
-	// 		padding: 0 0 10px 0;
-	// 		height: 400px;
-	// 		line-height: 400px;
-	// 	}
-	// 	&.single {
-	// 		// width: 25%;
-	// 		// float: left;
-	// 	}
-	// 	.block {
-	// 		background-position: center;
-	// 		background-size: cover;
-	// 		width: 100%;
-	// 		height: 100%;
-	// 		text-align: center;
-	// 		position: relative;
-	// 		border-radius: 3px;
-	// 		.fader {
-	// 			position: absolute;
-	// 			top: 0;
-	// 			left: 0;
-	// 			width: 100%;
-	// 			height: 100%;
-	// 			background: rgba(0,0,0,.3);
-	// 			border-radius: 3px;
-	// 			.info {
-	// 				display: inline-block;
-	// 				vertical-align: middle;
-	// 				line-height: 22px;
-	// 				> * {
-	// 					color: white;
-	// 					margin: 0;
-	// 				}
-	// 				.title {
-	// 					font-size: 17px;
-	// 					font-weight: 700;
-	// 				}
-	// 				.tip {
-	// 					font-size: 13px;
-	// 					font-weight: 300;
-	// 				}
-	// 			}
+	.place-wrapper {
+		padding: 5px;
+		height: 200px;
+		line-height: 200px;
+		&.item {
+			padding: 0 0 10px 0;
+			height: 400px;
+			line-height: 400px;
+		}
+		&.single {
+			// width: 25%;
+			// float: left;
+		}
+		.place {
+			background-position: center;
+			background-size: cover;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			position: relative;
+			border-radius: 3px;
+			.fader {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0,0,0,.3);
+				border-radius: 3px;
+				.info {
+					display: inline-block;
+					vertical-align: middle;
+					line-height: 22px;
+					> * {
+						color: white;
+						margin: 0;
+					}
+					.title {
+						font-size: 17px;
+						font-weight: 700;
+					}
+					.tip {
+						font-size: 13px;
+						font-weight: 300;
+					}
+				}
 				
-	// 		}
-	// 		.info-bottom {
-	// 			background: rgba(0,0,0,.3);
-	// 			line-height: 22px;
-	// 			font-weight: 700;
-	// 			font-size: 18px;
-	// 			position: absolute;
-	// 			text-align: left;
-	// 			bottom: 0;
-	// 			left: 0;
-	// 			width: 100%;
-	// 			padding: 10px;
-	// 			border-radius: 0 0 3px 3px;
-	// 			p.title {
-	// 				color: white;
-	// 			}
-	// 		}
-	// 	}
-	// }
+			}
+			.info-bottom {
+				background: rgba(0,0,0,.3);
+				line-height: 22px;
+				font-weight: 700;
+				font-size: 18px;
+				position: absolute;
+				text-align: left;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				padding: 10px;
+				border-radius: 0 0 3px 3px;
+				p.title {
+					color: white;
+				}
+			}
+		}
+	}
 }
