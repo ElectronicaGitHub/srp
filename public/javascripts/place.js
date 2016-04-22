@@ -1,22 +1,24 @@
-$(function () {
+var hotel = window.hotel,
+	coords = window.hotel.coordinates,
+	map;
 
-	var hotel = window.hotel,
-		coords = window.hotel.coordinates,
-		map;
-		
-	ymaps.ready(function () {
-		map = new ymaps.Map("map", {
-			center: coords,
-			zoom: 10,
-			type : 'yandex#map',
-			controls : []
-		});
-		myPlacemark = new ymaps.Placemark(coords, {}, {
-			preset: 'islands#icon',
-			iconColor: '#F34352'
-		});
-		map.geoObjects.add(myPlacemark);
-
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: {
+			lat: coords[0], 
+			lng: coords[1]
+		},
+		zoom: 11
 	});
 
-});
+	var marker = new google.maps.Marker({
+		position: {
+			lat: coords[0], 
+			lng: coords[1]
+		},
+		map: map,
+		zIndex : 20,		
+		title: 'Hello World!'
+	});
+
+}

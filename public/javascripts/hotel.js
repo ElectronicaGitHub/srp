@@ -31,6 +31,7 @@ function initMap() {
 				icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
 				position: loc,
 				map: map,
+				zIndex : 10,
 				title: place.title
 			}).addListener('click', function () {
 				(function (place) {
@@ -58,6 +59,7 @@ function initMap() {
 	var marker = new google.maps.Marker({
 		position: loc,
 		map: map,
+		zIndex : 20,		
 		title: 'Hello World!'
 	});
 
