@@ -23,6 +23,9 @@ header {
 			.username {
 				float: right;
 				padding-right: 25px;
+				@include respond-to(mobile-screens) { padding-right : 10px; }
+				@include respond-to(handhelds) { font-size: 12px; padding-right : 0px; }
+
 				
 				img {
 					vertical-align: top;
@@ -30,6 +33,8 @@ header {
 					width: 30px;
 					height: 30px;
 					margin-right: 8px;
+					@include respond-to(handhelds) { width: 20px; height: 20px; margin-top: 5px; }
+
 				}
 			}
 			.login, .cabinet {
@@ -41,6 +46,7 @@ header {
 				padding-left: 5px;
 				transition: background .1s;
 				text-decoration: none;
+				@include respond-to(handhelds) { font-size: 12px; padding-right : 0px; }
 				.fa-container {
 					display: inline-block;
 					width: 30px;
@@ -80,6 +86,8 @@ header {
 			}
 			a.cabinet {
 				margin-right: 20px;
+				@include respond-to(mobile-screens) { margin-right: 5px; }
+				@include respond-to(handhelds) { font-size: 12px; margin-right : 0px; }
 			}
 		}
 	}
