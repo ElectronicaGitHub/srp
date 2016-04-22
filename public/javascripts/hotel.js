@@ -17,7 +17,7 @@ function initMap() {
 
 	var zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', function(event) {
         google.maps.event.removeListener(zoomChangeBoundsListener);
-        map.setZoom( 11 );
+        map.setZoom( Math.min( 11, map.getZoom() );
     });
 
 
