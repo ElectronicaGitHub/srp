@@ -1,2 +1,3 @@
 #placesModal .modal-body{overflow:hidden;padding:0}#placesModal .modal-body button.close{position:absolute;top:5px;right:10px}#placesModal .modal-body .left,#placesModal .modal-body .right{height:300px;width:50%;float:left;display:inline-block}#placesModal .modal-body .left .image{background-size:cover;background-position:center;width:100%;height:100%}#placesModal .modal-body .right .info{padding:15px 20px}#placesModal .modal-body .right .info .title{font-size:20px;font-weight:700}#placesModal .modal-body .right .info .city-wrapper{margin-top:5px}#placesModal .modal-body .right .info .city-wrapper i{margin-right:5px}#placesModal .modal-body .right .info .description{margin-top:10px}
+
 /*# sourceMappingURL=places-modal.css.map */
