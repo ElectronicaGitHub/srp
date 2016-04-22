@@ -1,4 +1,4 @@
-var InvId = require('./models/InvId.js');
+var InvId = require('../models/InvId.js');
 
 InvId.findOne({}, function (err, finded) {
 	if (!finded) {

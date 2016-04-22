@@ -2,9 +2,9 @@ var path = require('path');
 var async = require('async');
 var fs = require('fs');
 var gm = require('gm');
-var mongoose = require('./configs/mongoose');
-var config = require('./configs/config_file');
-var Img = require('./models/Img.js');
+var mongoose = require('../configs/mongoose');
+var config = require('../configs/config_file');
+var Img = require('../models/Img.js');
 
 mongoose.connection.on('open', function () {
 });
