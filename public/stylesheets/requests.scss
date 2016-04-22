@@ -16,7 +16,6 @@
 
 .content {
 	background: white;
-	padding: 20px;
 	.requests {
 		> .title {
 			text-align: center;
@@ -26,15 +25,54 @@
 		.request {
 			position: relative;
 			background: #f7f7f7;
-			padding: 20px;
+			padding: 25px 0 0 0;
 			border-bottom: 1px solid rgba(0,0,0,.1);
-			.title {
-				font-size: 20px;
+			overflow: hidden;
+			.img {
+				background-position: center;
+				background-size: cover;
+				width: 100px;
+				height: 50px;
+				float: left;
+				margin-right: 10px;
 			}
 			.status {
 				position: absolute;
-				top: 25px;
-				right: 25px;
+				top: 10px;
+				right: 10px;
+			}
+			.top-panel {
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding: 2px;
+				font-weight: 700;
+				> * {
+					padding: 0 5px;
+					float: left;
+				}
+				.id {
+					background: lightgreen;
+				}
+				.client {
+					background: lightblue;
+				}
+				.phone {
+					background: lightcoral;
+					color: white;
+				}
+				.dates {
+					background: orange;
+				}
+				.count {
+					background: lightyellow;
+				}
+			}
+			.info {
+				float: left;
+				.title {
+					font-size: 20px;
+				}
 			}
 		}
 	}

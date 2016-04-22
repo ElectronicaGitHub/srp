@@ -30,7 +30,7 @@ module.exports = function (express) {
 	});
 
 	router.get('/', function (req, res, next) {
-		Request.find({}).populate('hotel owner').exec(function (err, results) {
+		Request.find({}).deepPopulate('hotel owner hotel.images').exec(function (err, results) {
 			if (err) return next(err);
 			res.render('requests', {
 				requests : results

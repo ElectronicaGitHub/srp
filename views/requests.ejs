@@ -20,20 +20,25 @@
 		<div class="requests">
 			<p class="title">Заказы клиентов</p>
 				<div class="request" ng-repeat="r in requests">
-					<p><a class="title" href="/hotel/{{ r.hotel.title_url }}" target="_blank">{{ r.hotel.title }}</a></p>
+					<div class="img" style="background-image:url('{{ r.hotel.images[0].path_low }}')"></div>
+					<div class="info">
+						<p><a class="title" href="/hotel/{{ r.hotel.title_url }}" target="_blank">{{ r.hotel.title }}</a></p>
+					</div>
 
-					<p class="count">id заказа: {{ r._id }}</p>
-					<p class="dates">Выбранные даты: {{ r.dates }}</p>
-					<p class="phone">Имя: {{ r.owner.name }}, Телефон: {{ r.phone }}</p>
-					<p class="count">Отдыхающих: {{ r.count }}, Цена:
-						<span >
-							<input type="number" ng-model="r.price">
-							<button ng-click="updateReq(r, { price : r.price })">Поменять</button>
+					<div class="top-panel">
+						<span class="id">id: {{ r._id }}</span>
+						<span class="client">{{ r.owner.name }} ({{ r.count }})</span>
+						<span class="phone">Телефон: {{ r.phone }}</span>
+						<span class="dates">Даты: {{ r.dates }}</span>
+						<span class="count">Цена: {{ r.price }}
+							<!-- <span > -->
+								<!-- <input type="number" ng-model="r.price"> -->
+								<!-- <button ng-click="updateReq(r, { price : r.price })">Поменять</button> -->
+							<!-- </span> -->
 						</span>
-					</p>
+					</div>
 					<span class="status">
 						<div ng-if="!r.status">
-							<p>Установить тариф</p>
 							<p><button ng-click="updateReq(r, { tariff : 1 , status : 1, final_price : r.price * 0.02 } )">Подтвердить ({{ r.price * 0.02 }} руб.) </button></p>
 							<!-- <p><button ng-click="updateReq(r, { tariff : 2 , status : 1, final_price : r.price * 1.04 } )">Помощь в подборе</button></p>
 							<p><button ng-click="updateReq(r, { tariff : 3 , status : 1, final_price : r.price * 1.1  } )">Полное Сопровождение</button></p> -->
