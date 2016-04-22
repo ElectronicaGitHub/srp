@@ -164,7 +164,7 @@
 						<div class="images-with-radio-wrapper">
 							<div class="images-wrapper">
 								<% for (var i = 0; i < hotel.images.length; i++) { %>
-									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url(<%= hotel.images[i].path_low %>)"></div>
+									<div data-n="<%= i %>" class="card-image <%= i == 0 ? 'current' : '' %>" style="background-image: url('<%= hotel.images[i].path_low %>')"></div>
 								<% } %>
 							</div>
 						</div>
