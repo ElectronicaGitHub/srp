@@ -1,10 +1,71 @@
+var hotel = window.hotel,
+	coords = window.hotel.coordinates,
+	map,
+	priceForPerson,
+	lsPrefix = 'srp__req__';
+
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: {
+			lat: coords[0], 
+			lng: coords[1]
+		},
+		zoom: 8
+	});
+
+	var bounds = new google.maps.LatLngBounds();
+
+	var zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', function(event) {
+        google.maps.event.removeListener(zoomChangeBoundsListener);
+        map.setZoom( Math.min( 8) );
+    });
+
+
+  	for (var i in hotel.places) {
+		var loc = new google.maps.LatLng(hotel.places[i].coordinates[0], hotel.places[i].coordinates[1]);
+
+		bounds.extend(loc);
+
+		(function (place) {
+			new google.maps.Marker({
+				icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+				position: loc,
+				map: map,
+				title: place.title
+			}).addListener('click', function () {
+				(function (place) {
+					if ($(window).width() >= 768) {
+
+						$('#placesModal .title').text(place.title);
+						$('#placesModal .description').text(place.description_full);
+						$('#placesModal .city').text(place.city.name);
+						$('#placesModal .image').css({
+							'background-image' : 'url(' + place.images[0].path + ')'
+						});
+						$('#placesModal').modal('show');
+
+					} else {
+						window.open('/place/'+ place.title_url);
+					}
+				})(place);
+			});
+		})(hotel.places[i]);
+	}
+	var loc = new google.maps.LatLng(coords[0], coords[1]);
+	bounds.extend(loc);
+
+	console.log(bounds);
+	var marker = new google.maps.Marker({
+		position: loc,
+		map: map,
+		title: 'Hello World!'
+	});
+
+	map.fitBounds(bounds);
+}
+
 $(function () {
 
-	var hotel = window.hotel,
-		coords = window.hotel.coordinates,
-		map,
-		priceForPerson,
-		lsPrefix = 'srp__req__';
 
 	if (user && user.requests.map(function (el) {
 		return el.hotel;
@@ -18,50 +79,51 @@ $(function () {
 		window.location = document.referrer;
 	})
 
-	ymaps.ready(function () {
-		map = new ymaps.Map("map", {
-			center: coords,
-			zoom: 10,
-			type : 'yandex#map',
-			controls : []
-		});
+	// ymaps.ready(function () {
+	// 	map = new ymaps.Map("map", {
+	// 		center: coords,
+	// 		zoom: 10,
+	// 		type : 'yandex#map',
+	// 		controls : []
+	// 	});
 
-		for (var i in hotel.places) {
-			(function (place) {
-				mp = new ymaps.Placemark(place.coordinates, {
-					hintContent : place.title
-				}, {
-					preset: 'islands#icon',
-					iconColor: '#FBB958'
-				});
-				mp.events.add('click', function () {
-					(function (place) {
-						if ($(window).width() >= 768) {
+	// 	for (var i in hotel.places) {
+	// 		(function (place) {
+	// 			mp = new ymaps.Placemark(place.coordinates, {
+	// 				hintContent : place.title
+	// 			}, {
+	// 				preset: 'islands#icon',
+	// 				iconColor: '#FBB958'
+	// 			});
+	// 			mp.events.add('click', function () {
+	// 				(function (place) {
+	// 					if ($(window).width() >= 768) {
 
-							$('#placesModal .title').text(place.title);
-							$('#placesModal .description').text(place.description_full);
-							$('#placesModal .city').text(place.city.name);
-							$('#placesModal .image').css({
-								'background-image' : 'url(' + place.images[0].path + ')'
-							});
-							$('#placesModal').modal('show');
+	// 						$('#placesModal .title').text(place.title);
+	// 						$('#placesModal .description').text(place.description_full);
+	// 						$('#placesModal .city').text(place.city.name);
+	// 						$('#placesModal .image').css({
+	// 							'background-image' : 'url(' + place.images[0].path + ')'
+	// 						});
+	// 						$('#placesModal').modal('show');
 
-						} else {
-							window.open('/place/'+ place.title_url);
-						}
-					})(place);
-				});
-				map.geoObjects.add(mp);
-			})(hotel.places[i]);
-		}
-		myPlacemark = new ymaps.Placemark(coords, {}, {
-			preset: 'islands#icon',
-			iconColor: '#F34352'
-		});
-		map.geoObjects.add(myPlacemark);
+	// 					} else {
+	// 						window.open('/place/'+ place.title_url);
+	// 					}
+	// 				})(place);
+	// 			});
+	// 			map.geoObjects.add(mp);
+	// 		})(hotel.places[i]);
+	// 	}
+	// 	myPlacemark = new ymaps.Placemark(coords, {}, {
+	// 		preset: 'islands#icon',
+	// 		iconColor: '#F34352'
+	// 	});
+	// 	map.geoObjects.add(myPlacemark);
 
-		map.setBounds(map.geoObjects.getBounds());
-	});
+	// 	map.setBounds(map.geoObjects.getBounds());
+	// });
+	// 
 	$("#phone").inputmask("+9 (999) 999 99 99", {
 		oncomplete: function() {
 			$('#offer-button').attr('disabled', false);
