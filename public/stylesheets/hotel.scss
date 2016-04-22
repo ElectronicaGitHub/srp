@@ -49,14 +49,20 @@ header .logo-wrapper {
 			.images-wrapper {
 				height: 100%;
 				width: 100%;
+				background: whitesmoke;
 				.image {
 					width: 100%;
 					height: 100%;
-					background-size: cover;
+					// background-size: cover;
+					background-size: contain;
+					background-repeat: no-repeat;
 					position: absolute;
 					background-position: center;
 					z-index: 100;
 					opacity: 0;
+					@include respond-to(handhelds) { background-size: cover; }
+					@include respond-to(under-768) { background-size: cover; }
+
 					&.pre_current {
 						z-index: 250;
 					}
