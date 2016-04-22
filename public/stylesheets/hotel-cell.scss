@@ -36,6 +36,7 @@ $image_hotel_height : 275px;
 					background-size: cover;
 					z-index: 100;
 					opacity: 0;
+					border-radius: 3px;
 					&.pre_current {
 						z-index: 250;
 					}
