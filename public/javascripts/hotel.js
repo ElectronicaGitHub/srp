@@ -25,11 +25,6 @@ $(function () {
 			type : 'yandex#map',
 			controls : []
 		});
-		myPlacemark = new ymaps.Placemark(coords, {}, {
-			preset: 'islands#icon',
-			iconColor: '#F34352'
-		});
-		map.geoObjects.add(myPlacemark);
 
 		for (var i in hotel.places) {
 			(function (place) {
@@ -40,11 +35,31 @@ $(function () {
 					iconColor: '#FBB958'
 				});
 				mp.events.add('click', function () {
-					window.open('/place/'+ place.title_url);
+					(function (place) {
+						if ($(window).width() >= 768) {
+							e.preventDefault();
+							
+							$('#placesModal .title').text(place.title);
+							$('#placesModal .description').text(place.description_full);
+							$('#placesModal .city').text(place.city.name);
+							$('#placesModal .image').css({
+								'background-image' : 'url(' + place.images[0].path + ')'
+							});
+							$('#placesModal').modal('show');
+
+						} else {
+							window.open('/place/'+ place.title_url);
+						}
+					})(place);
 				});
 				map.geoObjects.add(mp);
 			})(hotel.places[i]);
 		}
+		myPlacemark = new ymaps.Placemark(coords, {}, {
+			preset: 'islands#icon',
+			iconColor: '#F34352'
+		});
+		map.geoObjects.add(myPlacemark);
 
 		map.setBounds(map.geoObjects.getBounds());
 	});
