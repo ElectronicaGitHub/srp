@@ -11,7 +11,7 @@ async.series([
 		User.find({}, function (err, results) {
 			console.log('user.length = ', results.length);
 			async.each(results, function (doc) {
-				doc.reqests = [];
+				doc.requests = [];
 				doc.save();
 			});
 		});
