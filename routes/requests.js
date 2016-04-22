@@ -1,5 +1,6 @@
 var config = require('../configs/config_file');
 var Request = require('../models/Request.js');
+var InvId = require('../models/InvId.js');
 var User = require('../models/User.js');
 
 module.exports = function (express) {

@@ -13,7 +13,7 @@ var robokassa = {
 			alg : 'MD5',
 			pass1 : 'Q3mYKRLEpNnO96Hz8mQ7',
 			pass2 : 'lv0N2J1ozoDMi9ad0fxo'
-		},
+		}
 	},
 	base : 'https://auth.robokassa.ru/Merchant/Index.aspx',
 	login : 'serpantinmoscow',
@@ -29,14 +29,24 @@ module.exports = function  (express) {
 	var router = express.Router();
 
 	router.post('/link', function (req, res, next) {
+		var string = [
+			robokassa.login, 
+			req.body.sum + '.00', 
+			req.body.invId, 
+			robokassa.env['test'].pass1, 
+			'shp_payId=' + req.body.id
+		].join(':');
+
+		console.log(string);
 	    link = {
-	    	// InvId : 2147483647 ((2^31) - 1)
 	    	isTest : 1,
 	    	MerchantLogin : robokassa.login,
+	    	InvId : req.body.invId,
 	    	OutSum : req.body.sum + '.00',
-	    	InvDesc: "Оплата услуг по организации вашего отдыха",
-	    	SignatureValue : md5([robokassa.login, req.body.sum, '', robokassa.env['test'].pass1].join(':')),
-	    	Encoding : 'UTF-8',
+	    	SignatureValue : md5(string),
+	    	// InvDesc: "Оплата услуг по организации вашего отдыха",
+	    	// Encoding : 'UTF-8',
+	    	Culture : 'ru',
 	    	shp_payId: req.body.id
 	    };
 	    res.json({

@@ -4,7 +4,8 @@ angular.module('app', []).controller('cabinet', ['$scope', '$http', function ($s
 	$scope.makeLink = function (request) {
 		$http.post('/payment/link', { 
 			id : request._id, 
-			sum : request.final_price 
+			sum : request.final_price,
+			invId : request.inv_id
 		})
 		.success(function (data) {
 			console.log(data);

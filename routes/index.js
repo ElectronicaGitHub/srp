@@ -5,6 +5,7 @@ var Place = require('../models/Place.js');
 var Post = require('../models/Post.js');
 var Tag = require('../models/Tag.js');
 var City = require('../models/City.js');
+var InvId = require('../models/InvId.js');
 var User = require('../models/User.js');
 var Request = require('../models/Request.js');
 var async = require('async');
@@ -352,47 +353,61 @@ module.exports = function (express) {
 		var body = req.body;
 		body.owner = req.user._id;
 
-		Request.create(body, function (err, result) {
-
-			console.log(err);
-			if (err) return next(err);
-			// transport.sendMail({
-			// 	from : "antonovphilipdev@gmail.com",
-			// 	to: "alexandrtito@gmail.com",
-			// 	subject: 'Поступил новый запрос)',
-			// 	html: newRequestTmpl(body)
-			// }, function (err, info) {
-			// 	if (err) callback(err);
-
-			// 	res.json({
-			// 		message : 'ok'
-			// 	});
-				
-			// 	transport.sendMail({
-			// 		from : "antonovphilipdev@gmail.com",
-			// 		to: "molo4nik11@gmail.com",
-			// 		subject: 'Поступил новый запрос)',
-			// 		html: newRequestTmpl(body)
-			// 	}, function (err, info) {
-			// 		if (err) callback(err);
-			// 	});
-			// });
-
-			User.findByIdAndUpdate(req.user._id, {
-				'$addToSet' : { requests : result._id }
-			}, function (err, upd) {
-				if (err) return next(err);
-
-				req.session.update_user = true;
-
-				res.json({
-					message : 'ok'
+		async.waterfall([
+			function (callback) {
+				InvId.findOne({}, function (err, inv_id) {
+					if (err) callback(err);
+					callback(null, inv_id);
 				});
+			}, function (inv_id, callback) {
+				body.inv_id = inv_id.n;
+				Request.create(body, function (err, result) {
+					if (err) callback(err);
+					inv_id.n++;
+					inv_id.save(function (err, ok) {
+						if (err) callback(err);
+						callback(null, result);
+					});
+				});
+			}, function (request, callback) {
+				
+				// transport.sendMail({
+				// 	from : "antonovphilipdev@gmail.com",
+				// 	to: "alexandrtito@gmail.com",
+				// 	subject: 'Поступил новый запрос)',
+				// 	html: newRequestTmpl(body)
+				// }, function (err, info) {
+				// 	if (err) callback(err);
 
+				// 	res.json({
+				// 		message : 'ok'
+				// 	});
+					
+				// 	transport.sendMail({
+				// 		from : "antonovphilipdev@gmail.com",
+				// 		to: "molo4nik11@gmail.com",
+				// 		subject: 'Поступил новый запрос)',
+				// 		html: newRequestTmpl(body)
+				// 	}, function (err, info) {
+				// 		if (err) callback(err);
+				// 	});
+				// });
+
+				User.findByIdAndUpdate(req.user._id, {
+					'$addToSet' : { requests : request._id }
+				}, function (err, upd) {
+					if (err) callback(err);
+					callback(null);
+				});
+			}
+		], function (err) {
+			if (err) return next(err);
+			req.session.update_user = true;
+
+			res.json({
+				message : 'ok'
 			});
-
 		});
-
 	});
 
 	router.get('/sitemap.xml', function (req, res, next) {

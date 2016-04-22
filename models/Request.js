@@ -20,6 +20,7 @@ var Request = new Schema({
 	dates : String,
 	price : Number,
 	final_price : Number,
+	inv_id : Number,
 	status : {
 		type : Number,
 		default : 0
