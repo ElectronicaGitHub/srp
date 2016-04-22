@@ -10,14 +10,14 @@ function initMap() {
 			lat: coords[0], 
 			lng: coords[1]
 		},
-		zoom: 8
+		zoom: 11
 	});
 
 	var bounds = new google.maps.LatLngBounds();
 
 	var zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', function(event) {
         google.maps.event.removeListener(zoomChangeBoundsListener);
-        map.setZoom( Math.min( 8) );
+        map.setZoom( 11 );
     });
 
 
@@ -28,7 +28,7 @@ function initMap() {
 
 		(function (place) {
 			new google.maps.Marker({
-				icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+				icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
 				position: loc,
 				map: map,
 				title: place.title
