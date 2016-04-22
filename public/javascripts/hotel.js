@@ -37,8 +37,7 @@ $(function () {
 				mp.events.add('click', function () {
 					(function (place) {
 						if ($(window).width() >= 768) {
-							e.preventDefault();
-							
+
 							$('#placesModal .title').text(place.title);
 							$('#placesModal .description').text(place.description_full);
 							$('#placesModal .city').text(place.city.name);
