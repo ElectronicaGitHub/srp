@@ -8,10 +8,11 @@ angular.module('app', []).controller('cabinet', ['$scope', '$http', function ($s
 			invId : request.inv_id
 		})
 		.success(function (data) {
-			console.log(data);
-			console.log(data.link.SignatureValue);
+			// console.log(data);
+			// console.log(data.link.SignatureValue);
 			var link = data.base + '?' + $.param(data.link);
-			console.log(link);
+			// console.log(link);
+			location.href = link;
 		})
 		.error(function (data) {
 			console.log(data);
