@@ -489,7 +489,12 @@ var fileSave = function (file, cb, cbFail) {
   			message : 'Файл превышает указанный размер в 300 Кб.'
   		});
   	} else {
-      	var filename = makeID() + 'uid' + file.originalFilename;
+		var extension_regex = /\.[0-9a-z]+$/i;
+        var ext = file.originalFilename.match(extension_regex);
+
+      	var filename = makeID() + 'uid' + ext[0];
+      	console.log(filename);
+
       	async.series([
       		function (callback) {
 		      	// сохранить файл в фс
@@ -504,10 +509,9 @@ var fileSave = function (file, cb, cbFail) {
 				});
       		},
       		function (callback) {
-		      	var filename = 'low_' + makeID() + 'uid' + file.originalFilename;
-			  	var p = path.join(__dirname, "../public/attachments/" + filename);
+			  	var p = path.join(__dirname, "../public/attachments/low_" + filename);
       			gm(file.path).quality(40).write(p, function (err) {
-				  	var path_low = '/attachments/' + filename;
+				  	var path_low = '/attachments/low_' + filename;
       				if (err) { 
 						callback(err) 
       				}
