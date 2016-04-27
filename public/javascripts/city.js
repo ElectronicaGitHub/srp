@@ -1,7 +1,7 @@
 $(function () {
 	$('.hotels-slider').owlCarousel({
 		loop: true,
-		margin: 10,
+		margin: 4,
 		autoplay : true,
 		autoplayTimeout: 4000,
 		autoplayHoverPause: true,
