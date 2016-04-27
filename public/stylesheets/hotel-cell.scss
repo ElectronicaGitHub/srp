@@ -6,15 +6,16 @@ $full_hotel_height: 325px;
 $image_hotel_height : 275px;
 
 .cell-wrapper {
-	padding: 10px 7.5px;
+	padding: 10px 0;
+	// padding: 10px 7.5px;
 	a {
 		text-decoration: none;
 	}
 	.cell {
+		// border-radius: 3px;
 		position: relative;
 		background-color: white;
 		box-shadow: 0 1px 2px rgba(0,0,0,.3);
-		border-radius: 3px;
 		overflow: hidden;
 		height: $full_hotel_height;
 		.images-with-radio-wrapper {
@@ -27,6 +28,7 @@ $image_hotel_height : 275px;
 				width: 100%;
 				height: 100%;
 				.card-image {
+					// border-radius: 3px;
 					position: absolute;
 					top: 0;
 					left: 0;
@@ -36,7 +38,6 @@ $image_hotel_height : 275px;
 					background-size: cover;
 					z-index: 100;
 					opacity: 0;
-					border-radius: 3px;
 					&.pre_current {
 						z-index: 250;
 					}
