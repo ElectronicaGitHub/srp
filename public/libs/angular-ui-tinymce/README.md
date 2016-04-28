@@ -1,10 +1,11 @@
-# ui-tinymce directive [![Build Status](https://travis-ci.org/angular-ui/ui-tinymce.png)](https://travis-ci.org/angular-ui/ui-tinymce)
+# UI Tinymce - [AngularJS](http://angularjs.org/) directive for [TinyMCE](http://tinymce.com).
 
-This directive allows you to add a TinyMCE editor to your form elements.
+[![Build Status](https://travis-ci.org/angular-ui/ui-tinymce.png)](https://travis-ci.org/angular-ui/ui-tinymce) 
+[![Join the chat at https://gitter.im/angular-ui/ui-tinymce](https://badges.gitter.im/angular-ui/ui-tinymce.svg)](https://gitter.im/angular-ui/ui-tinymce?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Requirements
 
-- AngularJS
+- AngularJS 1.4.x or higher and it has been tested with Angular 1.4.8.
 - TinyMCE 4
 
 # Testing

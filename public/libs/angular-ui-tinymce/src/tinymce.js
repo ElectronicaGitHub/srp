@@ -13,6 +13,7 @@ angular.module('ui.tinymce', [])
 
     return {
       require: ['ngModel', '^?form'],
+      priority: 599,
       link: function(scope, element, attrs, ctrls) {
         if (!$window.tinymce) {
           return;
@@ -28,7 +29,7 @@ angular.module('ui.tinymce', [])
 
             ngModel.$setViewValue(content);
             if (!$rootScope.$$phase) {
-              scope.$apply();
+              scope.$digest();
             }
           };
 
@@ -55,6 +56,22 @@ angular.module('ui.tinymce', [])
 
         angular.extend(expression, scope.$eval(attrs.uiTinymce));
 
+        //Debounce update and save action
+        var debouncedUpdate = (function(debouncedUpdateDelay) {
+          var debouncedUpdateTimer;
+          return function(ed) {
+	        $timeout.cancel(debouncedUpdateTimer);
+	         debouncedUpdateTimer = $timeout(function() {
+              return (function(ed) {
+                if (ed.isDirty()) {
+                  ed.save();
+                  updateView(ed);
+                }
+              })(ed);
+            }, debouncedUpdateDelay);
+          };
+        })(400);
+
         var setupOptions = {
           // Update model when calling setContent
           // (such as from the source editor popup)
@@ -62,31 +79,25 @@ angular.module('ui.tinymce', [])
             ed.on('init', function() {
               ngModel.$render();
               ngModel.$setPristine();
+              ngModel.$setUntouched();
               if (form) {
                 form.$setPristine();
               }
             });
 
-            // Update model on button click
-            ed.on('ExecCommand', function() {
-              ed.save();
-              updateView(ed);
-            });
-
-            // Update model on change
-            ed.on('change NodeChange', function() {
-              ed.save();
-              updateView(ed);
+            // Update model when:
+            // - a button has been clicked [ExecCommand]
+            // - the editor content has been modified [change]
+            // - the node has changed [NodeChange]
+            // - an object has been resized (table, image) [ObjectResized]
+            ed.on('ExecCommand change NodeChange ObjectResized', function() {
+              debouncedUpdate(ed);
             });
 
             ed.on('blur', function() {
               element[0].blur();
-            });
-
-            // Update model when an object has been resized (table, image)
-            ed.on('ObjectResized', function() {
-              ed.save();
-              updateView(ed);
+              ngModel.$setTouched();
+              scope.$digest();
             });
 
             ed.on('remove', function() {
@@ -110,7 +121,7 @@ angular.module('ui.tinymce', [])
         // re-rendering directive
         $timeout(function() {
           if (options.baseURL){
-            tinymce.baseURL = options.baseURL;            
+            tinymce.baseURL = options.baseURL;
           }
           tinymce.init(options);
           toggleDisable(scope.$eval(attrs.ngDisabled));

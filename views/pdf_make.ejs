@@ -1,0 +1,37 @@
+<%- layout('base.ejs')%>
+<% block('title', 'Серпантин | Контакты') -%>
+
+<!-- <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script> -->
+
+<script>
+	window.request = <%- JSON.stringify(request) %>;	
+</script>
+<script src="/libs/tinymce-dist/tinymce.js"></script>
+<script src="/libs/angular/angular.min.js"></script>
+<script src="/libs/angular-ui-tinymce/src/tinymce.js"></script>
+<script src="/javascripts/pdf_make.js"></script>
+<!-- <script src="/javascripts/slider.js"></script> -->
+
+<!-- <link rel="stylesheet" href="/stylesheets/builded/law.css"> -->
+<style>
+	header {
+		display: none;
+	}
+</style>
+	
+<div ng-app="app" ng-controller="pdfMake">
+
+	<div class="header">
+		<p class="title">Создание PDF</p>
+	</div>
+
+	<div class="container" style="width: 800px">
+		<h3>Тут PDF</h3>
+
+		<textarea ui-tinymce="options" ng-model="html1" id="hotel"></textarea>
+		<button ng-click="addImage()">Добавить картинку</button>
+		<button ng-click="post()">Создать</button>
+	</div>
+
+
+</div>

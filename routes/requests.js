@@ -3,6 +3,25 @@ var Request = require('../models/Request.js');
 var InvId = require('../models/InvId.js');
 var User = require('../models/User.js');
 
+var fs = require('fs');
+var path = require('path');
+var pdf = require('html-pdf');
+var options = { 
+	// directory: '/public/files',
+	// base : 'localhost:8080',
+	base: 'file://' + path.join(__dirname, "../public"), 
+	header: {
+		height: "45mm",
+		contents: '<div style="text-align: center;">Author: Marc Bachmann</div>'
+	},
+	footer: {
+		height: "28mm",
+		contents: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>'
+	},
+	// type: "png",        
+	// quality: "100"
+};
+
 module.exports = function (express) {
 	var router = express.Router();
 
@@ -34,6 +53,30 @@ module.exports = function (express) {
 			if (err) return next(err);
 			res.render('requests', {
 				requests : results
+			});
+		});
+	});
+
+	router.post('/create_pdf', function (req, res, next) {
+		var html = req.body.html;
+
+		console.log(options);
+
+		pdf.create(html, options).toFile('./businesscard.pdf', function (err, result) {
+			if (err) return console.log(err);
+			console.log(result); // { filename: '/app/businesscard.pdf' }
+			res.json({
+				message : result
+			});
+		});
+	});
+
+
+
+	router.get('/pdfmake/:requestId', function (req, res, next) {
+		Request.findById(req.params.requestId).deepPopulate('hotel owner hotel.images').exec(function (err, result) {
+			res.render('pdf_make', {
+				request : result
 			});
 		});
 	});

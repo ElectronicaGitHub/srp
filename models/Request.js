@@ -19,6 +19,10 @@ var Request = new Schema({
 	phone : String,
 	dates : String,
 	price : Number,
+	file : {
+		type : String,
+		ref : 'File'
+	},
 	final_price : Number,
 	inv_id : Number,
 	status : {
