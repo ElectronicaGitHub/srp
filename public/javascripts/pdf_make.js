@@ -10,7 +10,8 @@ angular.module('app', ['ui.tinymce']).controller('pdfMake', ['$scope', '$http', 
 	};
 
 	$scope.addImage = function () {
-		$scope.html1 += '<img width="300" height="250" src="' + $scope.request.hotel.images[imagesN].path_low +  '"/> ' + $scope.request.hotel.images[imagesN].path_low + '!!!';
+		// $scope.html1 += '<img width="300" height="250" src="file:///Users/philip/work/serpantin/public' + $scope.request.hotel.images[imagesN].path_low +  '"/> ' + $scope.request.hotel.images[imagesN].path_low + '!!!';
+		$scope.html1 += '<img width="300" height="250" src="/..' + $scope.request.hotel.images[imagesN].path_low +  '"/> ' + $scope.request.hotel.images[imagesN].path_low + '!!!';
 		imagesN++;
 	}
 

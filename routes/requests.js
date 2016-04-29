@@ -9,7 +9,8 @@ var pdf = require('html-pdf');
 var options = { 
 	// directory: '/public/files',
 	// base : 'localhost:8080',
-	base: 'file://' + path.join(__dirname, "../public"), 
+	// base: 'file://' + path.join(__dirname, "../public"), 
+	// base: 'file://' + path.join(__dirname, "../public"), 
 	header: {
 		height: "45mm",
 		contents: '<div style="text-align: center;">Author: Marc Bachmann</div>'
@@ -60,7 +61,9 @@ module.exports = function (express) {
 	router.post('/create_pdf', function (req, res, next) {
 		var html = req.body.html;
 
-		console.log(options);
+		console.log(html);
+		html = html.replace(/\/\.\./gi, 'file://' + path.join(__dirname, "../public"));
+		console.log(html);
 
 		pdf.create(html, options).toFile('./businesscard.pdf', function (err, result) {
 			if (err) return console.log(err);
