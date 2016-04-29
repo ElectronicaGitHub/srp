@@ -64,6 +64,7 @@ module.exports = function (express) {
 		console.log('=================================================');
 		console.log(html); 
 		html = html.replace(/\.\.\/\.\.\/\.\./gi, '/..');
+		html = html.replace(/\.\.\/\.\./gi, '/..');
 		console.log('=================================================');
 		console.log(html); 
 		html = html.replace(/\/\.\./gi, 'file://' + path.join(__dirname, "../public"));

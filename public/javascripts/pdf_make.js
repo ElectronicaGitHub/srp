@@ -7,11 +7,11 @@ angular.module('app', ['ui.tinymce']).controller('pdfMake', ['$scope', '$http', 
 	$scope.html1 = '';
 
 	$scope.options = {
-		height: '600px',
+		height: '700px',
 		content_css : '/stylesheets/builded/vaucher.css'
 	};
 
-	$scope.html1 += '<div style="background-image: url(/../assets/vaucher_bg.jpg); width: 100%; background-position: center; background-size: 100%">';
+	$scope.html1 += '<div class="main-container" style="background-image: url(/../assets/vaucher_bg.jpg); width: 100%; background-position: center; background-size: 100%">';
 
 		$scope.html1 += '<h1 style="text-align:center">Отель</h1>';
 		$scope.html1 += '<div class="iterable"><img style="width: 40%; float:left" src="/..' + $scope.request.hotel.images[0].path_low +  '"/><p class="text">' + $scope.request.hotel.description_full + '</p></div> ';

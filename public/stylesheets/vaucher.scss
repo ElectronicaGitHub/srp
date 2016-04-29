@@ -4,6 +4,13 @@ img {
 	margin: 0 10px;
 	width: 40%;
 }
+.main-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	// bottom: 0;
+}
 p.text {
 	padding: 0 10px;
 	font-size: 13px;
