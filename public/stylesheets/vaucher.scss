@@ -1,12 +1,29 @@
 @import "main";
 
-* {
-	
+img {
+	margin: 0 10px;
+	width: 40%;
+}
+p.text {
+	padding: 0 10px;
+	font-size: 13px;
+	font-weight: 300;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.iterable {
+	overflow: hidden;
+	padding-bottom: 10px;
+	clear: both;
 }
 h1, h2, h3, h4 {
 	font-family: 'Lisa';
+	font-size: 30px;
+	margin: 0;
+	padding: 15px;
 }
 html, body {
 	padding: 0;
 	margin: 0;
+	height: 100%;
 }

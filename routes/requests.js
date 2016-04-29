@@ -61,9 +61,14 @@ module.exports = function (express) {
 	router.post('/create_pdf/:requestId', function (req, res, next) {
 		var html = req.body.html;
 
-		console.log(html);
+		console.log('=================================================');
+		console.log(html); 
+		html = html.replace(/\.\.\/\.\.\/\.\./gi, '/..');
+		console.log('=================================================');
+		console.log(html); 
 		html = html.replace(/\/\.\./gi, 'file://' + path.join(__dirname, "../public"));
-		console.log(html);
+		console.log('=================================================');
+		console.log(html); 
 
 		var p = './public';
 		var name = '/files/vaucher_' + req.params.requestId + '.pdf';

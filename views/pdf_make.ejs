@@ -1,5 +1,5 @@
 <%- layout('base.ejs')%>
-<% block('title', 'Серпантин | Контакты') -%>
+<% block('title', 'Серпантин | Ваучер') -%>
 
 <!-- <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script> -->
 
@@ -21,12 +21,7 @@
 	
 <div ng-app="app" ng-controller="pdfMake">
 
-	<div class="header">
-		<p class="title">Создание PDF</p>
-	</div>
-
-	<div class="container" style="width: 800px">
-		<h3>Тут PDF</h3>
+	<div class="container" style="width: 600px">
 
 		<textarea ui-tinymce="options" ng-model="html1" id="hotel"></textarea>
 		<!-- <button class="btn btn-xs btn-success" ng-click="addImage()">Добавить картинку</button> -->

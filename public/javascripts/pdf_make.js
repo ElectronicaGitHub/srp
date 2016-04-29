@@ -5,39 +5,29 @@ angular.module('app', ['ui.tinymce']).controller('pdfMake', ['$scope', '$http', 
 	imagesN = 0;
 
 	$scope.html1 = '';
-	$scope.html1 += '<link rel="stylesheet" href="/../stylesheets/builded/vaucher.css">';
 
 	$scope.options = {
-		height: '700px',
-		plugins: "pagebreak"
+		height: '600px',
+		content_css : '/stylesheets/builded/vaucher.css'
 	};
 
-	var cont = $('<div/>').css({
-		'background-image' : 'url(/../assets/vaucher_bg.jpg)',
-		height: '100%',
-		overflow: 'hidden',
-		'background-position' : 'center',
-		'background-size' : 'cover'
-	});
+	$scope.html1 += '<div style="background-image: url(/../assets/vaucher_bg.jpg); height: 100%; width: 100%; background-position: center; background-size: 100%">';
 
-	inner = '<h1 style="text-align:center">Отель</h1>';
-	inner += '<div style="height: 300px"><img width="300" height="250" src="/..' + $scope.request.hotel.images[0].path_low +  '"/></div> ';
-	inner += '</div><h1 style="text-align:center">Места</h1><div>';
+		$scope.html1 += '<h1 style="text-align:center">Отель</h1>';
+		$scope.html1 += '<div class="iterable"><img style="width: 40%; float:left" src="/..' + $scope.request.hotel.images[0].path_low +  '"/><p class="text">' + $scope.request.hotel.description_full + '</p></div> ';
+		$scope.html1 += '<h1 style="text-align:center">Места</h1>';
 
-	for (var i in $scope.request.hotel.places) {
-		inner += '<div style="' + (i % 2 == 1 ? 'float:left' : 'float:right') + ';height: 300px" ><img width="250" height="200" src="/..' + $scope.request.hotel.places[i].images[0].path_low +  '"/></div> ';
-		inner += '<p>' + $scope.request.hotel.places[i].description_full + '</p>'
-	};
-	console.log(cont, inner);
-	cont.html(inner);
-	$scope.html1 += cont[0].outerHTML;
+		for (var i in $scope.request.hotel.places) {
+			$scope.html1 += '<div class="iterable"><img style="width: 40%; ' + (i % 2 == 1 ? 'float:left' : 'float:right') + '" src="/..' + $scope.request.hotel.places[i].images[0].path_low +  '"/>';
+			$scope.html1 += '<p class="text">' + $scope.request.hotel.places[i].description_full + '</p></div>'
+		};
 
-	$scope.addImage = function () {
-		$scope.html1 += '<div style="height: 300px" ><img width="250" height="200" src="/..' + $scope.request.hotel.images[imagesN].path_low +  '"/></div> ';
-		imagesN++;
-	}
+
+	$scope.html1 += '</div>';
 
 	$scope.post = function () {
+		$scope.html1 += '<link rel="stylesheet" href="/../stylesheets/builded/vaucher.css"/>';
+
 		$http.post('/rq/create_pdf/' + $scope.request._id, { html : $scope.html1 })
 		.success(function (data) {
 			console.log(data);
