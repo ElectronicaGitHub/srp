@@ -8,7 +8,8 @@ angular.module('app', ['ui.tinymce']).controller('pdfMake', ['$scope', '$http', 
 	$scope.html1 += '<link rel="stylesheet" href="/../stylesheets/builded/vaucher.css">';
 
 	$scope.options = {
-		height: '700px'
+		height: '700px',
+		plugins: "pagebreak"
 	};
 
 	var cont = $('<div/>').css({
@@ -30,9 +31,6 @@ angular.module('app', ['ui.tinymce']).controller('pdfMake', ['$scope', '$http', 
 	console.log(cont, inner);
 	cont.html(inner);
 	$scope.html1 += cont[0].outerHTML;
-	$scope.html1 += cont[0].outerHTML;
-	$scope.html1 += cont[0].outerHTML;
-
 
 	$scope.addImage = function () {
 		$scope.html1 += '<div style="height: 300px" ><img width="250" height="200" src="/..' + $scope.request.hotel.images[imagesN].path_low +  '"/></div> ';
