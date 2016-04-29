@@ -65,11 +65,14 @@ module.exports = function (express) {
 		html = html.replace(/\/\.\./gi, 'file://' + path.join(__dirname, "../public"));
 		console.log(html);
 
-		pdf.create(html, options).toFile('./public/files/vaucher_' + req.params.requestId + '.pdf', function (err, result) {
+		var p = './public';
+		var name = '/files/vaucher_' + req.params.requestId + '.pdf';
+
+		pdf.create(html, options).toFile(p + name, function (err, result) {
 			if (err) return console.log(err);
 			console.log(result); // { filename: '/app/businesscard.pdf' }
 			res.json({
-				message : result
+				pdf : name
 			});
 		});
 	});

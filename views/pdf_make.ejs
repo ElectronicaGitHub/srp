@@ -29,8 +29,9 @@
 		<h3>Тут PDF</h3>
 
 		<textarea ui-tinymce="options" ng-model="html1" id="hotel"></textarea>
-		<button ng-click="addImage()">Добавить картинку</button>
-		<button ng-click="post()">Создать</button>
+		<!-- <button class="btn btn-xs btn-success" ng-click="addImage()">Добавить картинку</button> -->
+		<button class="btn btn-xs btn-success" ng-click="post()">Создать</button>
+		<a ng-show="pdf" href="{{ pdf }}" target="_blank"><button class="btn btn-xs btn-info">Просмотр</button></a>
 	</div>
 
 

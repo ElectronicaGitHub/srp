@@ -43,6 +43,10 @@ angular.module('app', ['ui.tinymce']).controller('pdfMake', ['$scope', '$http', 
 		$http.post('/rq/create_pdf/' + $scope.request._id, { html : $scope.html1 })
 		.success(function (data) {
 			console.log(data);
+
+			$scope.pdf = data.pdf;
+
+			console.log($scope.pdf);
 		})
 		.error(function (data) {
 			console.log(data);
