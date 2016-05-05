@@ -108,6 +108,10 @@
 
 <div class="index-content container">
 	<div class="content">
+		<div class="how-works">
+			<p class="title">Как мы работаем</p>
+			<img src='/assets/how_works.jpg' alt="">
+		</div>
 		<!-- <div class="city-carousel">
 			<% for (var i in cities_popular) { var city = cities_popular[i]; %>
 				<a href="/city/<%= city.name_url %>">
@@ -119,24 +123,27 @@
 				</a>
 			<% } %>
 		</div> -->
-		<div class="city-carousel">
-			<% for (var i = 0, ii = cities_popular.length; i < ii; i+=4) { %>
-					<div class="item">
-						<% for (var j = 0; j < 4; j++) { %>
-							<% if (cities_popular[i+j]) { %>
-								<a href="/city/<%= cities_popular[i+j].name_url %>">
-									<div class="img-wrapper">
-										<div class="img" style="background-image: url('<%= cities_popular[i+j].image.path_low %>');">
-											<div class="fader">
-												<span><%= cities_popular[i+j].name %></span>
+		<div class="cities-contiainer">
+			<p class="title">Популярные города</p>
+			<div class="city-carousel">
+				<% for (var i = 0, ii = cities_popular.length; i < ii; i+=4) { %>
+						<div class="item">
+							<% for (var j = 0; j < 4; j++) { %>
+								<% if (cities_popular[i+j]) { %>
+									<a href="/city/<%= cities_popular[i+j].name_url %>">
+										<div class="img-wrapper">
+											<div class="img" style="background-image: url('<%= cities_popular[i+j].image.path_low %>');">
+												<div class="fader">
+													<span><%= cities_popular[i+j].name %></span>
+												</div>
 											</div>
 										</div>
-									</div>
-								</a>
+									</a>
+								<% } %>
 							<% } %>
-						<% } %>
-					</div>
-			<% } %>
+						</div>
+				<% } %>
+			</div>
 		</div>
 		<div class="tags-container">
 			<p class="title">Популярные категории</p>
